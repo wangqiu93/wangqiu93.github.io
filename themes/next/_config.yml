@@ -47,9 +47,9 @@ index_with_subtitle: false
 # When running the site in a subdirectory (e.g. domain.tld/blog), remove the leading slash (/archives -> archives)
 menu:
   home: /
-#  categories: /categories/
+  categories: /categories/
   #about: /about/
-  archives: /archives/
+#  archives: /archives/
   tags: /tags/
   #sitemap: /sitemap.xml
   #commonweal: /404.html
@@ -624,6 +624,6 @@ images: images
 version: 5.1.1
 
 #开启打赏功能 由 habren 贡献
-#reward_comment: 坚持原创技术分享，您的支持将鼓励我继续创作！
-#wechatpay: /path/to/wechat-reward-image
-#alipay: /path/to/alipay-reward-image
+reward_comment: 坚持原创技术分享，您的支持将鼓励我继续创作！
+wechatpay: /images/wxpay.jpg
+alipay: /images/zfbpay.jpg
