@@ -72,11 +72,11 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: next
+theme: yelee
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: git@github.com:javaGreenHand/javaGreenHand.github.io.git
+  repo: git@github.com:wangqiu93/wangqiu93.github.io.git
   branch: master
