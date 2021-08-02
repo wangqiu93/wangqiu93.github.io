@@ -22,7 +22,7 @@
 <meta property="og:site_name" content="WangQiu&#39;s Blog">
 <meta property="og:description" content="架构师必备武器">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-07-28T14:36:49.163Z">
+<meta property="og:updated_time" content="2021-08-02T14:24:05.309Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM">
 <meta name="twitter:description" content="架构师必备武器">
@@ -313,7 +313,70 @@
       
           
         <p>架构师必备武器<br><a id="more"></a></p>
-<h1 id="内存模型"><a href="#内存模型" class="headerlink" title="内存模型"></a>内存模型</h1><h2 id="JVM内存模型"><a href="#JVM内存模型" class="headerlink" title="JVM内存模型"></a>JVM内存模型</h2><h2 id="Java内存模型"><a href="#Java内存模型" class="headerlink" title="Java内存模型"></a>Java内存模型</h2><h1 id="类加载"><a href="#类加载" class="headerlink" title="类加载"></a>类加载</h1><h1 id="GC"><a href="#GC" class="headerlink" title="GC"></a>GC</h1><h1 id="性能调优"><a href="#性能调优" class="headerlink" title="性能调优"></a>性能调优</h1><h1 id="执行模式"><a href="#执行模式" class="headerlink" title="执行模式"></a>执行模式</h1><h1 id="编译器优化"><a href="#编译器优化" class="headerlink" title="编译器优化"></a>编译器优化</h1>
+<h2 id="内存模型"><a href="#内存模型" class="headerlink" title="内存模型"></a>内存模型</h2><h3 id="JVM内存模型"><a href="#JVM内存模型" class="headerlink" title="JVM内存模型"></a>JVM内存模型</h3><ul>
+<li>栈</li>
+<li>本地方法栈</li>
+<li>程序计数器</li>
+<li>堆</li>
+<li>方法区</li>
+</ul>
+<h3 id="Java内存模型"><a href="#Java内存模型" class="headerlink" title="Java内存模型"></a>Java内存模型</h3><p>JMM 的主要目标是定义程序中变量的访问规则。</p>
+<ul>
+<li>所有的共享变量都存储在主内存中共享。</li>
+<li>每个线程有自己的工作内存。</li>
+<li>工作内存中保存的是主内存中变量的副本。</li>
+<li>线程对变量的读写等操作必须在自己的工作内存中进行，而不能直接读写主内存中的变量。</li>
+</ul>
+<h3 id="JMM三大特性"><a href="#JMM三大特性" class="headerlink" title="JMM三大特性"></a>JMM三大特性</h3><p>原子性</p>
+<ul>
+<li>JMM 保证对除 long 和 double 外的基础数据类型的读写操作是原子性的。</li>
+<li>关键字 synchronized 也可以提供原子性保证。</li>
+</ul>
+<p>可见性：当一个线程修改了共享变量的值，其他线程能够立即的值这个修改</p>
+<ul>
+<li>volatile 强制变量的赋值会同步刷新回主内存，强制变量的读取会从主内存重新加载，保证不同的线程总是能够看到该变量的最新值。</li>
+<li>synchronized</li>
+</ul>
+<p>有序性：如果在本线程内观察，所有的操作都是有序的；如果在一个线程中观察另一个线程，所有的操作都是无序的。</p>
+<ul>
+<li>volatile 关键字本身包含了禁止指令重排序的语义。</li>
+<li>synchronized 保证一个变量在同一个时刻只允许一条线程对其进行lock操作。</li>
+<li>先行发生原则<ul>
+<li>程序次序规则</li>
+<li>管程锁定规则</li>
+<li>volatile 变量规则</li>
+<li>线程启动、终止、中断规则</li>
+<li>对象终结规则</li>
+<li>传递性</li>
+</ul>
+</li>
+</ul>
+<h2 id="类加载"><a href="#类加载" class="headerlink" title="类加载"></a>类加载</h2><h3 id="类加载过程"><a href="#类加载过程" class="headerlink" title="类加载过程"></a>类加载过程</h3><p>类的加载指将编译好的 Class 类文件中的字节码读入内存中，将其放在方法区内并创建对应的 Class 对象。</p>
+<ul>
+<li>加载：文件到内存的过程。通过类的完全限定名查找此类字节码文件，并利用字节码文件创建一个 Class 对象。</li>
+<li>链接<ul>
+<li>验证：对类文件内容验证，主要包括四种：文件格式验证，元数据验证，字节码验证，符号引用验证。目的在于确保 Class 文件符合当前虚拟机要求，不会危害虚拟机自身安全。</li>
+<li>准备：进行内存分配，为类变量也就是类中由 static 修饰的变量分配内存，并且设置初始值。</li>
+<li>解析：解析字段、接口、方法，主要是将常量池中的符号引用替换为直接引用的过程。直接引用就是直接指向目标的指针、相对偏移量等。</li>
+</ul>
+</li>
+<li>初始化：主要完成静态块执行与静态变量的赋值。只有对类主动使用时，才会进行初始化，初始化的触发条件包括在创建类的实例时、访问类的静态方法或者静态变量时、Class.forName() 反射类时、或者某个子类被初始化时。</li>
+</ul>
+<h3 id="双亲委派模型"><a href="#双亲委派模型" class="headerlink" title="双亲委派模型"></a>双亲委派模型</h3><p>Java自带三种类加载器及其加载目录：</p>
+<ul>
+<li>BootStrap 启动类加载器：<java_home>/lib</java_home></li>
+<li>扩展类加载器：<java_home>/lib/ext</java_home></li>
+<li>应用加载器：java-classpath</li>
+</ul>
+<p>除此之外，可以自定义类加载器。</p>
+<p>双亲委派模式：可以避免类的重复加载，另外也避免了 Java 的核心 API 被篡改。</p>
+<ul>
+<li>一个类加载器在加载类时，先把这个请求委托给自己的父类加载器去执行。</li>
+<li>如果父类加载器还存在父类加载器，就继续向上委托，直到顶层的启动类加载器。</li>
+<li>如果父类加载器能够完成类加载，就成功返回。</li>
+<li>如果父类加载器无法完成加载，那么子加载器才会尝试自己去加载。</li>
+</ul>
+<h2 id="GC"><a href="#GC" class="headerlink" title="GC"></a>GC</h2><h2 id="性能调优"><a href="#性能调优" class="headerlink" title="性能调优"></a>性能调优</h2><h2 id="执行模式"><a href="#执行模式" class="headerlink" title="执行模式"></a>执行模式</h2><h2 id="编译器优化"><a href="#编译器优化" class="headerlink" title="编译器优化"></a>编译器优化</h2>
       
     </div>
     
@@ -324,7 +387,7 @@
         <p><span>本文标题:</span><a href="/2021/07/28/20180619/">JVM</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">王球</a></p>
         <p><span>发布时间:</span>2021-07-28, 20:08:06</p>
-        <p><span>最后更新:</span>2021-07-28, 22:36:49</p>
+        <p><span>最后更新:</span>2021-08-02, 22:24:05</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2021/07/28/20180619/" title="JVM">http://yoursite.com/2021/07/28/20180619/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2021/07/28/20180619/　　作者: 王球" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -340,15 +403,15 @@
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2021/07/28/20181010/">
-                    消息队列
+                <a href="/2021/07/28/20181112/">
+                    Kafka
                 </a>
             </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2021/07/28/20180720/">
-                    数据结构与算法
+                <a href="/2021/07/28/20180727/">
+                    Spring
                 </a>
             </div>
         
@@ -360,7 +423,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#内存模型"><span class="toc-number">1.</span> <span class="toc-text">内存模型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#JVM内存模型"><span class="toc-number">1.1.</span> <span class="toc-text">JVM内存模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Java内存模型"><span class="toc-number">1.2.</span> <span class="toc-text">Java内存模型</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#类加载"><span class="toc-number">2.</span> <span class="toc-text">类加载</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#GC"><span class="toc-number">3.</span> <span class="toc-text">GC</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#性能调优"><span class="toc-number">4.</span> <span class="toc-text">性能调优</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#执行模式"><span class="toc-number">5.</span> <span class="toc-text">执行模式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#编译器优化"><span class="toc-number">6.</span> <span class="toc-text">编译器优化</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#内存模型"><span class="toc-number">1.</span> <span class="toc-text">内存模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM内存模型"><span class="toc-number">1.1.</span> <span class="toc-text">JVM内存模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Java内存模型"><span class="toc-number">1.2.</span> <span class="toc-text">Java内存模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JMM三大特性"><span class="toc-number">1.3.</span> <span class="toc-text">JMM三大特性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#类加载"><span class="toc-number">2.</span> <span class="toc-text">类加载</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#类加载过程"><span class="toc-number">2.1.</span> <span class="toc-text">类加载过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#双亲委派模型"><span class="toc-number">2.2.</span> <span class="toc-text">双亲委派模型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GC"><span class="toc-number">3.</span> <span class="toc-text">GC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#性能调优"><span class="toc-number">4.</span> <span class="toc-text">性能调优</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#执行模式"><span class="toc-number">5.</span> <span class="toc-text">执行模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编译器优化"><span class="toc-number">6.</span> <span class="toc-text">编译器优化</span></a></li></ol>
         
     </div>
     <style>
@@ -416,7 +479,7 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2021/07/28/20181010/" title="上一篇: 消息队列">
+            <a href="/2021/07/28/20181112/" title="上一篇: Kafka">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -424,13 +487,13 @@
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2021/07/28/20180720/" title="下一篇: 数据结构与算法">
+            <a href="/2021/07/28/20180727/" title="下一篇: Spring">
                 <i class="fa fa-angle-right"></i>
             </a>
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20210730/">Netty</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20180916/">缓存</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20181113/">MySQL</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20181111/">Redis</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20180617/">Java</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20180630/">并发与多线程</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20180725/">常用工具集</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20171212/">操作系统与计算机网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20210728/">数据格式</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20181115/">Cassandra</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20181114/">HBase</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20190107/">Mongo</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20190112/">架构</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20180815/">RPC</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20181023/">数据库</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20181112/">Kafka</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20181010/">消息队列</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20180619/">JVM</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20180720/">数据结构与算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20180802/">MyBatis</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20180727/">Spring</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20170918/">硬技能图谱</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20180618/">设计模式</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20210730/">Netty</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20180916/">缓存</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20181111/">Redis</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20181113/">MySQL</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20180617/">Java</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20180630/">并发与多线程</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20180725/">常用工具集</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20171212/">操作系统与计算机网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20210728/">数据格式</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20190107/">Mongo</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20181114/">HBase</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20181115/">Cassandra</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20190112/">架构</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20180815/">RPC</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20181010/">消息队列</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20181023/">数据库</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20181112/">Kafka</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20180619/">JVM</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20180727/">Spring</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20180802/">MyBatis</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20180720/">数据结构与算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20170918/">硬技能图谱</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20180618/">设计模式</a></li></ul>
 
 
 
