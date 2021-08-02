@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-Hans">
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
 
     <!--[if lt IE 9]>
         <style>body {display: none; background: none !important} </style>
@@ -8,27 +8,29 @@
     <![endif]-->
 
 <meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="format-detection" content="telephone=no" />
-<meta name="author" content="王球" />
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="王球">
 
 
 
-<meta name="description" content="处理流程 在执行 SQL 时，首先会从 SqlSessionFactory 中创建一个新的 SqlSession。 SQL 语句是通过 SqlSession 中的 Executor 来执行，Executor 根据 SqlSession 传递的参数执行 query() 方法，然后创建一个 StatementHandler 对象，将必要的参数传递给 StatementHandler，由 Stateme">
+<meta name="description" content="MyBatis 的优点：  MyBatis 是原生SQL，不像 Hibernate 的 HQL 需要额外的学习成本。 MyBatis 的 SQL 语句与代码进行了解耦合。 MyBatis 功能简单，学习成本比较低，使用的门槛也非常低，可以快速上手。 MyBatis SQL调优比较灵活，而 Hibernate，SQL 语句是自动生成的，当有复杂语句需要进行优化时就比较难处理。   MyBatis 的">
 <meta name="keywords" content="框架">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MyBatis">
 <meta property="og:url" content="http://yoursite.com/2021/07/28/20180802/index.html">
 <meta property="og:site_name" content="WangQiu&#39;s Blog">
-<meta property="og:description" content="处理流程 在执行 SQL 时，首先会从 SqlSessionFactory 中创建一个新的 SqlSession。 SQL 语句是通过 SqlSession 中的 Executor 来执行，Executor 根据 SqlSession 传递的参数执行 query() 方法，然后创建一个 StatementHandler 对象，将必要的参数传递给 StatementHandler，由 Stateme">
+<meta property="og:description" content="MyBatis 的优点：  MyBatis 是原生SQL，不像 Hibernate 的 HQL 需要额外的学习成本。 MyBatis 的 SQL 语句与代码进行了解耦合。 MyBatis 功能简单，学习成本比较低，使用的门槛也非常低，可以快速上手。 MyBatis SQL调优比较灵活，而 Hibernate，SQL 语句是自动生成的，当有复杂语句需要进行优化时就比较难处理。   MyBatis 的">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-07-29T13:05:31.012Z">
+<meta property="og:image" content="http://yoursite.com/img/posts/MyBatis.png">
+<meta property="og:updated_time" content="2021-08-01T05:21:25.231Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MyBatis">
-<meta name="twitter:description" content="处理流程 在执行 SQL 时，首先会从 SqlSessionFactory 中创建一个新的 SqlSession。 SQL 语句是通过 SqlSession 中的 Executor 来执行，Executor 根据 SqlSession 传递的参数执行 query() 方法，然后创建一个 StatementHandler 对象，将必要的参数传递给 StatementHandler，由 Stateme">
+<meta name="twitter:description" content="MyBatis 的优点：  MyBatis 是原生SQL，不像 Hibernate 的 HQL 需要额外的学习成本。 MyBatis 的 SQL 语句与代码进行了解耦合。 MyBatis 功能简单，学习成本比较低，使用的门槛也非常低，可以快速上手。 MyBatis SQL调优比较灵活，而 Hibernate，SQL 语句是自动生成的，当有复杂语句需要进行优化时就比较难处理。   MyBatis 的">
+<meta name="twitter:image" content="http://yoursite.com/img/posts/MyBatis.png">
 
-<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
 
     <link rel="alternate" href="/atom.xml" title="WangQiu&#39;s Blog" type="application/atom+xml">
@@ -90,7 +92,7 @@
 
 
 
-</head>
+</head></html>
 <body>
   <div id="container">
     <div class="left-col">
@@ -317,13 +319,28 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="处理流程"><a href="#处理流程" class="headerlink" title="处理流程"></a>处理流程</h2><ol>
+        <p>MyBatis 的优点：</p>
+<ol>
+<li>MyBatis 是原生SQL，不像 Hibernate 的 HQL 需要额外的学习成本。</li>
+<li>MyBatis 的 SQL 语句与代码进行了解耦合。</li>
+<li>MyBatis 功能简单，学习成本比较低，使用的门槛也非常低，可以快速上手。</li>
+<li>MyBatis SQL调优比较灵活，而 Hibernate，SQL 语句是自动生成的，当有复杂语句需要进行优化时就比较难处理。 </li>
+</ol>
+<p>MyBatis 的缺点：</p>
+<ol>
+<li>相比 Hibernate 这样的全自动 ORM 框架，不能自动生成 SQL 语句，编写 SQL 的工作量比较大，尤其是字段多、关联表多的情况下；</li>
+<li>SQL 语句依赖于具体数据库，导致数据库迁移性差，而 Hibernate 则拥有良好的数据库可移植性。</li>
+</ol>
+<p>官方文档：<a href="https://mybatis.org/mybatis-3/zh/index.html" target="_blank" rel="noopener">MyBatis3</a></p>
+<a id="more"></a>
+<h2 id="处理流程"><a href="#处理流程" class="headerlink" title="处理流程"></a>处理流程</h2><p><img src="/img/posts/MyBatis.png" alt="MyBatis处理流程"></p>
+<ol>
 <li>在执行 SQL 时，首先会从 SqlSessionFactory 中创建一个新的 SqlSession。</li>
 <li>SQL 语句是通过 SqlSession 中的 Executor 来执行，Executor 根据 SqlSession 传递的参数执行 query() 方法，然后创建一个 StatementHandler 对象，将必要的参数传递给 StatementHandler，由 StatementHandler 来完成对数据库的查询。</li>
 <li>StatementHandler 调用 ParameterHandler 的 setParameters 方法，把用户传递的参数转换成 JDBC Statement 所需要的参数， 调用原生 JDBC 来执行语句。</li>
 <li>最后由 ResultSetHandler 的 handleResultSets 方法将 JDBC 返回的 ResultSet 结果集转换成对象集，并逐级返回结果，完成一次 SQL 语句执行。</li>
 </ol>
-
+<h2 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h2><h2 id="经验"><a href="#经验" class="headerlink" title="经验"></a>经验</h2>
       
     </div>
     
@@ -334,7 +351,7 @@
         <p><span>本文标题:</span><a href="/2021/07/28/20180802/">MyBatis</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">王球</a></p>
         <p><span>发布时间:</span>2021-07-28, 20:08:06</p>
-        <p><span>最后更新:</span>2021-07-29, 21:05:31</p>
+        <p><span>最后更新:</span>2021-08-01, 13:21:25</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2021/07/28/20180802/" title="MyBatis">http://yoursite.com/2021/07/28/20180802/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2021/07/28/20180802/　　作者: 王球" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -350,15 +367,15 @@
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2021/07/28/20180727/">
-                    Spring
+                <a href="/2021/07/28/20180720/">
+                    数据结构与算法
                 </a>
             </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2021/07/28/20170918/">
-                    硬技能图谱
+                <a href="/2021/07/28/20180727/">
+                    Spring
                 </a>
             </div>
         
@@ -370,7 +387,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#处理流程"><span class="toc-number">1.</span> <span class="toc-text">处理流程</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#处理流程"><span class="toc-number">1.</span> <span class="toc-text">处理流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#缓存"><span class="toc-number">2.</span> <span class="toc-text">缓存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#经验"><span class="toc-number">3.</span> <span class="toc-text">经验</span></a></li></ol>
         
     </div>
     <style>
@@ -426,7 +443,7 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2021/07/28/20180727/" title="上一篇: Spring">
+            <a href="/2021/07/28/20180720/" title="上一篇: 数据结构与算法">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -434,13 +451,13 @@
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2021/07/28/20170918/" title="下一篇: 硬技能图谱">
+            <a href="/2021/07/28/20180727/" title="下一篇: Spring">
                 <i class="fa fa-angle-right"></i>
             </a>
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20210730/">Netty</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20180916/">缓存</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20181111/">Redis</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20181113/">MySQL</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20180617/">Java</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20180630/">并发与多线程</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20180725/">常用工具集</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20171212/">操作系统与计算机网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20210728/">数据格式</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20181114/">HBase</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20181115/">Cassandra</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20190107/">Mongo</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20190112/">架构</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20180815/">RPC</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20181010/">消息队列</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20181023/">数据库</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20181112/">Kafka</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20180619/">JVM</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20180720/">数据结构与算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20180727/">Spring</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20180802/">MyBatis</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20170918/">硬技能图谱</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20180618/">设计模式</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20210730/">Netty</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20180916/">缓存</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20181113/">MySQL</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20181111/">Redis</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20180617/">Java</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20180630/">并发与多线程</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20180725/">常用工具集</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20171212/">操作系统与计算机网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20210728/">数据格式</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20181115/">Cassandra</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20181114/">HBase</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20190107/">Mongo</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20190112/">架构</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20180815/">RPC</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20181023/">数据库</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20181112/">Kafka</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20181010/">消息队列</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20180619/">JVM</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20180720/">数据结构与算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20180802/">MyBatis</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20180727/">Spring</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20170918/">硬技能图谱</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20180618/">设计模式</a></li></ul>
 
 
 

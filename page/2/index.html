@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-Hans">
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
 
     <!--[if lt IE 9]>
         <style>body {display: none; background: none !important} </style>
@@ -8,10 +8,10 @@
     <![endif]-->
 
 <meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="format-detection" content="telephone=no" />
-<meta name="author" content="王球" />
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="王球">
 
 
     
@@ -29,7 +29,7 @@
 <meta name="twitter:title" content="WangQiu&#39;s Blog">
 <meta name="twitter:description" content="总结,随笔">
 
-<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
 
     <link rel="alternate" href="/atom.xml" title="WangQiu&#39;s Blog" type="application/atom+xml">
@@ -93,7 +93,7 @@
 
 
 
-</head>
+</head></html>
 <body>
   <div id="container">
     <div class="left-col">
@@ -278,10 +278,10 @@
 </nav>
       <div class="body-wrap">
   
-    <article id="post-20181115" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-20181114" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2021/07/28/20181115/" class="article-date">
+      <a href="/2021/07/28/20181114/" class="article-date">
       <time datetime="2021-07-28T12:08:06.943Z" itemprop="datePublished">2021-07-28</time>
 </a>
 
@@ -297,7 +297,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/28/20181115/">Cassandra</a>
+      <a class="article-title" href="/2021/07/28/20181114/">HBase</a>
     </h1>
   
 
@@ -307,7 +307,23 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        
+        <h2 id="索引类型"><a href="#索引类型" class="headerlink" title="索引类型"></a>索引类型</h2><ul>
+<li>本地索引</li>
+<li>全局索引</li>
+<li>覆盖索引</li>
+</ul>
+<h2 id="RowKey设计"><a href="#RowKey设计" class="headerlink" title="RowKey设计"></a>RowKey设计</h2><ul>
+<li>长度原则</li>
+<li>唯一原则</li>
+<li>散列原则</li>
+</ul>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><ul>
+<li><a href="https://cloud.tencent.com/developer/article/1006043" target="_blank" rel="noopener">HBase技术细节笔记上</a></li>
+<li><a href="https://cloud.tencent.com/developer/article/1006044" target="_blank" rel="noopener">HBase技术细节笔记下</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/145551967" target="_blank" rel="noopener">我终于看懂了HBase，太不容易了</a></li>
+<li><a href="https://www.slidestalk.com/HBaseGroup/HBase_ebook28532" target="_blank" rel="noopener">2018 HBase技术总结</a></li>
+</ul>
+
       
     </div>
     
@@ -553,77 +569,6 @@
 
 
   
-    <article id="post-20181010" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2021/07/28/20181010/" class="article-date">
-      <time datetime="2021-07-28T12:08:06.942Z" itemprop="datePublished">2021-07-28</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/28/20181010/">消息队列</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><p>解耦合、削峰填谷、异步</p>
-<h2 id="消息协议"><a href="#消息协议" class="headerlink" title="消息协议"></a>消息协议</h2><p>AMQP<br>JMS</p>
-<h2 id="常用队列"><a href="#常用队列" class="headerlink" title="常用队列"></a>常用队列</h2><ul>
-<li>ActiveMQ: 单机吞吐量万级，有较低概率丢失消息</li>
-<li>RabbitMQ: Erlang开发，单机吞吐万级</li>
-<li>RocketMQ: 阿里开源，单机吞吐量10W级</li>
-<li>Kafka: Scala开发, 单机吞吐量10W级，发布订阅模式</li>
-</ul>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/应用模块/">应用模块</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/中间件/">中间件</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/消息队列/">消息队列</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
     <article id="post-20181023" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -782,7 +727,7 @@
 <li>每个Partition在一个Group中只能由一个Consumer消费，通过Group Coordinator来管理Consumer实际负责消费哪个Partiton，默认支持轮询和Range分配。</li>
 <li>Kafka在zk中保存了每个Topic中每个Partition在不同Group的消费偏移量offset。<br><strong>注意</strong>：分区数量一般要大于或等于消费者（同一Group）数量。否则，有的消费者会消费不到数据</li>
 </ul>
-<h2 id="经验"><a href="#经验" class="headerlink" title="经验"></a>经验</h2><h3 id="集成Spring-Kafka"><a href="#集成Spring-Kafka" class="headerlink" title="集成Spring Kafka"></a>集成Spring Kafka</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;dependency&gt;</div><div class="line">    &lt;groupId&gt;org.springframework.kafka&lt;/groupId&gt;</div><div class="line">    &lt;artifactId&gt;spring-kafka&lt;/artifactId&gt;</div><div class="line">&lt;/dependency&gt;</div></pre></td></tr></table></figure>
+<h2 id="经验"><a href="#经验" class="headerlink" title="经验"></a>经验</h2><h3 id="集成Spring-Kafka"><a href="#集成Spring-Kafka" class="headerlink" title="集成Spring Kafka"></a>集成Spring Kafka</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.kafka&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-kafka&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
 <p>生产：使用 KafkaTemplte 生产消息，多个Kafka实例需生产消息时配置不同的KafkaTemplate<br>消费：单条消费时直接使用 @KafkaListener 注解即可，批量消费需先配置containerFactory</p>
 <h3 id="生产者"><a href="#生产者" class="headerlink" title="生产者"></a>生产者</h3><p>ack</p>
 <ul>
@@ -795,8 +740,79 @@
 <li>增加Consumer个数</li>
 <li>增加处理线程：定义一个线程池，Poll数据，将数据提交到线程池中，再次Poll数据。</li>
 </ul>
-<h3 id="可视化"><a href="#可视化" class="headerlink" title="可视化"></a>可视化</h3><p><a href="https://www.kafkatool.com/download.html" target="_blank" rel="external">可视化工具下载地址</a></p>
-<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="https://cloud.tencent.com/document/product/597/30203" target="_blank" rel="external">CKafka常用参数配置指南</a><br><a href="https://help.aliyun.com/document_detail/68165.html?spm=a2c4g.11186623.6.761.1615358bafQjos" target="_blank" rel="external">发布者最佳实践</a><br><a href="https://help.aliyun.com/document_detail/68166.html?spm=a2c4g.11186623.6.762.4297203abkfLec" target="_blank" rel="external">订阅者最佳实践</a></p>
+<h3 id="可视化"><a href="#可视化" class="headerlink" title="可视化"></a>可视化</h3><p><a href="https://www.kafkatool.com/download.html" target="_blank" rel="noopener">可视化工具下载地址</a></p>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="https://cloud.tencent.com/document/product/597/30203" target="_blank" rel="noopener">CKafka常用参数配置指南</a><br><a href="https://help.aliyun.com/document_detail/68165.html?spm=a2c4g.11186623.6.761.1615358bafQjos" target="_blank" rel="noopener">发布者最佳实践</a><br><a href="https://help.aliyun.com/document_detail/68166.html?spm=a2c4g.11186623.6.762.4297203abkfLec" target="_blank" rel="noopener">订阅者最佳实践</a></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/应用模块/">应用模块</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/中间件/">中间件</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/消息队列/">消息队列</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-20181010" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/07/28/20181010/" class="article-date">
+      <time datetime="2021-07-28T12:08:06.942Z" itemprop="datePublished">2021-07-28</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/28/20181010/">消息队列</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><p>解耦合、削峰填谷、异步</p>
+<h2 id="消息协议"><a href="#消息协议" class="headerlink" title="消息协议"></a>消息协议</h2><p>AMQP<br>JMS</p>
+<h2 id="常用队列"><a href="#常用队列" class="headerlink" title="常用队列"></a>常用队列</h2><ul>
+<li>ActiveMQ: 单机吞吐量万级，有较低概率丢失消息</li>
+<li>RabbitMQ: Erlang开发，单机吞吐万级</li>
+<li>RocketMQ: 阿里开源，单机吞吐量10W级</li>
+<li>Kafka: Scala开发, 单机吞吐量10W级，发布订阅模式</li>
+</ul>
 
       
     </div>
@@ -924,7 +940,58 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h1 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h1><h1 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h1><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><h2 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h2><h2 id="字符串匹配"><a href="#字符串匹配" class="headerlink" title="字符串匹配"></a>字符串匹配</h2><h2 id="常用算法思路"><a href="#常用算法思路" class="headerlink" title="常用算法思路"></a>常用算法思路</h2>
+        <h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><h3 id="二叉搜索树"><a href="#二叉搜索树" class="headerlink" title="二叉搜索树"></a>二叉搜索树</h3><p><img src="http://s0.lgstatic.com/i/image2/M01/8A/E1/CgotOV14oT6AIEwmAAAW0UV9vPM694.png" alt="img"></p>
+<ul>
+<li>每个节点包含一个值。</li>
+<li>每个节点至多有两个子树。</li>
+<li>每个节点左子树节点的值都小于自身的值，每个节点右子树节点的值都大于自身的值。</li>
+</ul>
+<p>二叉树的查询时间复杂度是 log(N)，但是随着不断的插入、删除节点，二叉树的树高可能会不断变大，当一个二叉搜索树所有节点都只有左子树或者都只有右子树时，其查找性能就退化成线性的了。</p>
+<h3 id="平衡二叉树"><a href="#平衡二叉树" class="headerlink" title="平衡二叉树"></a>平衡二叉树</h3><p>平衡二叉树保证每个节点左右子树的高度差的绝对值不超过 1，比较适合插入、删除比较少的场景。</p>
+<h3 id="红黑树"><a href="#红黑树" class="headerlink" title="红黑树"></a>红黑树</h3><p>红黑树是一种更加实用的非严格的平衡二叉树，更关注局部平衡而非整体平衡，确保没有一条路径会比其他路径长出 2 倍，所以是接近平衡的，但减少了许多不必要的旋转操作，更加实用。</p>
+<p><img src="http://s0.lgstatic.com/i/image2/M01/8A/C2/CgoB5l14oT6AeAxdAAAmJsTBAww115.png" alt="img"></p>
+<ul>
+<li>每个节点不是红色就是黑色。</li>
+<li>根节点是黑色。</li>
+<li>每个叶子节点都是黑色的空节点，如图中的黑色三角。</li>
+<li>红色节点的两个子节点都是黑色的。</li>
+<li>任意节点到其叶节点的每条路径上，包含相同数量的黑色节点。    </li>
+</ul>
+<h3 id="B树"><a href="#B树" class="headerlink" title="B树"></a>B树</h3><p><img src="http://s0.lgstatic.com/i/image2/M01/8A/E1/CgotOV14oT6APZerAAAkJXd9qEE912.png" alt="img"></p>
+<p>B 树是一种多叉树，也叫多路搜索树，</p>
+<ul>
+<li>B 树中每个节点可以存储多个元素。</li>
+<li>关键字分布在整颗树中，一个关键字只出现在一个节点中。</li>
+<li>搜索可能在非叶节点停止。</li>
+<li>非常适合用在文件索引上，可以有效减少磁盘 IO 次数。</li>
+</ul>
+<p>B 树中所有结点的最大子节点数称为 B 树的阶，如上图所示是一棵 3 阶 B 树，也叫 2-3 树。</p>
+<p>一个 m 阶 B 树有如下特点：</p>
+<ol>
+<li>非叶节点最多有 m 棵子树。</li>
+<li>根节点最少有两个子树，非根、非叶节点最少有 m/2 棵子树。</li>
+<li>非叶子结点中保存的关键字个数，等于该节点子树个数−1。</li>
+<li>非叶子节点中的关键字大小有序。</li>
+<li>节点中每个关键字的左子树中的关键字都小于该关键字，右子树中的关键字都大于该关键字。</li>
+<li>所有叶节点都在同一层。</li>
+<li>B 树在查找时，从根结点开始，对结点内的有序的关键字序列进行二分查找，如果找到就结束，没有找到就进入查询关键字所属范围的子树进行查找，直到叶节点。</li>
+</ol>
+<h3 id="B-树"><a href="#B-树" class="headerlink" title="B+树"></a>B+树</h3><p><img src="http://s0.lgstatic.com/i/image2/M01/8A/C2/CgoB5l14oT6AUR7GAAAe0Dk9-gg936.png" alt="img"></p>
+<ol>
+<li>节点中的关键字与子树数目相同。</li>
+<li>关键字对应的子树中的节点都大于或等于关键字，子树中包括关键字自身。</li>
+<li>所有关键字都出现在叶子节点中。</li>
+<li>所有叶子节点都有指向下一个叶子节点的指针。</li>
+<li>在搜索时不会在非叶子节点命中，一定会查询到叶子节点。</li>
+<li>叶子节点相当于数据存储层，保存关键字对应的数据，而非叶子节点只保存关键字和指向叶节点的指针，不保存关键字对应的数据。</li>
+</ol>
+<p>B+ 树更适合索引系统的原因</p>
+<ol>
+<li>由于叶节点之间有指针相连，B+ 树更适合范围检索；</li>
+<li>由于非页节点只保存关键字和指针，同样大小非叶节点，B+ 树可以容纳更多的关键字，可以降低树高，查询时磁盘读写代价更低；</li>
+<li>B+ 树的查询效率比较稳定。任何关键字的查找必须走一条从根结点到叶子结点的路，所有关键字查询的路径长度相同，效率相当。</li>
+</ol>
+<h3 id="B-树-1"><a href="#B-树-1" class="headerlink" title="B*树"></a>B*树</h3><h2 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h2><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><h2 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h2><h2 id="字符串匹配"><a href="#字符串匹配" class="headerlink" title="字符串匹配"></a>字符串匹配</h2><h2 id="常用算法思路"><a href="#常用算法思路" class="headerlink" title="常用算法思路"></a>常用算法思路</h2>
       
     </div>
     
@@ -954,10 +1021,10 @@
 
 
   
-    <article id="post-20180727" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-20180802" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2021/07/28/20180727/" class="article-date">
+      <a href="/2021/07/28/20180802/" class="article-date">
       <time datetime="2021-07-28T12:08:06.941Z" itemprop="datePublished">2021-07-28</time>
 </a>
 
@@ -973,7 +1040,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/28/20180727/">Spring</a>
+      <a class="article-title" href="/2021/07/28/20180802/">MyBatis</a>
     </h1>
   
 
@@ -983,77 +1050,20 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h1 id="Spring-Framework"><a href="#Spring-Framework" class="headerlink" title="Spring Framework"></a>Spring Framework</h1><h2 id="Context初始化流程"><a href="#Context初始化流程" class="headerlink" title="Context初始化流程"></a>Context初始化流程</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">refresh</span><span class="params">()</span> <span class="keyword">throws</span> BeansException, IllegalStateException </span>&#123;</div><div class="line">    <span class="keyword">synchronized</span> (<span class="keyword">this</span>.startupShutdownMonitor) &#123;</div><div class="line">        prepareRefresh();</div><div class="line">        ConfigurableListableBeanFactory beanFactory = obtainFreshBeanFactory();</div><div class="line">        prepareBeanFactory(beanFactory);</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            postProcessBeanFactory(beanFactory);</div><div class="line">            invokeBeanFactoryPostProcessors(beanFactory);</div><div class="line">            registerBeanPostProcessors(beanFactory);</div><div class="line">            initMessageSource();</div><div class="line">            initApplicationEventMulticaster();</div><div class="line">            onRefresh();</div><div class="line">            registerListeners();</div><div class="line">            finishBeanFactoryInitialization(beanFactory);</div><div class="line">            finishRefresh();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">catch</span> (BeansException ex) &#123;</div><div class="line">            <span class="keyword">if</span> (logger.isWarnEnabled()) &#123;</div><div class="line">                logger.warn(<span class="string">"Exception encountered during context initialization - "</span> +</div><div class="line">                        <span class="string">"cancelling refresh attempt: "</span> + ex);</div><div class="line">            &#125;</div><div class="line">            destroyBeans();</div><div class="line">            cancelRefresh(ex);</div><div class="line">            <span class="keyword">throw</span> ex;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">finally</span> &#123;</div><div class="line">            resetCommonCaches();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+              <p>MyBatis 的优点：</p>
 <ol>
-<li>首先对刷新进行准备，包括设置开始时间、设置激活状态、初始化 Context 环境中的占位符，这个动作根据子类的需求由子类来执行，然后验证是否缺失必要的 properties。</li>
-<li>刷新并获得内部的 Bean Factory。</li>
-<li>对 BeanFactory 进行准备工作，比如设置类加载器和后置处理器、配置不进行自动装配的类型、注册默认的环境 Bean。</li>
-<li>为 Context 的子类提供后置处理 BeanFactory 的扩展能力。如果子类想在 Bean 定义加载完成后，开始初始化上下文之前做一些特殊逻辑，可以复写这个方法。</li>
-<li>执行 Context 中注册的 Bean Factory 后缀处理器。这里有两种后置处理器，一种是可以注册 Bean 的后缀处理器，另一种是针对 BeanFactory 进行处理的后置处理器。执行的顺序是，先按优先级执行可注册 Bean 的处理器，在按优先级执行针对 BeanFactory的处理器。对 Spring Boot 来说，这一步会进行注解 Bean Definition 的解析。流程如图右侧所示，由 ConfigurationClassPostProcessor 触发、由 ClassPathBeanDefinitionScanner 解析并注册到 BeanFactory。</li>
-<li>按优先级顺序在 BeanFactory 中注册  Bean的后缀处理器，Bean 后置处理器可以在 Bean 初始化前、后执行处理。</li>
-<li>初始化消息源，消息源用来支持消息的国际化。</li>
-<li>初始化应用事件广播器。事件广播器用来向 ApplicationListener 通知各种应用产生的事件，是一个标准的观察者模式。</li>
-<li>是留给子类的扩展步骤，用来让特定的 Context 子类初始化其他的 Bean。</li>
-<li>把实现了 ApplicationListener 的 Bean 注册到事件广播器，并对广播器中的早期未广播事件进行通知。</li>
-<li>冻结所有 Bean 描述信息的修改，实例化非延迟加载的单例 Bean。</li>
-<li>完成上下文的刷新工作，调用 LifecycleProcessor 的 onFresh() 方法以及发布 ContextRefreshedEvent 事件。</li>
-<li>在 finally 中，执行第十三步，重置公共的缓存，比如 ReflectionUtils 中的缓存、 AnnotationUtils 中的缓存等等。</li>
+<li>MyBatis 是原生SQL，不像 Hibernate 的 HQL 需要额外的学习成本。</li>
+<li>MyBatis 的 SQL 语句与代码进行了解耦合。</li>
+<li>MyBatis 功能简单，学习成本比较低，使用的门槛也非常低，可以快速上手。</li>
+<li>MyBatis SQL调优比较灵活，而 Hibernate，SQL 语句是自动生成的，当有复杂语句需要进行优化时就比较难处理。 </li>
 </ol>
-<h2 id="Bean生命周期"><a href="#Bean生命周期" class="headerlink" title="Bean生命周期"></a>Bean生命周期</h2><ol>
-<li>调用 Bean 的构造方法创建 Bean；</li>
-<li>通过反射调用 setter 方法进行属性的依赖注入；</li>
-<li>如果实现 BeanNameAware 接口的话，会设置 Bean 的 name；</li>
-<li>如果实现了 BeanFactoryAware，会把 BeanFactory 设置给 Bean；</li>
-<li>如果实现了 ApplicationContextAware，会给 Bean 设置 ApplictionContext；</li>
-<li>如果实现了 BeanPostProcessor 接口，则执行前置处理方法；</li>
-<li>实现了 InitializingBean 接口的话，执行 afterPropertiesSet 方法；</li>
-<li>执行自定义的 init 方法；</li>
-<li>执行 BeanPostProcessor 接口的后置处理方法；</li>
-<li>在使用完 Bean 需要销毁时，会先执行 DisposableBean 接口的 destroy 方法，然后在执行自定义的 destroy 方法。</li>
-</ol>
-<h2 id="事务传播类型"><a href="#事务传播类型" class="headerlink" title="事务传播类型"></a>事务传播类型</h2><p>REQUIRED：默认类型，如果当前没有事务，就创建一个新事务，如果当前存在事务，就加入该事务。</p>
-<p>SUPPORTS：支持当前事务，如果当前存在事务，就加入该事务，如果当前不存在事务，就以非事务执行。</p>
-<p>MANDATORY：支持当前事务，如果当前存在事务，就加入该事务，如果当前不存在事务，就抛出异常。</p>
-<p>REQUIRES_NEW：创建新事务，无论当前存不存在事务，都创建新事务。</p>
-<p>NOT_SUPPORTED：以非事务方式执行操作，如果当前存在事务，就把当前事务挂起。</p>
-<p>NEVER：以非事务方式执行，如果当前存在事务，则抛出异常。</p>
-<p>NESTED：如果当前存在事务，则在嵌套事务内执行。如果当前没有事务，则执行与 REQUIRED 类似的操作。</p>
-<h1 id="Spring-Boot"><a href="#Spring-Boot" class="headerlink" title="Spring Boot"></a>Spring Boot</h1><p>目标是简化 Spring 应用和服务的创建、开发与部署。</p>
-<ul>
-<li>简化了配置文件。</li>
-<li>使用嵌入式 Web 服务器。</li>
-<li>含有诸多开箱即用的微服务功能，</li>
-<li>可以和 Spring Cloud 联合部署。</li>
-</ul>
-<p>Spring Boot 的核心思想是约定大于配置，应用只需要很少的配置即可，简化了应用开发模式。</p>
-<h2 id="启动流程"><a href="#启动流程" class="headerlink" title="启动流程"></a>启动流程</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> ConfigurableApplicationContext <span class="title">run</span><span class="params">(String... args)</span> </span>&#123;</div><div class="line">    StopWatch stopWatch = <span class="keyword">new</span> StopWatch();</div><div class="line">    stopWatch.start();</div><div class="line">    ConfigurableApplicationContext context = <span class="keyword">null</span>;</div><div class="line">    Collection&lt;SpringBootExceptionReporter&gt; exceptionReporters = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">    configureHeadlessProperty();</div><div class="line">    SpringApplicationRunListeners listeners = getRunListeners(args);</div><div class="line">    listeners.starting();</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        ApplicationArguments applicationArguments = <span class="keyword">new</span> DefaultApplicationArguments(</div><div class="line">                args);</div><div class="line">        ConfigurableEnvironment environment = prepareEnvironment(listeners,</div><div class="line">                applicationArguments);</div><div class="line">        configureIgnoreBeanInfo(environment);</div><div class="line">        Banner printedBanner = printBanner(environment);</div><div class="line">        context = createApplicationContext();</div><div class="line">        exceptionReporters = getSpringFactoriesInstances(</div><div class="line">                SpringBootExceptionReporter.class,</div><div class="line">                <span class="keyword">new</span> Class[] &#123; ConfigurableApplicationContext.class &#125;, context);</div><div class="line">        prepareContext(context, environment, listeners, applicationArguments,</div><div class="line">                printedBanner);</div><div class="line">        refreshContext(context);</div><div class="line">        afterRefresh(context, applicationArguments);</div><div class="line">        stopWatch.stop();</div><div class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.logStartupInfo) &#123;</div><div class="line">            <span class="keyword">new</span> StartupInfoLogger(<span class="keyword">this</span>.mainApplicationClass)</div><div class="line">                    .logStarted(getApplicationLog(), stopWatch);</div><div class="line">        &#125;</div><div class="line">        listeners.started(context);</div><div class="line">        callRunners(context, applicationArguments);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">catch</span> (Throwable ex) &#123;</div><div class="line">        handleRunFailure(context, ex, exceptionReporters, listeners);</div><div class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(ex);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        listeners.running(context);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">catch</span> (Throwable ex) &#123;</div><div class="line">        handleRunFailure(context, ex, exceptionReporters, <span class="keyword">null</span>);</div><div class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(ex);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> context;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>MyBatis 的缺点：</p>
 <ol>
-<li>配置Environment。</li>
-<li>准备 Context 上下文，包括执行 ApplicationContext 的后置处理、初始化 Initializer、通知Listener 处理 ContextPrepared 和 ContextLoaded 事件。</li>
-<li>执行 refreshContext。</li>
+<li>相比 Hibernate 这样的全自动 ORM 框架，不能自动生成 SQL 语句，编写 SQL 的工作量比较大，尤其是字段多、关联表多的情况下；</li>
+<li>SQL 语句依赖于具体数据库，导致数据库迁移性差，而 Hibernate 则拥有良好的数据库可移植性。</li>
 </ol>
-<h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><ul>
-<li>bootstrap</li>
-<li>application</li>
-</ul>
-<h2 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h2><ul>
-<li>SpringBootApplication</li>
-<li>SpringBootConfiguration</li>
-<li>EnableAutoConfiguration</li>
-<li>@Conditional</li>
-</ul>
-<h2 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h2><ul>
-<li>Starter</li>
-<li>Actuator</li>
-<li>DevTools</li>
-<li>CLI</li>
-</ul>
-<h1 id="Spring-Cloud"><a href="#Spring-Cloud" class="headerlink" title="Spring Cloud"></a>Spring Cloud</h1><p>Spring Cloud 是一套完整的微服务解决方案，是一系列不同功能的微服务框架的集合。基于 Spring Boot，简化了分布式系统的开发。集成了服务发现、配置管理、消息总线、负载均衡、断路器、数据监控等各种服务治理能力。</p>
-<p>sleuth：提供了全链路追踪能力</p>
-<p>Netflix套件：提供了hystrix熔断器，zuul网关等众多的治理组件</p>
-<p>config 组件提供了动态配置能力</p>
-<p>bus组件：支持使用 RabbitMQ、Kafka、ActiveMQ 等消息队列，实现分布式服务之间的事件通信</p>
-<h1 id="Spring-Data"><a href="#Spring-Data" class="headerlink" title="Spring Data"></a>Spring Data</h1><h1 id="Spring-Security"><a href="#Spring-Security" class="headerlink" title="Spring Security"></a>Spring Security</h1>
+<p>官方文档：<a href="https://mybatis.org/mybatis-3/zh/index.html" target="_blank" rel="noopener">MyBatis3</a></p>
+          
       
     </div>
     
@@ -1070,6 +1080,10 @@
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/框架/">框架</a></li></ul>
     </div>
 
+      
+        <p class="article-more-link">
+          <a href="/2021/07/28/20180802/#more">阅读全文 >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>

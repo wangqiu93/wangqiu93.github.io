@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-Hans">
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
 
     <!--[if lt IE 9]>
         <style>body {display: none; background: none !important} </style>
@@ -8,10 +8,10 @@
     <![endif]-->
 
 <meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="format-detection" content="telephone=no" />
-<meta name="author" content="王球" />
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="王球">
 
 
     
@@ -29,7 +29,7 @@
 <meta name="twitter:title" content="WangQiu&#39;s Blog">
 <meta name="twitter:description" content="总结,随笔">
 
-<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
 
     <link rel="alternate" href="/atom.xml" title="WangQiu&#39;s Blog" type="application/atom+xml">
@@ -93,7 +93,7 @@
 
 
 
-</head>
+</head></html>
 <body>
   <div id="container">
     <div class="left-col">
@@ -417,6 +417,110 @@
 
 
   
+    <article id="post-20181113" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/07/29/20181113/" class="article-date">
+      <time datetime="2021-07-29T12:12:55.020Z" itemprop="datePublished">2021-07-29</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/29/20181113/">MySQL</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="调优"><a href="#调优" class="headerlink" title="调优"></a>调优</h2><p><img src="/img/posts/索引优化.png" alt="img"><br>这四个纬度从优化的成本角度来讲，从左到右优化成本逐渐升高；从优化效果角度来看，从右到左优化的效果更高。</p>
+<h3 id="表结构及索引优化"><a href="#表结构及索引优化" class="headerlink" title="表结构及索引优化"></a>表结构及索引优化</h3><ul>
+<li>在设计表结构时，考虑数据库的水平与垂直扩展能力，提前规划好未来1年的数据量、读写量的增长，规划好分库分表方案。比如设计用户信息表，预计 1 年后用户数据 10亿 条，写 QPS 约 5000，读 QPS 30000，可以设计按 UID 纬度进行散列，分为 4 个库每个库 32 张表，单表数据量控制在 KW 级别。</li>
+<li>为字段选择合适的数据类型，在保留扩展能力的前提下，优先选用较小的数据结构。例如保存年龄的字段，要使用 TINYINT 而不要使用 INT。</li>
+<li>控制表的列数。</li>
+<li>如果查询时需要对多张表进行关联查询，可以设计一些冗余字段提高效率。</li>
+<li>要擅用索引，比如为经常作为查询条件的字段创建索引、创建联合索引时要根据最左原则考虑索引的复用能力，不要重复创建索引；要为保证数据不能重复的字段创建唯一索引等等。不过要注意索引对插入、更新等写操作是有代价的，不要滥用索引，比如像性别这样唯一很差的字段就不适合建立索引。</li>
+<li>列字段尽量设置为 not null。MySQL 难以对使用 null 的列进行查询优化，允许 null 会使索引、索引统计和值更加复杂，允许 null 值的列需要更多的存储空间，还需要 MySQL 内部进行特殊处理。</li>
+</ul>
+<h3 id="SQL语句优化"><a href="#SQL语句优化" class="headerlink" title="SQL语句优化"></a>SQL语句优化</h3><ul>
+<li>要找到最需要优化的 SQL 语句。要么是使用最频繁的语句，要么是优化后提高最明显的语句，可以通过查询 MySQL 的慢查询日志来发现需要进行优化的 SQL 语句。</li>
+<li>利用 MySQL 提供的分析工具。例如使用 Explain 来分析语句的执行计划，看看是否使用了索引，使用了哪个索引，扫描了多少记录，是否使用文件排序等等。或者利用 Profile 命令来分析某个语句执行过程中各个分步的耗时。</li>
+<li>要注意使用查询语句是要避免使用 SELECT *，而是应该指定具体需要获取的字段。原因一是可以避免查询出不需要使用的字段，二是可以避免查询列字段的元信息。</li>
+<li>尽量使用 prepared statements，一个是它性能更好，另一个是可以防止 SQL 注入。</li>
+<li>尽量使用索引扫描来进行排序，也就是尽量在有索引的字段上进行排序操作。</li>
+</ul>
+<h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><p>索引可以大幅增加数据库的查询的性能，但是索引也是有代价的，首先需要额外的磁盘空间来保存索引；其次，对于插入、更新、删除等操作由于更新索引会增加额外的开销，因此索引比较适合用在读多写少的场景。</p>
+<h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><ul>
+<li>唯一索引：索引列中的值必须是唯一的，但是允许出现空值。</li>
+<li>主键索引：一种特殊的唯一索引，但是它不允许出现空值。</li>
+<li>普通索引：唯一索引不同，它允许索引列中存在相同的值。</li>
+<li>联合索引：由多个列共同组成的索引，需遵循最左原则，就是 where 查询条件中的字段必须与索引字段从左到右进行匹配。</li>
+<li>全文索引：全文索引只能在 CHAR、VARCHAR、TEXT 类型字段上使用，底层使用倒排索引实现。</li>
+</ul>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>B+树：适合用作 &gt; 或 &lt; 这样的范围查询，是 MySQL 中最常使用的一种索引实现。<br>R-Tree：用于处理多维数据的数据结构，可以对地理数据进行空间索引。不过实际业务场景中使用的比较少。<br>Hash：散列表索引，效率高于 B+树，但是不支持范围查找或排序等功能。实际使用的也比较少。<br>FullText：全文索引，是一种记录关键字与对应文档关系的倒排索引。</p>
+<h2 id="存储引擎"><a href="#存储引擎" class="headerlink" title="存储引擎"></a>存储引擎</h2><p><img src="/img/posts/聚簇索引.png" alt="img"></p>
+<p><strong>聚簇索引</strong></p>
+<p>B+树叶子节点上的data是行数据。</p>
+<p><strong>非聚簇索引</strong></p>
+<p>B+树的叶子节点上的data不是行数据。而是数据存放的地址或者主键值。</p>
+<h3 id="MyISAM"><a href="#MyISAM" class="headerlink" title="MyISAM"></a>MyISAM</h3><p>5.5版本前默认引擎，支持全文索引，查询效率比较高，但不支持事务、使用<strong>表级锁</strong>。</p>
+<p>主键和辅助键均使用非聚簇索引。</p>
+<h3 id="InnoDB"><a href="#InnoDB" class="headerlink" title="InnoDB"></a>InnoDB</h3><p>5.5版本后默认引擎。支持 ACID 事务、支持外键、支持<strong>行级锁</strong>。</p>
+<p>主键使用聚簇索引，辅助键使用非聚簇索引。</p>
+<h3 id="TokuDB"><a href="#TokuDB" class="headerlink" title="TokuDB"></a>TokuDB</h3><p>第三方开发的开源存储引擎，有非常快的写速度，支持数据的压缩存储、可以在线添加索引而不影响读写操作。但是因为压缩的原因，TokuDB 非常适合访问频率不高的数据或历史数据归档，不适合大量读取的场景。</p>
+<h2 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h2><ul>
+<li>表锁：开销小，加锁快，不会出现死锁；但是锁的粒度大，发生锁冲突的概率高，并发访问效率比较低。</li>
+<li>行级锁：开销大，加锁慢，有可能会出现死锁，不过因为锁定粒度最小，发生锁冲突的概率低，并发访问效率比较高</li>
+<li>共享锁：读锁，其他事务可以读，但不能写。MySQL 可以通过 lock in share mode 语句显示使用共享锁。</li>
+<li>排他锁：写锁，其他事务不能读取，也不能写。对于 UPDATE、DELETE 和 INSERT 语句，InnoDB 会自动给涉及的数据集加排他锁，或者使用 select for update 显示使用排他锁。</li>
+</ul>
+<h2 id="经验"><a href="#经验" class="headerlink" title="经验"></a>经验</h2>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/应用模块/">应用模块</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-20181111" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -485,107 +589,6 @@
 
 
   
-    <article id="post-20181113" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2021/07/29/20181113/" class="article-date">
-      <time datetime="2021-07-29T12:12:55.020Z" itemprop="datePublished">2021-07-29</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/29/20181113/">MySQL</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h2 id="调优"><a href="#调优" class="headerlink" title="调优"></a>调优</h2><p><img src="http://s0.lgstatic.com/i/image2/M01/8A/CF/CgoB5l14tcCAW4TEAAA4gPziGLI076.png" alt="img"><br>这四个纬度从优化的成本角度来讲，从左到右优化成本逐渐升高；从优化效果角度来看，从右到左优化的效果更高。</p>
-<h3 id="表结构及索引优化"><a href="#表结构及索引优化" class="headerlink" title="表结构及索引优化"></a>表结构及索引优化</h3><ul>
-<li>在设计表结构时，考虑数据库的水平与垂直扩展能力，提前规划好未来1年的数据量、读写量的增长，规划好分库分表方案。比如设计用户信息表，预计 1 年后用户数据 10亿 条，写 QPS 约 5000，读 QPS 30000，可以设计按 UID 纬度进行散列，分为 4 个库每个库 32 张表，单表数据量控制在 KW 级别。</li>
-<li>为字段选择合适的数据类型，在保留扩展能力的前提下，优先选用较小的数据结构。例如保存年龄的字段，要使用 TINYINT 而不要使用 INT。</li>
-<li>控制表的列数。</li>
-<li>如果查询时需要对多张表进行关联查询，可以设计一些冗余字段提高效率。</li>
-<li>要擅用索引，比如为经常作为查询条件的字段创建索引、创建联合索引时要根据最左原则考虑索引的复用能力，不要重复创建索引；要为保证数据不能重复的字段创建唯一索引等等。不过要注意索引对插入、更新等写操作是有代价的，不要滥用索引，比如像性别这样唯一很差的字段就不适合建立索引。</li>
-<li>列字段尽量设置为 not null。MySQL 难以对使用 null 的列进行查询优化，允许 null 会使索引、索引统计和值更加复杂，允许 null 值的列需要更多的存储空间，还需要 MySQL 内部进行特殊处理。</li>
-</ul>
-<h3 id="SQL语句优化"><a href="#SQL语句优化" class="headerlink" title="SQL语句优化"></a>SQL语句优化</h3><ul>
-<li>要找到最需要优化的 SQL 语句。要么是使用最频繁的语句，要么是优化后提高最明显的语句，可以通过查询 MySQL 的慢查询日志来发现需要进行优化的 SQL 语句。</li>
-<li>利用 MySQL 提供的分析工具。例如使用 Explain 来分析语句的执行计划，看看是否使用了索引，使用了哪个索引，扫描了多少记录，是否使用文件排序等等。或者利用 Profile 命令来分析某个语句执行过程中各个分步的耗时。</li>
-<li>要注意使用查询语句是要避免使用 SELECT *，而是应该指定具体需要获取的字段。原因一是可以避免查询出不需要使用的字段，二是可以避免查询列字段的元信息。</li>
-<li>尽量使用 prepared statements，一个是它性能更好，另一个是可以防止 SQL 注入。</li>
-<li>尽量使用索引扫描来进行排序，也就是尽量在有索引的字段上进行排序操作。</li>
-</ul>
-<h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><p>索引可以大幅增加数据库的查询的性能，但是索引也是有代价的，首先需要额外的磁盘空间来保存索引；其次，对于插入、更新、删除等操作由于更新索引会增加额外的开销，因此索引比较适合用在读多写少的场景。</p>
-<h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><ul>
-<li>聚簇索引</li>
-<li>非聚簇索引</li>
-<li>唯一索引：索引列中的值必须是唯一的，但是允许出现空值。</li>
-<li>主键索引：一种特殊的唯一索引，但是它不允许出现空值。</li>
-<li>普通索引：唯一索引不同，它允许索引列中存在相同的值。</li>
-<li>联合索引：由多个列共同组成的索引，需遵循最左原则，就是 where 查询条件中的字段必须与索引字段从左到右进行匹配。</li>
-<li>全文索引：全文索引只能在 CHAR、VARCHAR、TEXT 类型字段上使用，底层使用倒排索引实现。</li>
-</ul>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>B-Tree：适合用作 &gt; 或 &lt; 这样的范围查询，是 MySQL 中最常使用的一种索引实现。<br>R-Tree：用于处理多维数据的数据结构，可以对地理数据进行空间索引。不过实际业务场景中使用的比较少。<br>Hash：散列表索引，效率高于 B-Tree，但是不支持范围查找和排序等功能。实际使用的也比较少。<br>FullText：全文索引，是一种记录关键字与对应文档关系的倒排索引。</p>
-<h2 id="存储引擎"><a href="#存储引擎" class="headerlink" title="存储引擎"></a>存储引擎</h2><ul>
-<li>MyISAM：是 MySQL 官方提供的存储引擎，其特点是支持全文索引，查询效率比较高，缺点是不支持事务、使用<strong>表级锁</strong>。</li>
-<li>InnoDB：5.5版本后默认引擎。特点是支持 ACID 事务、支持外键、支持<strong>行级锁</strong>提高了并发效率。</li>
-<li>TokuDB：是第三方开发的开源存储引擎，有非常快的写速度，支持数据的压缩存储、可以在线添加索引而不影响读写操作。但是因为压缩的原因，TokuDB 非常适合访问频率不高的数据或历史数据归档，不适合大量读取的场景。</li>
-</ul>
-<h2 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h2><ul>
-<li>表锁：开销小，加锁快，不会出现死锁；但是锁的粒度大，发生锁冲突的概率高，并发访问效率比较低。</li>
-<li>行级锁：开销大，加锁慢，有可能会出现死锁，不过因为锁定粒度最小，发生锁冲突的概率低，并发访问效率比较高</li>
-<li>共享锁：读锁，其他事务可以读，但不能写。MySQL 可以通过 lock in share mode 语句显示使用共享锁。</li>
-<li>排他锁：写锁，其他事务不能读取，也不能写。对于 UPDATE、DELETE 和 INSERT 语句，InnoDB 会自动给涉及的数据集加排他锁，或者使用 select for update 显示使用排他锁。</li>
-</ul>
-<h2 id="经验"><a href="#经验" class="headerlink" title="经验"></a>经验</h2>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/应用模块/">应用模块</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
     <article id="post-20180617" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -615,8 +618,8 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h1 id="常用集合"><a href="#常用集合" class="headerlink" title="常用集合"></a>常用集合</h1><h2 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h2><p>时间复杂度：最好O（1），最差O（N）<br>实现：数组加链表，数组中的每一项是一个链表，通过<strong>计算</strong>存入对象的 HashCode，来计算对象在数组中要存入的位置，用链表来解决散列冲突，链表中的节点存储的是键值对。<br>优化：JDK1.8之后为减少搜索时间，当链表长度大于阔值（默认8）且数组长度大于64时，链表会转换为<strong>红黑树</strong>。<br>参考文章：<a href="https://blog.csdn.net/woshimaxiao1/article/details/83661464" target="_blank" rel="external">Java集合之一—HashMap</a></p>
-<h2 id="ConcurrentHashMap"><a href="#ConcurrentHashMap" class="headerlink" title="ConcurrentHashMap"></a>ConcurrentHashMap</h2><p>1.7：使用 Segment （继承ReentrantLock，结构为数组加链表且均采用 volatile 修饰，保证获取时的可见性）进行分段加锁，降低并发锁定，支持 Segment 数组数量的线程并发。<br>1.8：抛弃了分段锁，使用 CAS + synchronized 来提高性能，并且同 hashMap 一样增加了红黑树。<br>参考文章：<a href="https://blog.csdn.net/weixin_44460333/article/details/86770169" target="_blank" rel="external">HashMap？ConcurrentHashMap？相信看完这篇没人能难住你！</a></p>
+        <h1 id="常用集合"><a href="#常用集合" class="headerlink" title="常用集合"></a>常用集合</h1><h2 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h2><p>时间复杂度：最好O（1），最差O（N）<br>实现：数组加链表，数组中的每一项是一个链表，通过<strong>计算</strong>存入对象的 HashCode，来计算对象在数组中要存入的位置，用链表来解决散列冲突，链表中的节点存储的是键值对。<br>优化：JDK1.8之后为减少搜索时间，当链表长度大于阔值（默认8）且数组长度大于64时，链表会转换为<strong>红黑树</strong>。<br>参考文章：<a href="https://blog.csdn.net/woshimaxiao1/article/details/83661464" target="_blank" rel="noopener">Java集合之一—HashMap</a></p>
+<h2 id="ConcurrentHashMap"><a href="#ConcurrentHashMap" class="headerlink" title="ConcurrentHashMap"></a>ConcurrentHashMap</h2><p>1.7：使用 Segment （继承ReentrantLock，结构为数组加链表且均采用 volatile 修饰，保证获取时的可见性）进行分段加锁，降低并发锁定，支持 Segment 数组数量的线程并发。<br>1.8：抛弃了分段锁，使用 CAS + synchronized 来提高性能，并且同 hashMap 一样增加了红黑树。<br>参考文章：<a href="https://blog.csdn.net/weixin_44460333/article/details/86770169" target="_blank" rel="noopener">HashMap？ConcurrentHashMap？相信看完这篇没人能难住你！</a></p>
 <h2 id="JUC"><a href="#JUC" class="headerlink" title="JUC"></a>JUC</h2><h3 id="原子类"><a href="#原子类" class="headerlink" title="原子类"></a>原子类</h3><p>例如：AtomicBoolean、AtomicLong、AtomicInteger、LongAdder、LongAccumulator等。<br>AtomicLong：通过 unsafe 类实现，基于CAS。<br>LongAdder：基于Cell，分段锁思想，空间换时间，更适合高并发场景。<br>LongAccumulator：提供了比LongAdder更强大的功能，能够指定对数据的操作规则，例如可以把对数据的相加操作改成相乘操作。</p>
 <h3 id="锁类"><a href="#锁类" class="headerlink" title="锁类"></a>锁类</h3><p>ReentrantLock<br>ReentrantReadWriteLock<br>StampedLock：JDK 1.8 改进的读写锁，是使用一种 CLH 的乐观锁，能够有效防止写饥饿。所谓写饥饿就是在多线程读写时，读线程访问非常频繁，导致总是有读线程占用资源，写线程很难加上写锁。<br>LockSupport</p>
 <h3 id="异步执行类"><a href="#异步执行类" class="headerlink" title="异步执行类"></a>异步执行类</h3><p>Executors：用于创建线程池<br>ForkJoinPool：1.7提供，采用分治思想，将大任务分解成多个小任务处理，然后在合并处理结果。特点是使用工作窃取算法，可以有效平衡多任务时间长短不一的场景。<br>FutureTask<br>CompletableFuture：可以支持流式调用，可以方便的进行多 future 的组合使用，例如可以同时执行两个异步任务，然后对执行结果进行合并处理。还可以很方便地设置完成时间。</p>
@@ -695,23 +698,23 @@
 <ul>
 <li>FixedThreadPool<br>固定大小线程池，特点是线程数固定，使用无界队列。<br>适用于任务数量不均匀的场景、对内存压力不敏感但系统负载比较敏感的场景。</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ExecutorService <span class="title">newFixedThreadPool</span><span class="params">(<span class="keyword">int</span> nThreads)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ThreadPoolExecutor(nThreads, nThreads,</div><div class="line">                                  <span class="number">0L</span>, TimeUnit.MILLISECONDS,</div><div class="line">                                  <span class="keyword">new</span> LinkedBlockingQueue&lt;Runnable&gt;());</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ExecutorService <span class="title">newFixedThreadPool</span><span class="params">(<span class="keyword">int</span> nThreads)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ThreadPoolExecutor(nThreads, nThreads,</span><br><span class="line">                                  <span class="number">0L</span>, TimeUnit.MILLISECONDS,</span><br><span class="line">                                  <span class="keyword">new</span> LinkedBlockingQueue&lt;Runnable&gt;());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>CachedThreadPool<br>Cached 线程池，特点是不限制线程数。<br>适用于要求低延迟的短期任务场景。</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ExecutorService <span class="title">newCachedThreadPool</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ThreadPoolExecutor(<span class="number">0</span>, Integer.MAX_VALUE,</div><div class="line">                                  <span class="number">60L</span>, TimeUnit.SECONDS,</div><div class="line">                                  <span class="keyword">new</span> SynchronousQueue&lt;Runnable&gt;());</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ExecutorService <span class="title">newCachedThreadPool</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ThreadPoolExecutor(<span class="number">0</span>, Integer.MAX_VALUE,</span><br><span class="line">                                  <span class="number">60L</span>, TimeUnit.SECONDS,</span><br><span class="line">                                  <span class="keyword">new</span> SynchronousQueue&lt;Runnable&gt;());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>SingleThreadExecutor<br>单线程线程池，就是一个线程的固定线程池。<br>适用于需要异步执行但需要保证任务顺序的场景。</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ScheduledExecutorService <span class="title">newSingleThreadScheduledExecutor</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> DelegatedScheduledExecutorService</div><div class="line">        (<span class="keyword">new</span> ScheduledThreadPoolExecutor(<span class="number">1</span>));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ScheduledExecutorService <span class="title">newSingleThreadScheduledExecutor</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> DelegatedScheduledExecutorService</span><br><span class="line">        (<span class="keyword">new</span> ScheduledThreadPoolExecutor(<span class="number">1</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>ScheduledThreadPool<br>Scheduled 线程池。<br>适用于定期执行任务场景，支持按固定频率定期执行和按固定延时定期执行两种方式。</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ScheduledExecutorService <span class="title">newScheduledThreadPool</span><span class="params">(<span class="keyword">int</span> corePoolSize)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ScheduledThreadPoolExecutor(corePoolSize);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">ScheduledThreadPoolExecutor</span><span class="params">(<span class="keyword">int</span> corePoolSize)</span> </span>&#123;</div><div class="line">    <span class="keyword">super</span>(corePoolSize, Integer.MAX_VALUE, <span class="number">0</span>, NANOSECONDS,</div><div class="line">          <span class="keyword">new</span> DelayedWorkQueue());</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ScheduledExecutorService <span class="title">newScheduledThreadPool</span><span class="params">(<span class="keyword">int</span> corePoolSize)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ScheduledThreadPoolExecutor(corePoolSize);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ScheduledThreadPoolExecutor</span><span class="params">(<span class="keyword">int</span> corePoolSize)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>(corePoolSize, Integer.MAX_VALUE, <span class="number">0</span>, NANOSECONDS,</span><br><span class="line">          <span class="keyword">new</span> DelayedWorkQueue());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>WorkStealingPool<br>工作窃取线程池，使用的是 ForkJoinPool，是固定并行度的多任务队列。<br>适合任务执行时长不均匀的场景。</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ExecutorService <span class="title">newWorkStealingPool</span><span class="params">(<span class="keyword">int</span> parallelism)</span> </span>&#123;</div><div class="line">     <span class="keyword">return</span> <span class="keyword">new</span> ForkJoinPool</div><div class="line">         (parallelism,</div><div class="line">          ForkJoinPool.defaultForkJoinWorkerThreadFactory,</div><div class="line">          <span class="keyword">null</span>, <span class="keyword">true</span>);</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ExecutorService <span class="title">newWorkStealingPool</span><span class="params">(<span class="keyword">int</span> parallelism)</span> </span>&#123;</span><br><span class="line">     <span class="keyword">return</span> <span class="keyword">new</span> ForkJoinPool</span><br><span class="line">         (parallelism,</span><br><span class="line">          ForkJoinPool.defaultForkJoinWorkerThreadFactory,</span><br><span class="line">          <span class="keyword">null</span>, <span class="keyword">true</span>);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
 <p>另外还可以根据业务需要自定义线程池，可使用 ThreadPoolExecutor(JUC工具类) 或 ThreadPoolTaskExecutor(Spring封装类) 。</p>
 <h3 id="核心参数"><a href="#核心参数" class="headerlink" title="核心参数"></a>核心参数</h3><ul>
 <li>核心线程数</li>
@@ -720,9 +723,9 @@
 <li>缓存队列<br>ArrayBlockingQueue: 有界队列，队列有最大容量限制<br>LinkedBlockingQueue: 无界队列，队列不限制容量<br>SynchronousQueue: 同步队列，内部没有缓冲区。</li>
 <li>线程工厂<br>用来创建新线程，可以用来对线程的一些属性进行定制，例如线程的 group、线程名、优先级等，一般使用默认工厂类即可。</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">VehicleThreadFactory</span> <span class="keyword">implements</span> <span class="title">ThreadFactory</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> ThreadGroup group;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> AtomicInteger threadNumber = <span class="keyword">new</span> AtomicInteger(<span class="number">1</span>);</div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String prefix;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">VehicleThreadFactory</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">        SecurityManager s = System.getSecurityManager();</div><div class="line">        group = (s != <span class="keyword">null</span>) ? s.getThreadGroup() :</div><div class="line">                Thread.currentThread().getThreadGroup();</div><div class="line">        prefix = name + <span class="string">"-thread-"</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Thread <span class="title">newThread</span><span class="params">(Runnable r)</span> </span>&#123;</div><div class="line">        Thread t = <span class="keyword">new</span> Thread(group, r,</div><div class="line">                prefix + threadNumber.getAndIncrement(),</div><div class="line">                <span class="number">0</span>);</div><div class="line">        <span class="keyword">if</span> (t.isDaemon()) &#123;</div><div class="line">            t.setDaemon(<span class="keyword">false</span>);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (t.getPriority() != Thread.NORM_PRIORITY) &#123;</div><div class="line">            t.setPriority(Thread.NORM_PRIORITY);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> t;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">VehicleThreadFactory</span> <span class="keyword">implements</span> <span class="title">ThreadFactory</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> ThreadGroup group;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> AtomicInteger threadNumber = <span class="keyword">new</span> AtomicInteger(<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String prefix;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">VehicleThreadFactory</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        SecurityManager s = System.getSecurityManager();</span><br><span class="line">        group = (s != <span class="keyword">null</span>) ? s.getThreadGroup() :</span><br><span class="line">                Thread.currentThread().getThreadGroup();</span><br><span class="line">        prefix = name + <span class="string">"-thread-"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Thread <span class="title">newThread</span><span class="params">(Runnable r)</span> </span>&#123;</span><br><span class="line">        Thread t = <span class="keyword">new</span> Thread(group, r,</span><br><span class="line">                prefix + threadNumber.getAndIncrement(),</span><br><span class="line">                <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">if</span> (t.isDaemon()) &#123;</span><br><span class="line">            t.setDaemon(<span class="keyword">false</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (t.getPriority() != Thread.NORM_PRIORITY) &#123;</span><br><span class="line">            t.setPriority(Thread.NORM_PRIORITY);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> t;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
-<li>拒绝策略<br>Abort：默认策略，抛出 RejectedExecutionException 。<br>Discard：直接丢弃任务。<br>CallerRuns：由提交任务的线程直接执行。<br>DiscardOldest: 会丢弃最早提交的任务。<br>也可以自定义策略，例如：<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">(r, executor) -&gt; &#123;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        executor.getQueue().put(r);</div><div class="line">    &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">        log.warn(<span class="string">"retry put task error,message:&#123;&#125;"</span>, e);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<li>拒绝策略<br>Abort：默认策略，抛出 RejectedExecutionException 。<br>Discard：直接丢弃任务。<br>CallerRuns：由提交任务的线程直接执行。<br>DiscardOldest: 会丢弃最早提交的任务。<br>也可以自定义策略，例如：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(r, executor) -&gt; &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        executor.getQueue().put(r);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">        log.warn(<span class="string">"retry put task error,message:&#123;&#125;"</span>, e);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h2 id="同步与互斥"><a href="#同步与互斥" class="headerlink" title="同步与互斥"></a>同步与互斥</h2><h3 id="synchronized"><a href="#synchronized" class="headerlink" title="synchronized"></a>synchronized</h3><p>synchronized 应用在方法上时，在字节码中是通过方法的 <strong>ACC_SYNCHRONIZED</strong> 标志来实现的；<br>synchronized 应用在同步块上时，在字节码中是通过 <strong>monitorenter</strong> 和 <strong>monitorexit</strong> 实现的。<br>最终都是通过对对象进行加锁，在 JVM 中，对象在内存中分为三块区域：对象头、实例数据和对齐填充。在对象头中保存了锁标志位和指向 monitor 对象的起始地址，当 Monitor 被某个线程持有后，就会处于锁定状态，此时 Owner 会指向持有 Monitor 对象的线程。Monitor 还有两个队列，用来存放进入及等待获取锁的线程。<br>JVM对其进行了大量优化</p>
@@ -923,7 +926,7 @@
         <a id="more"></a>
 <h2 id="计算机网络"><a href="#计算机网络" class="headerlink" title="计算机网络"></a>计算机网络</h2><h3 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h3><h3 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h3><p>三次握手建连<br><img src="http://s0.lgstatic.com/i/image2/M01/8A/6E/CgotOV13hviAU5H3AAAyMppFmf8039.png" alt="img"></p>
 <p>四次挥手断连<br><img src="http://s0.lgstatic.com/i/image2/M01/8A/4E/CgoB5l13hviAZRJ1AABEfmQ55Jw991.png" alt="img"></p>
-<h3 id="UDP"><a href="#UDP" class="headerlink" title="UDP"></a>UDP</h3><h3 id="QUIC"><a href="#QUIC" class="headerlink" title="QUIC"></a>QUIC</h3><h3 id="RPC"><a href="#RPC" class="headerlink" title="RPC"></a>RPC</h3><h3 id="MQTT"><a href="#MQTT" class="headerlink" title="MQTT"></a>MQTT</h3><h3 id="GB32960-新能源通信协议"><a href="#GB32960-新能源通信协议" class="headerlink" title="GB32960(新能源通信协议)"></a>GB32960(新能源通信协议)</h3><p><a href="http://c.gb688.cn/bzgk/gb/showGb?type=online&amp;hcno=674DE45C0AD3DE2CD75B9C4CD8ED57C1" target="_blank" rel="external">在线文档</a></p>
+<h3 id="UDP"><a href="#UDP" class="headerlink" title="UDP"></a>UDP</h3><h3 id="QUIC"><a href="#QUIC" class="headerlink" title="QUIC"></a>QUIC</h3><h3 id="RPC"><a href="#RPC" class="headerlink" title="RPC"></a>RPC</h3><h3 id="MQTT"><a href="#MQTT" class="headerlink" title="MQTT"></a>MQTT</h3><h3 id="GB32960-新能源通信协议"><a href="#GB32960-新能源通信协议" class="headerlink" title="GB32960(新能源通信协议)"></a>GB32960(新能源通信协议)</h3><p><a href="http://c.gb688.cn/bzgk/gb/showGb?type=online&amp;hcno=674DE45C0AD3DE2CD75B9C4CD8ED57C1" target="_blank" rel="noopener">在线文档</a></p>
 <h2 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h2><h3 id="top"><a href="#top" class="headerlink" title="top"></a>top</h3><h3 id="netstat"><a href="#netstat" class="headerlink" title="netstat"></a>netstat</h3><h2 id="经验"><a href="#经验" class="headerlink" title="经验"></a>经验</h2><p>生产配置：4C8G</p>
 
       
@@ -1015,10 +1018,10 @@
 
 
   
-    <article id="post-20181114" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-20181115" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2021/07/28/20181114/" class="article-date">
+      <a href="/2021/07/28/20181115/" class="article-date">
       <time datetime="2021-07-28T12:08:06.943Z" itemprop="datePublished">2021-07-28</time>
 </a>
 
@@ -1034,7 +1037,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/28/20181114/">HBase</a>
+      <a class="article-title" href="/2021/07/28/20181115/">Cassandra</a>
     </h1>
   
 
@@ -1044,23 +1047,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="索引类型"><a href="#索引类型" class="headerlink" title="索引类型"></a>索引类型</h2><ul>
-<li>本地索引</li>
-<li>全局索引</li>
-<li>覆盖索引</li>
-</ul>
-<h2 id="RowKey设计"><a href="#RowKey设计" class="headerlink" title="RowKey设计"></a>RowKey设计</h2><ul>
-<li>长度原则</li>
-<li>唯一原则</li>
-<li>散列原则</li>
-</ul>
-<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><ul>
-<li><a href="https://cloud.tencent.com/developer/article/1006043" target="_blank" rel="external">HBase技术细节笔记上</a></li>
-<li><a href="https://cloud.tencent.com/developer/article/1006044" target="_blank" rel="external">HBase技术细节笔记下</a></li>
-<li><a href="https://zhuanlan.zhihu.com/p/145551967" target="_blank" rel="external">我终于看懂了HBase，太不容易了</a></li>
-<li><a href="https://www.slidestalk.com/HBaseGroup/HBase_ebook28532" target="_blank" rel="external">2018 HBase技术总结</a></li>
-</ul>
-
+        
       
     </div>
     

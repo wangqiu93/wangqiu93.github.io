@@ -1,0 +1,524 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>Netty</title>
+      <link href="/2021/07/29/20210730/"/>
+      <url>/2021/07/29/20210730/</url>
+      
+        <content type="html"><![CDATA[<p>Netty 是一个高性能的异步事件驱动的 NIO 框架，它对消息的处理采用串行无锁化设计，提供了对 TCP、UDP 和文件传输的支持。</p><p>内置了多种 encoder 和 decoder 实现来解决 TCP 粘包问题。</p><p>处理消息时使用了池化的缓冲池 ByteBuffers，提高性能。</p><p>结合内存零 copy 机制，减少了对象的创建，降低了 GC 的压力。<br><a id="more"></a></p><p><img src="http://s0.lgstatic.com/i/image2/M01/8A/E8/CgotOV14qRCAOMXfAACEn9bOiF8679.png" alt="img"></p><h2 id="线程模型"><a href="#线程模型" class="headerlink" title="线程模型"></a>线程模型</h2><p>Netty 线程模型采用“服务端监听线程”和“IO 线程”分离的方式。</p><p>Boss 线程组负责监听事件，创建 Socket 并绑定到 Worker 线程组。Worker 线程组负责 IO 处理。</p><p>线程组由 EventLoopGroup 实现，其中包含了多个 EventLoop 事件处理器，每个 EventLoop 包含一个处理线程。</p><p>通常情况下在 NIO 非阻塞模式下，Netty 为每个 Channel 分配一个 EventLoop，并且它的整个生命周期中的事件都由这个 EventLoop 来处理。一个 EventLoop 可以绑定多个 Channel。</p><h2 id="处理模型"><a href="#处理模型" class="headerlink" title="处理模型"></a>处理模型</h2><p>Netty4 中 Channel 的读写事件都是由 Worker 线程来处理。请求处理中最主要的就是 ChannelPipeline，其中包含了一组 ChannelHandler。</p><p>这些 Handler 组成了责任链模式，依次对 Channel 中的消息进行处理。一般接收消息时，Pipeline 处理完成会把消息提交到业务线程池进行处理，当业务线程处理完成时，会封装成 Task，提交回 Channel 对应的 EventLoop 来写回返回值。</p><h2 id="主要概念"><a href="#主要概念" class="headerlink" title="主要概念"></a>主要概念</h2><ul><li>Channel</li><li>ChannelHandler</li><li>ChannelPipeline</li><li>EventLoop</li><li>BootStrap</li></ul><h2 id="零内存复制"><a href="#零内存复制" class="headerlink" title="零内存复制"></a>零内存复制</h2><p>使用堆外内存来避免在 Socket 读写时缓冲数据在堆外与堆内进行频繁复制；使用 CompositeByteBuf 来减少多个小的 buffer 合并时产生的内存复制；</p><p>使用 FileRegion 实现文件传输的零拷贝等。</p><h2 id="粘包与半包"><a href="#粘包与半包" class="headerlink" title="粘包与半包"></a>粘包与半包</h2><p>FixedLengthFrameDecoder 用来解决固定大小数据包的粘包问题</p><p>LineBasedFrameDecoder 适合对文本进行按行分包</p><p>DelimiterBasedFrameDecoder 适合按特殊字符作为分包标记的场景</p><p>LengthFieldBasedFrameDecoder 可以支持复杂的自定义协议分包</p><h2 id="Netty3-和-Netty4"><a href="#Netty3-和-Netty4" class="headerlink" title="Netty3 和 Netty4"></a>Netty3 和 Netty4</h2>]]></content>
+      
+      
+      <categories>
+          
+          <category> 应用模块 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 框架 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>缓存</title>
+      <link href="/2021/07/29/20180916/"/>
+      <url>/2021/07/29/20180916/</url>
+      
+        <content type="html"><![CDATA[<p>缓存是高并发场景下提高热点数据访问性能的一个有效手段，使用内存来保存数据。<br><a id="more"></a></p><h2 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h2><ul><li>本地缓存<ul><li>Caffeine</li></ul></li><li>分布式缓存<ul><li><a href="/2021/07/29/20181111/">Redis</a></li><li>Memcache</li></ul></li><li>多级缓存：本地缓存 + 分布式缓存<br>实际业务中一般采用多级缓存，本地缓存只保存访问频率最高的部分热点数据，其他的热点数据放在分布式缓存中。</li></ul><h2 id="淘汰策略"><a href="#淘汰策略" class="headerlink" title="淘汰策略"></a>淘汰策略</h2><p>由于成本和内存限制，当存储的数据超过缓存容量时，需要对缓存的数据进行剔除。</p><ul><li>FIFO：淘汰最早数据。</li><li>LRU：剔除最近最少使用。</li><li>LFU：剔除最近使用频率最低。</li></ul><h2 id="缓存常见问题"><a href="#缓存常见问题" class="headerlink" title="缓存常见问题"></a>缓存常见问题</h2><h3 id="缓存更新方式"><a href="#缓存更新方式" class="headerlink" title="缓存更新方式"></a>缓存更新方式</h3><p>在数据源（可能是 DB，也可能是远程服务）发生变更时需要对缓存进行更新。<br><strong>DB：</strong></p><p>在更新完 DB 后就直接更新缓存</p><p><strong>远程服务</strong></p><ul><li>对缓存数据设置失效期（数据不一致的最大容忍时间），key 不存在或失效时先请求数据源获取最新数据，然后再次缓存，并更新失效期。</li><li>定时对数据进行分批更新</li></ul><h3 id="缓存不一致"><a href="#缓存不一致" class="headerlink" title="缓存不一致"></a>缓存不一致</h3><p>主动更新失败，例如更新 DB 后，更新 Redis 因为网络原因请求超时；或者是异步更新失败导致。</p><ul><li>服务对耗时不是特别敏感：可以增加重试。</li><li>服务对耗时不是特别敏感：可以通过异步补偿任务来处理失败的更新。</li><li>短期的数据不一致不会影响业务：那么只要下次更新时可以成功，能保证最终一致性就可以。</li></ul><h3 id="缓存穿透"><a href="#缓存穿透" class="headerlink" title="缓存穿透"></a>缓存穿透</h3><p>外部的恶意攻击，用户不断发起不存在数据的请求。</p><ul><li>对不存在的数据，在缓存中保存一个空对象进行标记，防止相同 ID 再次访问 DB。不过有时这个方法并不能很好解决问题，可能导致缓存中存储大量无用数据。</li><li>使用 BloomFilter 过滤器，BloomFilter 的特点是存在性检测，如果 BloomFilter 中不存在，那么数据一定不存在；如果 BloomFilter 中存在，实际数据也有可能会不存在。非常适合解决这类的问题。</li></ul><h3 id="缓存击穿"><a href="#缓存击穿" class="headerlink" title="缓存击穿"></a>缓存击穿</h3><p>某个热点数据失效时，大量针对这个数据的请求会穿透到数据源。</p><ul><li>可以使用互斥锁更新，保证同一个进程中针对同一个数据不会并发请求到 DB，减小 DB 压力。</li><li>使用随机退避方式，失效时随机 sleep 一个很短的时间，再次查询，如果失败再执行更新。</li></ul><p>多个热点 key 同时失效，大量请求会穿透到数据源。</p><ul><li>可以在缓存时使用固定时间加上一个小的随机数，避免大量热点 key 同一时刻失效。</li></ul><h3 id="缓存雪崩：缓存挂掉"><a href="#缓存雪崩：缓存挂掉" class="headerlink" title="缓存雪崩：缓存挂掉"></a>缓存雪崩：缓存挂掉</h3><p>缓存挂掉，这时所有的请求都会穿透到 DB。</p><ul><li>使用快速失败的熔断策略，减少 DB 瞬间压力。</li><li>使用主从模式和集群模式来尽量保证缓存服务的高可用。</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 应用模块 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 缓存 </tag>
+            
+            <tag> 中间件 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>MySQL</title>
+      <link href="/2021/07/29/20181113/"/>
+      <url>/2021/07/29/20181113/</url>
+      
+        <content type="html"><![CDATA[<h2 id="调优"><a href="#调优" class="headerlink" title="调优"></a>调优</h2><p><img src="/img/posts/索引优化.png" alt="img"><br>这四个纬度从优化的成本角度来讲，从左到右优化成本逐渐升高；从优化效果角度来看，从右到左优化的效果更高。</p><h3 id="表结构及索引优化"><a href="#表结构及索引优化" class="headerlink" title="表结构及索引优化"></a>表结构及索引优化</h3><ul><li>在设计表结构时，考虑数据库的水平与垂直扩展能力，提前规划好未来1年的数据量、读写量的增长，规划好分库分表方案。比如设计用户信息表，预计 1 年后用户数据 10亿 条，写 QPS 约 5000，读 QPS 30000，可以设计按 UID 纬度进行散列，分为 4 个库每个库 32 张表，单表数据量控制在 KW 级别。</li><li>为字段选择合适的数据类型，在保留扩展能力的前提下，优先选用较小的数据结构。例如保存年龄的字段，要使用 TINYINT 而不要使用 INT。</li><li>控制表的列数。</li><li>如果查询时需要对多张表进行关联查询，可以设计一些冗余字段提高效率。</li><li>要擅用索引，比如为经常作为查询条件的字段创建索引、创建联合索引时要根据最左原则考虑索引的复用能力，不要重复创建索引；要为保证数据不能重复的字段创建唯一索引等等。不过要注意索引对插入、更新等写操作是有代价的，不要滥用索引，比如像性别这样唯一很差的字段就不适合建立索引。</li><li>列字段尽量设置为 not null。MySQL 难以对使用 null 的列进行查询优化，允许 null 会使索引、索引统计和值更加复杂，允许 null 值的列需要更多的存储空间，还需要 MySQL 内部进行特殊处理。</li></ul><h3 id="SQL语句优化"><a href="#SQL语句优化" class="headerlink" title="SQL语句优化"></a>SQL语句优化</h3><ul><li>要找到最需要优化的 SQL 语句。要么是使用最频繁的语句，要么是优化后提高最明显的语句，可以通过查询 MySQL 的慢查询日志来发现需要进行优化的 SQL 语句。</li><li>利用 MySQL 提供的分析工具。例如使用 Explain 来分析语句的执行计划，看看是否使用了索引，使用了哪个索引，扫描了多少记录，是否使用文件排序等等。或者利用 Profile 命令来分析某个语句执行过程中各个分步的耗时。</li><li>要注意使用查询语句是要避免使用 SELECT *，而是应该指定具体需要获取的字段。原因一是可以避免查询出不需要使用的字段，二是可以避免查询列字段的元信息。</li><li>尽量使用 prepared statements，一个是它性能更好，另一个是可以防止 SQL 注入。</li><li>尽量使用索引扫描来进行排序，也就是尽量在有索引的字段上进行排序操作。</li></ul><h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><p>索引可以大幅增加数据库的查询的性能，但是索引也是有代价的，首先需要额外的磁盘空间来保存索引；其次，对于插入、更新、删除等操作由于更新索引会增加额外的开销，因此索引比较适合用在读多写少的场景。</p><h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><ul><li>唯一索引：索引列中的值必须是唯一的，但是允许出现空值。</li><li>主键索引：一种特殊的唯一索引，但是它不允许出现空值。</li><li>普通索引：唯一索引不同，它允许索引列中存在相同的值。</li><li>联合索引：由多个列共同组成的索引，需遵循最左原则，就是 where 查询条件中的字段必须与索引字段从左到右进行匹配。</li><li>全文索引：全文索引只能在 CHAR、VARCHAR、TEXT 类型字段上使用，底层使用倒排索引实现。</li></ul><h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>B+树：适合用作 &gt; 或 &lt; 这样的范围查询，是 MySQL 中最常使用的一种索引实现。<br>R-Tree：用于处理多维数据的数据结构，可以对地理数据进行空间索引。不过实际业务场景中使用的比较少。<br>Hash：散列表索引，效率高于 B+树，但是不支持范围查找或排序等功能。实际使用的也比较少。<br>FullText：全文索引，是一种记录关键字与对应文档关系的倒排索引。</p><h2 id="存储引擎"><a href="#存储引擎" class="headerlink" title="存储引擎"></a>存储引擎</h2><p><img src="/img/posts/聚簇索引.png" alt="img"></p><p><strong>聚簇索引</strong></p><p>B+树叶子节点上的data是行数据。</p><p><strong>非聚簇索引</strong></p><p>B+树的叶子节点上的data不是行数据。而是数据存放的地址或者主键值。</p><h3 id="MyISAM"><a href="#MyISAM" class="headerlink" title="MyISAM"></a>MyISAM</h3><p>5.5版本前默认引擎，支持全文索引，查询效率比较高，但不支持事务、使用<strong>表级锁</strong>。</p><p>主键和辅助键均使用非聚簇索引。</p><h3 id="InnoDB"><a href="#InnoDB" class="headerlink" title="InnoDB"></a>InnoDB</h3><p>5.5版本后默认引擎。支持 ACID 事务、支持外键、支持<strong>行级锁</strong>。</p><p>主键使用聚簇索引，辅助键使用非聚簇索引。</p><h3 id="TokuDB"><a href="#TokuDB" class="headerlink" title="TokuDB"></a>TokuDB</h3><p>第三方开发的开源存储引擎，有非常快的写速度，支持数据的压缩存储、可以在线添加索引而不影响读写操作。但是因为压缩的原因，TokuDB 非常适合访问频率不高的数据或历史数据归档，不适合大量读取的场景。</p><h2 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h2><ul><li>表锁：开销小，加锁快，不会出现死锁；但是锁的粒度大，发生锁冲突的概率高，并发访问效率比较低。</li><li>行级锁：开销大，加锁慢，有可能会出现死锁，不过因为锁定粒度最小，发生锁冲突的概率低，并发访问效率比较高</li><li>共享锁：读锁，其他事务可以读，但不能写。MySQL 可以通过 lock in share mode 语句显示使用共享锁。</li><li>排他锁：写锁，其他事务不能读取，也不能写。对于 UPDATE、DELETE 和 INSERT 语句，InnoDB 会自动给涉及的数据集加排他锁，或者使用 select for update 显示使用排他锁。</li></ul><h2 id="经验"><a href="#经验" class="headerlink" title="经验"></a>经验</h2>]]></content>
+      
+      
+      <categories>
+          
+          <category> 应用模块 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 数据库 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Redis</title>
+      <link href="/2021/07/29/20181111/"/>
+      <url>/2021/07/29/20181111/</url>
+      
+        <content type="html"><![CDATA[<p>采用单线程模式处理请求，支持持久化，支持多种数据格式，能够提供高可用服务。<br><a id="more"></a></p><h2 id="数据结构实现"><a href="#数据结构实现" class="headerlink" title="数据结构实现"></a>数据结构实现</h2><p><img src="/img/posts/Redis数据结构.png" alt="Redis数据结构"><br>在 Redis 中，所有的对象都被封装成了 redisObject，如图中浅绿的模块。redisObject 包括了对象的类型，就是 Redis 支持的 string、hash、list、set 和 sorted set 5种类型。另外 redisObject 还包括了具体对象的存储方式。</p><h3 id="string"><a href="#string" class="headerlink" title="string"></a>string</h3><p>最常使用的类型，底层使用 <strong>SDS</strong> 存储。</p><h3 id="list"><a href="#list" class="headerlink" title="list"></a>list</h3><p>3.2 版本前，当 Hash 表中所有的 key 和 value 字符串长度都小于 64 字节且键值对数量小于 512 个时使用 <strong>ZipList</strong>，否则使用 <strong>LinkedList</strong>。</p><p>3.2 版本后，基于 <strong>QuickList</strong> 实现。</p><h3 id="hash"><a href="#hash" class="headerlink" title="hash"></a>hash</h3><p>当 Hash 表中所有的 key 和 value 字符串长度都小于 64 字节且键值对数量小于 512 个时使用<strong>ZipList</strong>，否则使用 <strong>HashTable</strong>。</p><h3 id="set"><a href="#set" class="headerlink" title="set"></a>set</h3><p>当集合中元素小于 512 且所有的数据都是数值类型时使用 <strong>IntSet</strong>，否则会使用 <strong>HashTable</strong>。</p><h3 id="sorted-set"><a href="#sorted-set" class="headerlink" title="sorted set"></a>sorted set</h3><p>当有序集合中元素数量小于 128 个并且所有元素长度都小于 64 字节时使用 <strong>ZipList</strong>，否则使用 <strong>SkipList</strong>。</p><p><strong>注意</strong>：Redis 的内存分配是使用 <strong>jemalloc</strong> 进行分配。jemalloc 将内存空间划分为小、大、巨大三个范围，并在范围中划分了小的内存块，当存储数据时，选择大小最合适的内存块进行分配，有利于减小内存碎片。</p><h2 id="底层数据结构详解"><a href="#底层数据结构详解" class="headerlink" title="底层数据结构详解"></a>底层数据结构详解</h2><h3 id="SDS"><a href="#SDS" class="headerlink" title="SDS"></a>SDS</h3><p>动态字符串，类似于 Java 中的 ArrayList，可以通过预分配冗余空间的方式来减少内存的频繁分配。</p><h3 id="ZipList"><a href="#ZipList" class="headerlink" title="ZipList"></a>ZipList</h3><p>结构为：数据长度+数据，存储在一段连续的内存上，存储效率高，但是它不利于修改操作，适用于数据较少的情况。</p><h3 id="LinkedList"><a href="#LinkedList" class="headerlink" title="LinkedList"></a>LinkedList</h3><p>结构为：双向链表，在插入节点上复杂度很低，但它的内存开销很大，每个节点的地址不连续，容易产生内存碎片。</p><h3 id="QuickList"><a href="#QuickList" class="headerlink" title="QuickList"></a>QuickList</h3><p>结构为 LinkedList + ZipList。主体为 LinkedList，它的每一个节点都是一个 ZipList。</p><h3 id="HashTable"><a href="#HashTable" class="headerlink" title="HashTable"></a>HashTable</h3><p>哈希表</p><h3 id="IntSet"><a href="#IntSet" class="headerlink" title="IntSet"></a>IntSet</h3><p>整数集合</p><h3 id="SkipList"><a href="#SkipList" class="headerlink" title="SkipList"></a>SkipList</h3><p>结构为：单链表+多级索引</p><h2 id="高可用"><a href="#高可用" class="headerlink" title="高可用"></a>高可用</h2><h3 id="主从同步"><a href="#主从同步" class="headerlink" title="主从同步"></a>主从同步</h3><p>读写分离</p><h3 id="Cluster-集群"><a href="#Cluster-集群" class="headerlink" title="Cluster 集群"></a>Cluster 集群</h3><p>横向扩展<br>Redis Cluster 使用分片机制，在内部分为 16384 个 slot 插槽，分布在所有 master 节点上，每个 master 节点负责一部分 slot。数据操作时按 key 做 CRC16 来计算在哪个 slot，由哪个 master 进行处理。数据的冗余是通过 slave 节点来保障。</p><h3 id="Sentinel-哨兵"><a href="#Sentinel-哨兵" class="headerlink" title="Sentinel 哨兵"></a>Sentinel 哨兵</h3><p>通过 Sentinel 哨兵来监控 Redis 主服务器的状态。当主挂掉时，在从节点中根据一定策略选出新主，并调整其他从 SlaveOf 到新主。<br>选主策略：</p><ul><li>slave 的 priority 设置的越低，优先级越高；</li><li>同等情况下，slave 复制的数据越多优先级越高；</li><li>相同的条件下 RunId 越小越容易被选中。<br>sentinel 也会进行多实例部署，sentinel 之间通过 Raft 协议来保证自身的高可用。</li></ul><h2 id="持久化"><a href="#持久化" class="headerlink" title="持久化"></a>持久化</h2><p>RDB：把内存中的数据集以快照形式写入磁盘，实际操作是通过 fork 子进程执行，采用二进制压缩存储。适合用来做灾备。<br>AOF：以文本日志的形式记录 Redis 处理的每一个写入或删除操作。AOF 要大于 RDB，AOF 在运行效率上往往会慢于 RDB。</p><h2 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h2><h3 id="Bitmap"><a href="#Bitmap" class="headerlink" title="Bitmap"></a>Bitmap</h3><p>位图是支持按 bit 位来存储信息，可以用来实现 BloomFilter。</p><h3 id="HyperLogLog"><a href="#HyperLogLog" class="headerlink" title="HyperLogLog"></a>HyperLogLog</h3><p>提供不精确的去重计数功能，比较适合用来做大规模数据的去重统计，例如统计 UV。</p><h3 id="Geospatial"><a href="#Geospatial" class="headerlink" title="Geospatial"></a>Geospatial</h3><p>可以用来保存地理位置，并作位置距离计算或者根据半径计算位置等。这三个其实也可以算作一种数据结构。</p><h3 id="pub-sub"><a href="#pub-sub" class="headerlink" title="pub/sub"></a>pub/sub</h3><p>订阅发布功能，可以用作简单的消息队列。</p><h3 id="Pipeline"><a href="#Pipeline" class="headerlink" title="Pipeline"></a>Pipeline</h3><p>以批量执行一组指令，一次性返回全部结果，可以减少频繁的请求应答。</p><h3 id="Lua脚本"><a href="#Lua脚本" class="headerlink" title="Lua脚本"></a>Lua脚本</h3><p>支持提交 Lua 脚本来执行一系列的功能。</p><h3 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h3><p>Redis 只保证串行执行命令，并且能保证全部执行，但是执行命令失败时并不会回滚，而是会继续执行下去。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 应用模块 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 缓存 </tag>
+            
+            <tag> 中间件 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Java</title>
+      <link href="/2021/07/29/20180617/"/>
+      <url>/2021/07/29/20180617/</url>
+      
+        <content type="html"><![CDATA[<h1 id="常用集合"><a href="#常用集合" class="headerlink" title="常用集合"></a>常用集合</h1><h2 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h2><p>时间复杂度：最好O（1），最差O（N）<br>实现：数组加链表，数组中的每一项是一个链表，通过<strong>计算</strong>存入对象的 HashCode，来计算对象在数组中要存入的位置，用链表来解决散列冲突，链表中的节点存储的是键值对。<br>优化：JDK1.8之后为减少搜索时间，当链表长度大于阔值（默认8）且数组长度大于64时，链表会转换为<strong>红黑树</strong>。<br>参考文章：<a href="https://blog.csdn.net/woshimaxiao1/article/details/83661464" target="_blank" rel="noopener">Java集合之一—HashMap</a></p><h2 id="ConcurrentHashMap"><a href="#ConcurrentHashMap" class="headerlink" title="ConcurrentHashMap"></a>ConcurrentHashMap</h2><p>1.7：使用 Segment （继承ReentrantLock，结构为数组加链表且均采用 volatile 修饰，保证获取时的可见性）进行分段加锁，降低并发锁定，支持 Segment 数组数量的线程并发。<br>1.8：抛弃了分段锁，使用 CAS + synchronized 来提高性能，并且同 hashMap 一样增加了红黑树。<br>参考文章：<a href="https://blog.csdn.net/weixin_44460333/article/details/86770169" target="_blank" rel="noopener">HashMap？ConcurrentHashMap？相信看完这篇没人能难住你！</a></p><h2 id="JUC"><a href="#JUC" class="headerlink" title="JUC"></a>JUC</h2><h3 id="原子类"><a href="#原子类" class="headerlink" title="原子类"></a>原子类</h3><p>例如：AtomicBoolean、AtomicLong、AtomicInteger、LongAdder、LongAccumulator等。<br>AtomicLong：通过 unsafe 类实现，基于CAS。<br>LongAdder：基于Cell，分段锁思想，空间换时间，更适合高并发场景。<br>LongAccumulator：提供了比LongAdder更强大的功能，能够指定对数据的操作规则，例如可以把对数据的相加操作改成相乘操作。</p><h3 id="锁类"><a href="#锁类" class="headerlink" title="锁类"></a>锁类</h3><p>ReentrantLock<br>ReentrantReadWriteLock<br>StampedLock：JDK 1.8 改进的读写锁，是使用一种 CLH 的乐观锁，能够有效防止写饥饿。所谓写饥饿就是在多线程读写时，读线程访问非常频繁，导致总是有读线程占用资源，写线程很难加上写锁。<br>LockSupport</p><h3 id="异步执行类"><a href="#异步执行类" class="headerlink" title="异步执行类"></a>异步执行类</h3><p>Executors：用于创建线程池<br>ForkJoinPool：1.7提供，采用分治思想，将大任务分解成多个小任务处理，然后在合并处理结果。特点是使用工作窃取算法，可以有效平衡多任务时间长短不一的场景。<br>FutureTask<br>CompletableFuture：可以支持流式调用，可以方便的进行多 future 的组合使用，例如可以同时执行两个异步任务，然后对执行结果进行合并处理。还可以很方便地设置完成时间。</p><h3 id="阻塞队列类"><a href="#阻塞队列类" class="headerlink" title="阻塞队列类"></a>阻塞队列类</h3><p>LinkedBlockingDeque：双端队列，也就是可以分别从队头和队尾操作入队、出队。<br>ArrayBlockingQueue：单端队列，只能从队尾入队，队头出队。 </p><h3 id="多线程协作类"><a href="#多线程协作类" class="headerlink" title="多线程协作类"></a>多线程协作类</h3><p>CountDownLatch：实现计数器功能，可以用来控制等待多个线程执行任务后进行汇总。<br>CyclicBarrier：可以让一组线程等待至某个状态之后，再全部同时执行，一般在测试时使用，可以让多线程更好的并发执行。<br>Semaphore：用来控制对共享资源的访问并发度。允许多个线程共享资源，适用于限制使用共享资源线程数量的场景，例如 100 个车辆要使用 20 个停车位，那么最多允许 20 个车占用停车位。</p><h3 id="集合类"><a href="#集合类" class="headerlink" title="集合类"></a>集合类</h3><p>ConcurrentHashMap：线程安全的HashMap。<br>CopyOnWriteArrayList：通过写入数据时进行 copy 修改，然后更新引用的方式，来消除并行读写中的锁使用，比较适合读多写少，数据量比较小，但是并发非常高的场景。</p><h1 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h1><h1 id="动态代理"><a href="#动态代理" class="headerlink" title="动态代理"></a>动态代理</h1><h2 id="JDK动态代理"><a href="#JDK动态代理" class="headerlink" title="JDK动态代理"></a>JDK动态代理</h2><h2 id="CGLIB动态代理"><a href="#CGLIB动态代理" class="headerlink" title="CGLIB动态代理"></a>CGLIB动态代理</h2><p>JDK 动态代理只能代理实现了接口的类或者直接代理接口；CGLIB 可以代理未实现任何接口的类，但不能代理声明为 final 类型的类和方法。</p><h1 id="基础数据类型"><a href="#基础数据类型" class="headerlink" title="基础数据类型"></a>基础数据类型</h1><h1 id="对象引用"><a href="#对象引用" class="headerlink" title="对象引用"></a>对象引用</h1><h1 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h1><h1 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h1><h1 id="SPI"><a href="#SPI" class="headerlink" title="SPI"></a>SPI</h1><h1 id="版本特性"><a href="#版本特性" class="headerlink" title="版本特性"></a>版本特性</h1>]]></content>
+      
+      
+      <categories>
+          
+          <category> 基础模块 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>并发与多线程</title>
+      <link href="/2021/07/29/20180630/"/>
+      <url>/2021/07/29/20180630/</url>
+      
+        <content type="html"><![CDATA[<h2 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h2><p>线程池通过复用线程，避免线程频繁地创建和销毁。</p><h3 id="线程池任务执行流程"><a href="#线程池任务执行流程" class="headerlink" title="线程池任务执行流程"></a>线程池任务执行流程</h3><p>提交任务的方法<br>submit：可以返回一个 future 对象，通过 future 对象可以了解任务执行情况，可以取消任务的执行，还可获取执行结果或执行异常。<br>execute：submit 最终也是通过 execute 执行的。<br><img src="http://s0.lgstatic.com/i/image2/M01/8A/BE/CgoB5l14nI6ABd8rAABJ5DF7U78658.png" alt="img"></p><ol><li>向线程池提交任务时，会首先判断线程池中的线程数是否大于设置的核心线程数，如果不大于，就创建一个核心线程来执行任务。</li><li>如果大于核心线程数，就会判断缓冲队列是否满了，如果没有满，则放入队列，等待线程空闲时执行任务。</li><li>如果队列已经满了，则判断是否达到了线程池设置的最大线程数，如果没有达到，就创建新线程来执行任务。</li><li>如果已经达到了最大线程数，则执行指定的拒绝策略</li></ol><h3 id="创建线程池"><a href="#创建线程池" class="headerlink" title="创建线程池"></a>创建线程池</h3><p>Java 的 Executors 工具类中提供了 5 种类型的线程池。</p><ul><li>FixedThreadPool<br>固定大小线程池，特点是线程数固定，使用无界队列。<br>适用于任务数量不均匀的场景、对内存压力不敏感但系统负载比较敏感的场景。</li></ul><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ExecutorService <span class="title">newFixedThreadPool</span><span class="params">(<span class="keyword">int</span> nThreads)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ThreadPoolExecutor(nThreads, nThreads,</span><br><span class="line">                                  <span class="number">0L</span>, TimeUnit.MILLISECONDS,</span><br><span class="line">                                  <span class="keyword">new</span> LinkedBlockingQueue&lt;Runnable&gt;());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ul><li>CachedThreadPool<br>Cached 线程池，特点是不限制线程数。<br>适用于要求低延迟的短期任务场景。</li></ul><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ExecutorService <span class="title">newCachedThreadPool</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ThreadPoolExecutor(<span class="number">0</span>, Integer.MAX_VALUE,</span><br><span class="line">                                  <span class="number">60L</span>, TimeUnit.SECONDS,</span><br><span class="line">                                  <span class="keyword">new</span> SynchronousQueue&lt;Runnable&gt;());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ul><li>SingleThreadExecutor<br>单线程线程池，就是一个线程的固定线程池。<br>适用于需要异步执行但需要保证任务顺序的场景。</li></ul><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ScheduledExecutorService <span class="title">newSingleThreadScheduledExecutor</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> DelegatedScheduledExecutorService</span><br><span class="line">        (<span class="keyword">new</span> ScheduledThreadPoolExecutor(<span class="number">1</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ul><li>ScheduledThreadPool<br>Scheduled 线程池。<br>适用于定期执行任务场景，支持按固定频率定期执行和按固定延时定期执行两种方式。</li></ul><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ScheduledExecutorService <span class="title">newScheduledThreadPool</span><span class="params">(<span class="keyword">int</span> corePoolSize)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ScheduledThreadPoolExecutor(corePoolSize);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ScheduledThreadPoolExecutor</span><span class="params">(<span class="keyword">int</span> corePoolSize)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>(corePoolSize, Integer.MAX_VALUE, <span class="number">0</span>, NANOSECONDS,</span><br><span class="line">          <span class="keyword">new</span> DelayedWorkQueue());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ul><li>WorkStealingPool<br>工作窃取线程池，使用的是 ForkJoinPool，是固定并行度的多任务队列。<br>适合任务执行时长不均匀的场景。</li></ul><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ExecutorService <span class="title">newWorkStealingPool</span><span class="params">(<span class="keyword">int</span> parallelism)</span> </span>&#123;</span><br><span class="line">     <span class="keyword">return</span> <span class="keyword">new</span> ForkJoinPool</span><br><span class="line">         (parallelism,</span><br><span class="line">          ForkJoinPool.defaultForkJoinWorkerThreadFactory,</span><br><span class="line">          <span class="keyword">null</span>, <span class="keyword">true</span>);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure><p>另外还可以根据业务需要自定义线程池，可使用 ThreadPoolExecutor(JUC工具类) 或 ThreadPoolTaskExecutor(Spring封装类) 。</p><h3 id="核心参数"><a href="#核心参数" class="headerlink" title="核心参数"></a>核心参数</h3><ul><li>核心线程数</li><li>最大线程数</li><li>线程空闲时间和空闲时间的单位<br>当线程闲置超过空闲时间就会被销毁。可以通过 allowCoreThreadTimeOut 方法来允许核心线程被回收。</li><li>缓存队列<br>ArrayBlockingQueue: 有界队列，队列有最大容量限制<br>LinkedBlockingQueue: 无界队列，队列不限制容量<br>SynchronousQueue: 同步队列，内部没有缓冲区。</li><li>线程工厂<br>用来创建新线程，可以用来对线程的一些属性进行定制，例如线程的 group、线程名、优先级等，一般使用默认工厂类即可。</li></ul><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">VehicleThreadFactory</span> <span class="keyword">implements</span> <span class="title">ThreadFactory</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> ThreadGroup group;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> AtomicInteger threadNumber = <span class="keyword">new</span> AtomicInteger(<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String prefix;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">VehicleThreadFactory</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        SecurityManager s = System.getSecurityManager();</span><br><span class="line">        group = (s != <span class="keyword">null</span>) ? s.getThreadGroup() :</span><br><span class="line">                Thread.currentThread().getThreadGroup();</span><br><span class="line">        prefix = name + <span class="string">"-thread-"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Thread <span class="title">newThread</span><span class="params">(Runnable r)</span> </span>&#123;</span><br><span class="line">        Thread t = <span class="keyword">new</span> Thread(group, r,</span><br><span class="line">                prefix + threadNumber.getAndIncrement(),</span><br><span class="line">                <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">if</span> (t.isDaemon()) &#123;</span><br><span class="line">            t.setDaemon(<span class="keyword">false</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (t.getPriority() != Thread.NORM_PRIORITY) &#123;</span><br><span class="line">            t.setPriority(Thread.NORM_PRIORITY);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> t;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ul><li>拒绝策略<br>Abort：默认策略，抛出 RejectedExecutionException 。<br>Discard：直接丢弃任务。<br>CallerRuns：由提交任务的线程直接执行。<br>DiscardOldest: 会丢弃最早提交的任务。<br>也可以自定义策略，例如：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(r, executor) -&gt; &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        executor.getQueue().put(r);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">        log.warn(<span class="string">"retry put task error,message:&#123;&#125;"</span>, e);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li></ul><h2 id="同步与互斥"><a href="#同步与互斥" class="headerlink" title="同步与互斥"></a>同步与互斥</h2><h3 id="synchronized"><a href="#synchronized" class="headerlink" title="synchronized"></a>synchronized</h3><p>synchronized 应用在方法上时，在字节码中是通过方法的 <strong>ACC_SYNCHRONIZED</strong> 标志来实现的；<br>synchronized 应用在同步块上时，在字节码中是通过 <strong>monitorenter</strong> 和 <strong>monitorexit</strong> 实现的。<br>最终都是通过对对象进行加锁，在 JVM 中，对象在内存中分为三块区域：对象头、实例数据和对齐填充。在对象头中保存了锁标志位和指向 monitor 对象的起始地址，当 Monitor 被某个线程持有后，就会处于锁定状态，此时 Owner 会指向持有 Monitor 对象的线程。Monitor 还有两个队列，用来存放进入及等待获取锁的线程。<br>JVM对其进行了大量优化</p><ul><li>锁消除</li><li>锁粗化</li><li>自旋和自适应自旋</li><li>锁升级<br>无锁-&gt;偏向锁-&gt;轻量级锁-&gt;重量级锁<h3 id="Lock"><a href="#Lock" class="headerlink" title="Lock"></a>Lock</h3>AQS是实现Lock基础，AQS 有一个 state 标记位，值为1时表示有线程占用，其他线程需要进入到同步队列等待。<br><img src="http://s0.lgstatic.com/i/image2/M01/8A/BE/CgoB5l14nI6ANLfHAAA3fj0S8po403.png" alt="img"></li></ul><ol><li>当获得锁的线程需要等待某个条件时，会进入 condition 的等待队列，等待队列可以有多个。</li><li>当 condition 条件满足时，线程会从等待队列重新进入同步队列进行获取锁的竞争</li></ol><ul><li>ReentrantLock<br>基于AQS实现，内部有公平锁和非公平锁两种实现，差别就在于新来的线程是否比已经在同步队列中的等待线程更早获得锁。</li><li>Semaphore<br>基于AQS实现，差别在于 ReentrantLock 是独占锁，Semaphore 是共享锁。</li></ul><h3 id="CAS"><a href="#CAS" class="headerlink" title="CAS"></a>CAS</h3><p>乐观锁的一种实现方式，是一种轻量级锁，JUC 中很多工具类的实现就是基于 CAS。它认为并发操作并不总会发生。<br>操作流程如下：其中比较并写回的操作是通过操作系统原语实现的，保证执行过程中不会被中断。</p><ol><li>线程在读取数据时不进行加锁；</li><li>在准备写回数据时，比较原值是否修改；</li><li>若未被其他线程修改则写回；</li><li>若已被修改，则重新执行读取流程。</li></ol><p>缺点：容易出现ABA问题，不一定会影响结果，但还是需要防范，可以通过增加额外的标志位或者时间戳解决。JUC 工具包中提供了这样的类。<br><img src="http://s0.lgstatic.com/i/image2/M01/8A/BE/CgoB5l14nI6AB5XwAAAWMnENBjk562.png" alt="img"></p><ol><li>线程 T1 读取值 A 之后，发生两次写入。</li><li>先由线程 T2 写回了 B</li><li>又由 T3 写回了 A</li><li>此时 T1 在写回比较时，值还是 A，就无法判断是否发生过修改。</li></ol><p>synchronized 和 ReentrantLock 的区别：<br>相同点：都是可重入、重量级锁。<br>不同点：</p><ol><li>synchronized 依赖于 JVM 而 ReentrantLock 依赖于 API。</li><li>ReentrantLock 比 synchronized 增加了一些高级功能。例如：等待可中断、可实现公平锁、可绑定多个条件。<br>使用场景：</li></ol><h2 id="线程状态转换"><a href="#线程状态转换" class="headerlink" title="线程状态转换"></a>线程状态转换</h2><p><img src="http://s0.lgstatic.com/i/image2/M01/8A/BE/CgoB5l14nI2Ab8rJAACvTREK08g324.png" alt="img"></p><ol><li>当创建一个线程时，线程处在 NEW 状态。</li><li>运行 Thread 的 start 方法后，线程进入 RUNNABLE 可运行状态，但线程此时是 READY 状态，就绪状态等待线程调度，在获取 CPU 后才能进入 RUNNING 运行状态。运行状态可以随着不同条件转换成除 NEW 以外的其他状态。</li><li>线程进入 synchronized 同步块或者同步方法时，如果获取锁失败，则会进入到 BLOCKED 状态，当获取到锁后，会从 BLOCKED 状态恢复到 RUNNABLE 可运行状态。</li><li>调用 Object.wait、Thread.join等，进入 TIMED_WAITING 有超时时间的等待状态。调用 Thread.join 或者 Locksupport.park 等，进入 WAITING 无超时的等待状态。均可以通过 notify 或 unpark 结束等待状态并恢复到RUNNABLE 可运行状态。</li><li>线程运行完成结束，进入 TERMINATED 状态。</li></ol><h2 id="线程通信"><a href="#线程通信" class="headerlink" title="线程通信"></a>线程通信</h2><h3 id="wait"><a href="#wait" class="headerlink" title="wait"></a>wait</h3><p>wait 和 sleep 区别：</p><ul><li>wait 属于 Object 类，sleep 属于 Thread 类；</li><li>wait 会释放锁对象，而 sleep 不会；</li><li>使用的位置不同，wait 需要在同步块中使用，sleep 可以在任意地方；</li><li>sleep 需要捕获异常，而 wait 不需要。</li></ul><h3 id="notify"><a href="#notify" class="headerlink" title="notify"></a>notify</h3><h3 id="notifyAll"><a href="#notifyAll" class="headerlink" title="notifyAll"></a>notifyAll</h3><h2 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h2><p>产生条件：</p><ul><li>互斥</li><li>请求并持有</li><li>非剥夺</li><li>循环等待<br>死锁检测与防止<br>竞争条件与临界区</li></ul><h2 id="机制"><a href="#机制" class="headerlink" title="机制"></a>机制</h2><h3 id="ThreadLocal"><a href="#ThreadLocal" class="headerlink" title="ThreadLocal"></a>ThreadLocal</h3><p>用来解决线程数据隔离的问题，底层使用ThreadLocalMap保存线程变量。</p><h3 id="Fork-Join"><a href="#Fork-Join" class="headerlink" title="Fork/Join"></a>Fork/Join</h3><p>用于大任务的分割与汇总</p><h3 id="Volatile"><a href="#Volatile" class="headerlink" title="Volatile"></a>Volatile</h3><p>对多线程数据可见性的保证</p><h3 id="Interrupt"><a href="#Interrupt" class="headerlink" title="Interrupt"></a>Interrupt</h3><p>线程的中断机制</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 基础模块 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>常用工具集</title>
+      <link href="/2021/07/29/20180725/"/>
+      <url>/2021/07/29/20180725/</url>
+      
+        <content type="html"><![CDATA[<h2 id="团队协作"><a href="#团队协作" class="headerlink" title="团队协作"></a>团队协作</h2><ul><li>Git<h3 id="MAC-SSH-Key"><a href="#MAC-SSH-Key" class="headerlink" title="MAC SSH Key"></a>MAC SSH Key</h3></li></ul><ol><li>生成：ssh-keygen -t rsa -C “wangqiu8077@163.com”</li><li>复制：pbcopy &lt; ~/.ssh/id_rsa.pub</li><li>验证：ssh -T git@github.com<br>ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDDnEhi5PeHYuK9hENM2Izh5n69vtjkt91JQBVc15WbFAOupJc4hBm8uH9ZOJN+QLzrltJBqIicSQulTM+hb3AcDTDru4TuK4ecGumw0pu23SNNoFw7lpZKzOS5Z0siNb9kN+LFUsUCyZLyvXbB1L376fooiBYgiTHQoXu3FfimTyTDPKIq6woSrgopDRyAMPSQDXFvLLFfLWxu0Y4haJ7oULz88IoBxDGNh5p5Un+oMaKQs1PlYY+Ziz9nq5NrLT0eBwX2PngR0fIRhuZCZa1I5EI5HTOEQu8/FniMvnfuBKWN6V3prDofQoCDjsdOPaUr37xM4zas+S2AV+TSYXh5 wangqiu8077@163.com</li></ol><ul><li>SVN</li></ul><h2 id="质量保证"><a href="#质量保证" class="headerlink" title="质量保证"></a>质量保证</h2><h2 id="压测"><a href="#压测" class="headerlink" title="压测"></a>压测</h2><ul><li>JMeter</li></ul><h2 id="容器与代理"><a href="#容器与代理" class="headerlink" title="容器与代理"></a>容器与代理</h2><h2 id="文档管理"><a href="#文档管理" class="headerlink" title="文档管理"></a>文档管理</h2><ul><li>confluence</li></ul><h2 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h2>]]></content>
+      
+      
+      <categories>
+          
+          <category> 应用模块 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>操作系统与计算机网络</title>
+      <link href="/2021/07/29/20171212/"/>
+      <url>/2021/07/29/20171212/</url>
+      
+        <content type="html"><![CDATA[<a id="more"></a><h2 id="计算机网络"><a href="#计算机网络" class="headerlink" title="计算机网络"></a>计算机网络</h2><h3 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h3><h3 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h3><p>三次握手建连<br><img src="http://s0.lgstatic.com/i/image2/M01/8A/6E/CgotOV13hviAU5H3AAAyMppFmf8039.png" alt="img"></p><p>四次挥手断连<br><img src="http://s0.lgstatic.com/i/image2/M01/8A/4E/CgoB5l13hviAZRJ1AABEfmQ55Jw991.png" alt="img"></p><h3 id="UDP"><a href="#UDP" class="headerlink" title="UDP"></a>UDP</h3><h3 id="QUIC"><a href="#QUIC" class="headerlink" title="QUIC"></a>QUIC</h3><h3 id="RPC"><a href="#RPC" class="headerlink" title="RPC"></a>RPC</h3><h3 id="MQTT"><a href="#MQTT" class="headerlink" title="MQTT"></a>MQTT</h3><h3 id="GB32960-新能源通信协议"><a href="#GB32960-新能源通信协议" class="headerlink" title="GB32960(新能源通信协议)"></a>GB32960(新能源通信协议)</h3><p><a href="http://c.gb688.cn/bzgk/gb/showGb?type=online&amp;hcno=674DE45C0AD3DE2CD75B9C4CD8ED57C1" target="_blank" rel="noopener">在线文档</a></p><h2 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h2><h3 id="top"><a href="#top" class="headerlink" title="top"></a>top</h3><h3 id="netstat"><a href="#netstat" class="headerlink" title="netstat"></a>netstat</h3><h2 id="经验"><a href="#经验" class="headerlink" title="经验"></a>经验</h2><p>生产配置：4C8G</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 基础模块 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>数据格式</title>
+      <link href="/2021/07/28/20210728/"/>
+      <url>/2021/07/28/20210728/</url>
+      
+        <content type="html"><![CDATA[<h2 id="ProtoBuf"><a href="#ProtoBuf" class="headerlink" title="ProtoBuf"></a>ProtoBuf</h2><p>Protocol Buffer 简称 protobuf，google开源的一种数据传输格式，类似于json，但比json的体积要小，速度更快，并且跨平台、跨语言。使用时需编写.proto文件，然后使用protocol.exe生成特定语言的文件。序列化和反序列化需使用同一个文件。<br>protobuf按照Tag + 可选（长度） + 值进行存储，不存储真正的属性名，而是在解析时按照Tag去寻找对应的属性名，然后对其进行赋值。<br>Protostuff是为了简化生成中间文件而生的开源项目。<br>都是Java语言时，客户端和服务端类名、属性、类型需保持一致。包名也必须一致？<br>服务端Java、客户端Python时，客户端需定义Message。对于泛型的处理，需要经过调试才能知道各种类型的Tag。<br>同时需注意客户端与服务端的protobuf的版本必须一致，目前主要版本为2.0、3.0。</p><h2 id="JSON"><a href="#JSON" class="headerlink" title="JSON"></a>JSON</h2>]]></content>
+      
+      
+      <categories>
+          
+          <category> 基础模块 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Cassandra</title>
+      <link href="/2021/07/28/20181115/"/>
+      <url>/2021/07/28/20181115/</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      <categories>
+          
+          <category> 应用模块 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 数据库 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>HBase</title>
+      <link href="/2021/07/28/20181114/"/>
+      <url>/2021/07/28/20181114/</url>
+      
+        <content type="html"><![CDATA[<h2 id="索引类型"><a href="#索引类型" class="headerlink" title="索引类型"></a>索引类型</h2><ul><li>本地索引</li><li>全局索引</li><li>覆盖索引</li></ul><h2 id="RowKey设计"><a href="#RowKey设计" class="headerlink" title="RowKey设计"></a>RowKey设计</h2><ul><li>长度原则</li><li>唯一原则</li><li>散列原则</li></ul><h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><ul><li><a href="https://cloud.tencent.com/developer/article/1006043" target="_blank" rel="noopener">HBase技术细节笔记上</a></li><li><a href="https://cloud.tencent.com/developer/article/1006044" target="_blank" rel="noopener">HBase技术细节笔记下</a></li><li><a href="https://zhuanlan.zhihu.com/p/145551967" target="_blank" rel="noopener">我终于看懂了HBase，太不容易了</a></li><li><a href="https://www.slidestalk.com/HBaseGroup/HBase_ebook28532" target="_blank" rel="noopener">2018 HBase技术总结</a></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 应用模块 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 数据库 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Mongo</title>
+      <link href="/2021/07/28/20190107/"/>
+      <url>/2021/07/28/20190107/</url>
+      
+        <content type="html"><![CDATA[<h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><ul><li>单键索引</li><li>复合索引</li><li>多键值索引</li><li>地理索引</li><li>全文索引</li><li><p>散列索引</p></li><li><p>稀疏索引</p></li><li>唯一索引</li><li>过期索引</li></ul><h2 id="部署方式"><a href="#部署方式" class="headerlink" title="部署方式"></a>部署方式</h2><p>分片<br>副本集</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 应用模块 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 数据库 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>架构</title>
+      <link href="/2021/07/28/20190112/"/>
+      <url>/2021/07/28/20190112/</url>
+      
+        <content type="html"><![CDATA[<h2 id="CAP理论"><a href="#CAP理论" class="headerlink" title="CAP理论"></a>CAP理论</h2><p>Consistency: 一致性，所有节点访问同一份最新的数据副本<br>Availability: 可用性，非故障的节点在合理的时间内返回合理的响应（不是错误或者超时的响应）。<br>Partition tolerance: 分区容错性，分布式系统出现网络分区的时候，仍然能够对外提供服务。<br>在一个分布式系统中，这三个特性最多只能同时满足两个，三者不可兼得。</p><h3 id="CA"><a href="#CA" class="headerlink" title="CA"></a>CA</h3><p>放弃分区容错，这也就等同于放弃了分布式系统，所以 CA 只存在于单机系统。</p><h3 id="CP"><a href="#CP" class="headerlink" title="CP"></a>CP</h3><p>选择强一致和分区容错，允许极端情况下出现短时的服务不可用。<br>CP实现的系统：ZooKeeper、Consul、Etcd、HBase、Nacos</p><h3 id="AP"><a href="#AP" class="headerlink" title="AP"></a>AP</h3><p>选择分区容错和高可用，允许数据出现短时间不一致。在服务注册的场景，短期的不一致一般不会对服务交互产生影响，因此采用 AP 原则的注册中心才是微服务比较适合的选择。<br>AP实现的系统：Eureka、Nacos、Cassandra</p><h3 id="BASE"><a href="#BASE" class="headerlink" title="BASE"></a>BASE</h3><p>Basically Available：基本可用<br>Soft-state：软状态<br>Eventual Consistency：最终一致性<br>它是对 CAP 中一致性和可用性权衡的结果。BASE 的核心思想是即使无法做到强一致性，也可以根据系统特点，采用适当的方式达到最终一致性。</p><h2 id="微服务框架"><a href="#微服务框架" class="headerlink" title="微服务框架"></a>微服务框架</h2><ul><li>服务注册：Zookeeper、Consul、Eureka、Nacos</li><li>负载均衡：ribbon</li><li>熔断降级：hystrix</li><li>网关：Zuul</li><li>配置管理：config</li></ul><h2 id="云原生服务"><a href="#云原生服务" class="headerlink" title="云原生服务"></a>云原生服务</h2><h2 id="Service-Mesh"><a href="#Service-Mesh" class="headerlink" title="Service Mesh"></a>Service Mesh</h2>]]></content>
+      
+      
+      <categories>
+          
+          <category> 综合模块 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>RPC</title>
+      <link href="/2021/07/28/20180815/"/>
+      <url>/2021/07/28/20180815/</url>
+      
+        <content type="html"><![CDATA[<p>RPC 是远程过程调用的简写，RPC 与 HTTP 一样都可以实现远程服务的调用，但是使用方式上有很大的区别。它能够像使用本地方法一样调用远程的方法。<br><a id="more"></a></p><h2 id="交互流程"><a href="#交互流程" class="headerlink" title="交互流程"></a>交互流程</h2><p><img src="http://s0.lgstatic.com/i/image2/M01/8A/C8/CgoB5l14qRCAD22_AAAwyeZIb9A096.png" alt="img"></p><ul><li>Client端：请求的发起方，也称 Consumer 或者 Referer。</li><li>Server 端：服务实现提供方，也称 Provider。</li></ul><p>为了保持较高的性能，Client 端一般都是直接请求远端的 Server 节点。因此，RPC 框架需要自动的服务注册与发现的能力，上方的绿色的注册中心就是用来动态维护可用服务节点信息的模块。</p><p><strong>当 Server 提供服务时</strong>，向注册中心注册服务信息，告诉注册中心可以提供哪些服务。同时与注册中心保持心跳或者维持长链接，来维持 Server 可用状态，具体方式与注册中心的实现有关。例如 ZK 使用长链接推送方式而 Consul 使用心跳方式。</p><p><strong>当 Client 需要使用服务时</strong>，会先向注册中心订阅服务，获得可用的 Server 节点，并保存在 Client 本地。当 Server 节点发生变更时会通知 Client 更新本地 Server 节点信息。Client 按某种负载均衡策略直接请求 Server 使用服务。</p><p>注意：注册中心只参与服务节点的注册与变更通知，并不会参与具体请求的处理。另外一般的 RPC 框架都提供了完整的服务治理能力，因此会有额外的管理模块和信息采集模块来监控、管理服务。</p><h2 id="开源框架"><a href="#开源框架" class="headerlink" title="开源框架"></a>开源框架</h2><h3 id="Dubbo"><a href="#Dubbo" class="headerlink" title="Dubbo"></a>Dubbo</h3><ul><li>阿里开源的 RPC 框架，提供完善的服务治理能力。</li><li>可以快速为 Java 服务提供 RPC 能力。</li><li>提供了随机、轮询、最少调用优先等多种负载均衡策略。</li><li>提供对 ZK 等多种注册中心等支持，能够自动完成服务的注册与发现。</li><li>提供可视化的管理后台，方便对服务状态进行监控和管理。</li></ul><h3 id="Motan"><a href="#Motan" class="headerlink" title="Motan"></a>Motan</h3><ul><li>微博开源的轻量级服务治理框架，提供强大灵活的扩展能力。</li><li>提供了多语言支持，目前支持 Java、PHP、Lua、Golang 等多语言交互，目前 Python 和 C++ 的客户端也在研发中。</li><li>通过 Agent 代理方式，实现了的跨语言 ServiceMesh 的支持。</li><li>Java 版本的通信层也是通过 Netty 来实现的，基于 TCP 的私有协议进行通信。</li></ul><h3 id="gPRC"><a href="#gPRC" class="headerlink" title="gPRC"></a>gPRC</h3><ul><li>Google 开源的框架，本身支持的服务治理能力并不强，但拥有非常灵活的插件扩展能力，可以方便的实现自定义的服务治理能力。</li><li>默认使用 Protobuf 进行消息序列化，非常适合多语言服务之间进行交互。</li><li>基于 HTTP2 协议，能够支持链接复用。</li><li>提供了流式调用能力。</li><li>支持从服务端进行推送消息的能力。</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 应用模块 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>数据库</title>
+      <link href="/2021/07/28/20181023/"/>
+      <url>/2021/07/28/20181023/</url>
+      
+        <content type="html"><![CDATA[<h2 id="常用数据库"><a href="#常用数据库" class="headerlink" title="常用数据库"></a>常用数据库</h2><ul><li>关系型数据库<ul><li>MySQL</li><li>Oracle</li><li>PostgreSQL(PGSQL)</li><li>MariaDB</li></ul></li><li>NoSQL<ul><li>MongoDB</li><li>HBase</li><li>Cassandra</li><li>Pika</li></ul></li><li>NewSQL<ul><li>TiDB</li><li>OceanBase</li></ul></li></ul><h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><h3 id="事务特性"><a href="#事务特性" class="headerlink" title="事务特性"></a>事务特性</h3><p>A(Atomicity)C(Consistency)I(Isolation)D(Durability)</p><ul><li>原子性：指事务由原子的操作序列组成，所有操作要么全部成功，要么全部失败回滚。</li><li>一致性：指事务的执行不能破坏数据库数据的完整性和一致性，一个事务在执行之前和执行之后，数据库都必须处以一致性状态。比如在做多表操作时，多个表要么都是事务后新的值，要么都是事务前的旧值。</li><li>隔离性：指多个用户并发访问数据库时，数据库为每个用户执行的事务，不能被其他事务的操作所干扰，多个并发事务之间要相互隔离。</li><li>持久性：指一个事务一旦提交并执行成功，那么对数据库中数据的改变就是永久性的，即便是在数据库系统遇到故障的情况下也不会丢失提交事务的操作。</li></ul><h3 id="并发问题"><a href="#并发问题" class="headerlink" title="并发问题"></a>并发问题</h3><p>脏读：指在一个事务处理过程里读取了另一个未提交的事务中的数据。</p><p>不可重复读：指对于数据库中某个数据，一个事务范围内多次查询返回了不同的数据值，这是由于在多次查询之间，有其他事务修改了数据并进行了提交。</p><p>幻读：指一个事务中执行两次完全相同的查询时，第二次查询所返回的结果集跟第一个查询不相同。与不可重复读的区别在于，不可重复读是对同一条记录，两次读取的值不同。而幻读是记录的增加或删除，导致两次相同条件获取的结果记录数不同。</p><h3 id="隔离级别"><a href="#隔离级别" class="headerlink" title="隔离级别"></a>隔离级别</h3><ul><li>读未提交：最低的隔离级别，可以读取到其他事务未提交的内容。所有并发问题都有可能发生。</li><li>读已提交：就是只能读取到其他事务已经提交的数据。可以解决脏读问题。</li><li>可重复读：MySQL默认隔离级别，可以保证整个事务过程中，对同数据的多次读取结果是相同的。这个级别可以解决脏读和不可重复读的问题。</li><li>串行化：最高的隔离级别，所有事务操作都依次顺序执行。这个级别会导致并发度下降，性能最差。不过这个级别可以解决前面提到的所有并发问题。</li></ul><h3 id="事务分类"><a href="#事务分类" class="headerlink" title="事务分类"></a>事务分类</h3><ul><li>扁平化事务：使用最多，所有的操作都在同一层次，不能提交或者回滚事务的某一部分，要么都成功，要么都回滚。</li><li>带保存点的扁平化事务：允许事务在执行过程中回滚到较早的状态，而不是全部回滚。通过在事务中插入保存点，当操作失败后，可以选择回滚到最近的保存点处。</li><li>链事务：在事务提交时，会将必要的上下文隐式传递给下一个事务，当事务失败时就可以回滚到最近的事务。不过，链事务只能回滚到最近的保存点，而带保存点的扁平化事务是可以回滚到任意的保存点。</li><li>嵌套事务：由顶层事务和子事务构成，类似于树的结构。一般顶层事务负责逻辑管理，子事务负责具体的工作，子事务可以提交，但真正提交要等到父事务提交，如果上层事务回滚，那么所有的子事务都会回滚。</li></ul><h3 id="分布式事务解决方案"><a href="#分布式事务解决方案" class="headerlink" title="分布式事务解决方案"></a>分布式事务解决方案</h3><ul><li>XA协议：是保证强一致性的刚性事务。实现方式有两段式提交和三段式提交。两段式提交需要有一个事务协调者来保证所有的事务参与者都完成了第一阶段的准备工作。如果协调者收到所有参与者都准备好的消息，就会通知所有的事务执行第二阶段提交。一般场景下两段式提交已经能够很好得解决分布式事务了，然而两阶段在即使只有一个进程发生故障时，也会导致整个系统存在较长时间的阻塞。三段式提交通过增加 pre-commit 阶段来减少前面提到的系统阻塞的时间。三段式提交很少在实际中使用，简单了解就可以了。</li><li>TCC：是满足最终一致性的柔性事务方案。TCC 采用补偿机制，核心思想是对每个操作，都要注册对应的确认和补偿操作。它分为三个阶段：Try 阶段主要对业务系统进行检测及资源预留；Confirm 阶段对业务系统做确认提交；Cancel 阶段是在业务执行错误，执行回滚，释放预留的资源。</li><li>消息一致性：是将本地操作和发送消息放在一个事务中，保证本地操作和消息发送要么都成功要么都失败。下游应用订阅消息，收到消息后执行对应操作。</li><li>GTS：阿里云中的全局事务服务 GTS，对应的开源版本是 Fescar。Fescar 基于两段式提交进行改良，剥离了分布式事务方案对数据库在协议支持上的要求。使用 Fescar 的前提是分支事务中涉及的资源，必须是支持 ACID 事务的关系型数据库。分支的提交和回滚机制，都依赖于本地事务来保障。 Fescar 的实现目前还存在一些局限，比如事务隔离级别最高支持到读已提交级别。</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 应用模块 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 数据库 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Kafka</title>
+      <link href="/2021/07/28/20181112/"/>
+      <url>/2021/07/28/20181112/</url>
+      
+        <content type="html"><![CDATA[<h2 id="生产消息"><a href="#生产消息" class="headerlink" title="生产消息"></a>生产消息</h2><p>生产者根据规则选择一个Partition写入</p><ul><li>轮询策略（默认规则）</li><li>指定Partition</li><li>指定key来根据Hash值选择Partition</li></ul><p>消息发送方式</p><ul><li>同步：默认方式</li><li>异步：允许批量</li><li>oneway：不需要返回结果</li></ul><h2 id="消费消息"><a href="#消费消息" class="headerlink" title="消费消息"></a>消费消息</h2><ul><li>Consumer按照Group来消费消息，topic中的每一条消息可以被多个Consumer Group消费；</li><li>每个Partition在一个Group中只能由一个Consumer消费，通过Group Coordinator来管理Consumer实际负责消费哪个Partiton，默认支持轮询和Range分配。</li><li>Kafka在zk中保存了每个Topic中每个Partition在不同Group的消费偏移量offset。<br><strong>注意</strong>：分区数量一般要大于或等于消费者（同一Group）数量。否则，有的消费者会消费不到数据</li></ul><h2 id="经验"><a href="#经验" class="headerlink" title="经验"></a>经验</h2><h3 id="集成Spring-Kafka"><a href="#集成Spring-Kafka" class="headerlink" title="集成Spring Kafka"></a>集成Spring Kafka</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.kafka&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-kafka&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure><p>生产：使用 KafkaTemplte 生产消息，多个Kafka实例需生产消息时配置不同的KafkaTemplate<br>消费：单条消费时直接使用 @KafkaListener 注解即可，批量消费需先配置containerFactory</p><h3 id="生产者"><a href="#生产者" class="headerlink" title="生产者"></a>生产者</h3><p>ack</p><ul><li>-1或all</li><li>0</li><li>1</li></ul><h3 id="消费者"><a href="#消费者" class="headerlink" title="消费者"></a>消费者</h3><p>提高消费速度</p><ul><li>增加Consumer个数</li><li>增加处理线程：定义一个线程池，Poll数据，将数据提交到线程池中，再次Poll数据。</li></ul><h3 id="可视化"><a href="#可视化" class="headerlink" title="可视化"></a>可视化</h3><p><a href="https://www.kafkatool.com/download.html" target="_blank" rel="noopener">可视化工具下载地址</a></p><h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="https://cloud.tencent.com/document/product/597/30203" target="_blank" rel="noopener">CKafka常用参数配置指南</a><br><a href="https://help.aliyun.com/document_detail/68165.html?spm=a2c4g.11186623.6.761.1615358bafQjos" target="_blank" rel="noopener">发布者最佳实践</a><br><a href="https://help.aliyun.com/document_detail/68166.html?spm=a2c4g.11186623.6.762.4297203abkfLec" target="_blank" rel="noopener">订阅者最佳实践</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 应用模块 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 中间件 </tag>
+            
+            <tag> 消息队列 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>消息队列</title>
+      <link href="/2021/07/28/20181010/"/>
+      <url>/2021/07/28/20181010/</url>
+      
+        <content type="html"><![CDATA[<h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><p>解耦合、削峰填谷、异步</p><h2 id="消息协议"><a href="#消息协议" class="headerlink" title="消息协议"></a>消息协议</h2><p>AMQP<br>JMS</p><h2 id="常用队列"><a href="#常用队列" class="headerlink" title="常用队列"></a>常用队列</h2><ul><li>ActiveMQ: 单机吞吐量万级，有较低概率丢失消息</li><li>RabbitMQ: Erlang开发，单机吞吐万级</li><li>RocketMQ: 阿里开源，单机吞吐量10W级</li><li>Kafka: Scala开发, 单机吞吐量10W级，发布订阅模式</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 应用模块 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 中间件 </tag>
+            
+            <tag> 消息队列 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>JVM</title>
+      <link href="/2021/07/28/20180619/"/>
+      <url>/2021/07/28/20180619/</url>
+      
+        <content type="html"><![CDATA[<p>架构师必备武器<br><a id="more"></a></p><h1 id="内存模型"><a href="#内存模型" class="headerlink" title="内存模型"></a>内存模型</h1><h2 id="JVM内存模型"><a href="#JVM内存模型" class="headerlink" title="JVM内存模型"></a>JVM内存模型</h2><h2 id="Java内存模型"><a href="#Java内存模型" class="headerlink" title="Java内存模型"></a>Java内存模型</h2><h1 id="类加载"><a href="#类加载" class="headerlink" title="类加载"></a>类加载</h1><h1 id="GC"><a href="#GC" class="headerlink" title="GC"></a>GC</h1><h1 id="性能调优"><a href="#性能调优" class="headerlink" title="性能调优"></a>性能调优</h1><h1 id="执行模式"><a href="#执行模式" class="headerlink" title="执行模式"></a>执行模式</h1><h1 id="编译器优化"><a href="#编译器优化" class="headerlink" title="编译器优化"></a>编译器优化</h1>]]></content>
+      
+      
+      <categories>
+          
+          <category> 基础模块 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>数据结构与算法</title>
+      <link href="/2021/07/28/20180720/"/>
+      <url>/2021/07/28/20180720/</url>
+      
+        <content type="html"><![CDATA[<h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><h3 id="二叉搜索树"><a href="#二叉搜索树" class="headerlink" title="二叉搜索树"></a>二叉搜索树</h3><p><img src="http://s0.lgstatic.com/i/image2/M01/8A/E1/CgotOV14oT6AIEwmAAAW0UV9vPM694.png" alt="img"></p><ul><li>每个节点包含一个值。</li><li>每个节点至多有两个子树。</li><li>每个节点左子树节点的值都小于自身的值，每个节点右子树节点的值都大于自身的值。</li></ul><p>二叉树的查询时间复杂度是 log(N)，但是随着不断的插入、删除节点，二叉树的树高可能会不断变大，当一个二叉搜索树所有节点都只有左子树或者都只有右子树时，其查找性能就退化成线性的了。</p><h3 id="平衡二叉树"><a href="#平衡二叉树" class="headerlink" title="平衡二叉树"></a>平衡二叉树</h3><p>平衡二叉树保证每个节点左右子树的高度差的绝对值不超过 1，比较适合插入、删除比较少的场景。</p><h3 id="红黑树"><a href="#红黑树" class="headerlink" title="红黑树"></a>红黑树</h3><p>红黑树是一种更加实用的非严格的平衡二叉树，更关注局部平衡而非整体平衡，确保没有一条路径会比其他路径长出 2 倍，所以是接近平衡的，但减少了许多不必要的旋转操作，更加实用。</p><p><img src="http://s0.lgstatic.com/i/image2/M01/8A/C2/CgoB5l14oT6AeAxdAAAmJsTBAww115.png" alt="img"></p><ul><li>每个节点不是红色就是黑色。</li><li>根节点是黑色。</li><li>每个叶子节点都是黑色的空节点，如图中的黑色三角。</li><li>红色节点的两个子节点都是黑色的。</li><li>任意节点到其叶节点的每条路径上，包含相同数量的黑色节点。    </li></ul><h3 id="B树"><a href="#B树" class="headerlink" title="B树"></a>B树</h3><p><img src="http://s0.lgstatic.com/i/image2/M01/8A/E1/CgotOV14oT6APZerAAAkJXd9qEE912.png" alt="img"></p><p>B 树是一种多叉树，也叫多路搜索树，</p><ul><li>B 树中每个节点可以存储多个元素。</li><li>关键字分布在整颗树中，一个关键字只出现在一个节点中。</li><li>搜索可能在非叶节点停止。</li><li>非常适合用在文件索引上，可以有效减少磁盘 IO 次数。</li></ul><p>B 树中所有结点的最大子节点数称为 B 树的阶，如上图所示是一棵 3 阶 B 树，也叫 2-3 树。</p><p>一个 m 阶 B 树有如下特点：</p><ol><li>非叶节点最多有 m 棵子树。</li><li>根节点最少有两个子树，非根、非叶节点最少有 m/2 棵子树。</li><li>非叶子结点中保存的关键字个数，等于该节点子树个数−1。</li><li>非叶子节点中的关键字大小有序。</li><li>节点中每个关键字的左子树中的关键字都小于该关键字，右子树中的关键字都大于该关键字。</li><li>所有叶节点都在同一层。</li><li>B 树在查找时，从根结点开始，对结点内的有序的关键字序列进行二分查找，如果找到就结束，没有找到就进入查询关键字所属范围的子树进行查找，直到叶节点。</li></ol><h3 id="B-树"><a href="#B-树" class="headerlink" title="B+树"></a>B+树</h3><p><img src="http://s0.lgstatic.com/i/image2/M01/8A/C2/CgoB5l14oT6AUR7GAAAe0Dk9-gg936.png" alt="img"></p><ol><li>节点中的关键字与子树数目相同。</li><li>关键字对应的子树中的节点都大于或等于关键字，子树中包括关键字自身。</li><li>所有关键字都出现在叶子节点中。</li><li>所有叶子节点都有指向下一个叶子节点的指针。</li><li>在搜索时不会在非叶子节点命中，一定会查询到叶子节点。</li><li>叶子节点相当于数据存储层，保存关键字对应的数据，而非叶子节点只保存关键字和指向叶节点的指针，不保存关键字对应的数据。</li></ol><p>B+ 树更适合索引系统的原因</p><ol><li>由于叶节点之间有指针相连，B+ 树更适合范围检索；</li><li>由于非页节点只保存关键字和指针，同样大小非叶节点，B+ 树可以容纳更多的关键字，可以降低树高，查询时磁盘读写代价更低；</li><li>B+ 树的查询效率比较稳定。任何关键字的查找必须走一条从根结点到叶子结点的路，所有关键字查询的路径长度相同，效率相当。</li></ol><h3 id="B-树-1"><a href="#B-树-1" class="headerlink" title="B*树"></a>B*树</h3><h2 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h2><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><h2 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h2><h2 id="字符串匹配"><a href="#字符串匹配" class="headerlink" title="字符串匹配"></a>字符串匹配</h2><h2 id="常用算法思路"><a href="#常用算法思路" class="headerlink" title="常用算法思路"></a>常用算法思路</h2>]]></content>
+      
+      
+      <categories>
+          
+          <category> 基础模块 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>MyBatis</title>
+      <link href="/2021/07/28/20180802/"/>
+      <url>/2021/07/28/20180802/</url>
+      
+        <content type="html"><![CDATA[<p>MyBatis 的优点：</p><ol><li>MyBatis 是原生SQL，不像 Hibernate 的 HQL 需要额外的学习成本。</li><li>MyBatis 的 SQL 语句与代码进行了解耦合。</li><li>MyBatis 功能简单，学习成本比较低，使用的门槛也非常低，可以快速上手。</li><li>MyBatis SQL调优比较灵活，而 Hibernate，SQL 语句是自动生成的，当有复杂语句需要进行优化时就比较难处理。 </li></ol><p>MyBatis 的缺点：</p><ol><li>相比 Hibernate 这样的全自动 ORM 框架，不能自动生成 SQL 语句，编写 SQL 的工作量比较大，尤其是字段多、关联表多的情况下；</li><li>SQL 语句依赖于具体数据库，导致数据库迁移性差，而 Hibernate 则拥有良好的数据库可移植性。</li></ol><p>官方文档：<a href="https://mybatis.org/mybatis-3/zh/index.html" target="_blank" rel="noopener">MyBatis3</a></p><a id="more"></a><h2 id="处理流程"><a href="#处理流程" class="headerlink" title="处理流程"></a>处理流程</h2><p><img src="/img/posts/MyBatis.png" alt="MyBatis处理流程"></p><ol><li>在执行 SQL 时，首先会从 SqlSessionFactory 中创建一个新的 SqlSession。</li><li>SQL 语句是通过 SqlSession 中的 Executor 来执行，Executor 根据 SqlSession 传递的参数执行 query() 方法，然后创建一个 StatementHandler 对象，将必要的参数传递给 StatementHandler，由 StatementHandler 来完成对数据库的查询。</li><li>StatementHandler 调用 ParameterHandler 的 setParameters 方法，把用户传递的参数转换成 JDBC Statement 所需要的参数， 调用原生 JDBC 来执行语句。</li><li>最后由 ResultSetHandler 的 handleResultSets 方法将 JDBC 返回的 ResultSet 结果集转换成对象集，并逐级返回结果，完成一次 SQL 语句执行。</li></ol><h2 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h2><h2 id="经验"><a href="#经验" class="headerlink" title="经验"></a>经验</h2>]]></content>
+      
+      
+      <categories>
+          
+          <category> 应用模块 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 框架 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Spring</title>
+      <link href="/2021/07/28/20180727/"/>
+      <url>/2021/07/28/20180727/</url>
+      
+        <content type="html"><![CDATA[<h2 id="Spring-Framework"><a href="#Spring-Framework" class="headerlink" title="Spring Framework"></a>Spring Framework</h2><h3 id="Bean生命周期"><a href="#Bean生命周期" class="headerlink" title="Bean生命周期"></a>Bean生命周期</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// AbstractAutowireCapableBeanFactory</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> Object <span class="title">doCreateBean</span><span class="params">(<span class="keyword">final</span> String beanName, <span class="keyword">final</span> RootBeanDefinition mbd, <span class="keyword">final</span> @Nullable Object[] args)</span></span></span><br><span class="line"><span class="function">    <span class="keyword">throws</span> BeanCreationException </span>&#123;</span><br><span class="line">  <span class="comment">// 1. 实例化</span></span><br><span class="line">  BeanWrapper instanceWrapper = <span class="keyword">null</span>;</span><br><span class="line">  <span class="keyword">if</span> (instanceWrapper == <span class="keyword">null</span>) &#123;</span><br><span class="line">      instanceWrapper = createBeanInstance(beanName, mbd, args);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  Object exposedObject = bean;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">      <span class="comment">// 2. 属性赋值</span></span><br><span class="line">      populateBean(beanName, mbd, instanceWrapper);</span><br><span class="line">      <span class="comment">// 3. 初始化</span></span><br><span class="line">      exposedObject = initializeBean(beanName, exposedObject, mbd);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 4. 销毁-注册回调接口</span></span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">      registerDisposableBeanIfNecessary(beanName, bean, mbd);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> exposedObject;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>创建 Bean 的时候默认是按照自然排序来进行创建的，其过程主要分为4 个阶段</p><ol><li>实例化（Instantiation），调用构造方法创建一个对象。</li><li>属性注入（Populate），通过反射为这个对象填充属性。</li><li>初始化（Initialization），进行初始化，并实现 Spring AOP 代理。<ol><li>检查 Aware 的相关接口（BeanNameAware、BeanFactoryAware、ApplicationContextAware）并设置相关依赖。</li><li>BeanPostProcessor 前置处理。</li><li>若实现了 InitializingBean 接口，执行 afterPropertiesSet 方法；</li><li>执行自定义的 init 方法；</li><li>BeanPostProcessor 后置处理。</li><li>注册 Destruction 相关回调接口。</li></ol></li><li>销毁（Destruction），若实现 DisposableBean 接口，执行 destroy 方法，然后执行自定义的 destroy 方法。</li></ol><h3 id="循环依赖"><a href="#循环依赖" class="headerlink" title="循环依赖"></a>循环依赖</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 初始化后的 Bean</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> Map&lt;String, Object&gt; singletonObjects = <span class="keyword">new</span> ConcurrentHashMap&lt;String, Object&gt;(<span class="number">256</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 完成实例化后的，但是还未进行属性注入及初始化的对象</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> Map&lt;String, Object&gt; earlySingletonObjects = <span class="keyword">new</span> HashMap&lt;String, Object&gt;(<span class="number">16</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 提前暴露的一个单例工厂，二级缓存中存储的就是从这个工厂中获取到的对象</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> Map&lt;String, ObjectFactory&lt;?&gt;&gt; singletonFactories = <span class="keyword">new</span> HashMap&lt;String, ObjectFactory&lt;?&gt;&gt;(<span class="number">16</span>);</span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// DefaultSingletonBeanRegistry.getSingleton</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> Object <span class="title">getSingleton</span><span class="params">(String beanName, <span class="keyword">boolean</span> allowEarlyReference)</span> </span>&#123;</span><br><span class="line">  <span class="comment">// 首先从一级缓存 singletonObjects 中获取。</span></span><br><span class="line">  Object singletonObject = <span class="keyword">this</span>.singletonObjects.get(beanName);</span><br><span class="line">  <span class="keyword">if</span> (singletonObject == <span class="keyword">null</span> &amp;&amp; isSingletonCurrentlyInCreation(beanName)) &#123;</span><br><span class="line">    <span class="comment">// 走到这说明出现循环依赖了</span></span><br><span class="line">    <span class="keyword">synchronized</span> (<span class="keyword">this</span>.singletonObjects) &#123;</span><br><span class="line">      <span class="comment">// 如果获取不到，并且对象正在创建中，就从二级缓存 earlySingletonObjects 中获取。</span></span><br><span class="line">      singletonObject = <span class="keyword">this</span>.earlySingletonObjects.get(beanName);</span><br><span class="line">      <span class="keyword">if</span> (singletonObject == <span class="keyword">null</span> &amp;&amp; allowEarlyReference) &#123;</span><br><span class="line">        <span class="comment">// 如果还是获取不到且允许通过 singletonFactories 获取，就从三级缓存 singletonFactory 获取</span></span><br><span class="line">        ObjectFactory&lt;?&gt; singletonFactory = <span class="keyword">this</span>.singletonFactories.get(beanName);</span><br><span class="line">        <span class="keyword">if</span> (singletonFactory != <span class="keyword">null</span>) &#123;</span><br><span class="line">          singletonObject = singletonFactory.getObject();</span><br><span class="line">          <span class="keyword">this</span>.earlySingletonObjects.put(beanName, singletonObject);</span><br><span class="line">          <span class="keyword">this</span>.singletonFactories.remove(beanName);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> singletonObject;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>循环依赖解决的核心是通过 <strong>提前曝光</strong> 机制，使用 三级缓存 。</p><p>二级缓存其实就可以解决循环依赖，但是为了完成 <strong>Spring AOP 中的后置处理</strong> Spring使用了三级缓存。</p><p>参考文章：<a href="https://blog.csdn.net/BigBug_500/article/details/109050337" target="_blank" rel="noopener">Spring 循环依赖的“常见”面试问题</a></p><h3 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h3><p>使用注解：@Transactional</p><ol><li>注解只有作用到 public 方法上事务才生效，不推荐在接口上使用；</li><li>避免同一个类中调用注解的方法，这样会导致事务失效；</li></ol><h4 id="传播类型"><a href="#传播类型" class="headerlink" title="传播类型"></a>传播类型</h4><ul><li>REQUIRED：如果当前存在事务，就加入该事务；<strong>如果当前不存在事务，就创建一个新事务</strong>。默认类型。</li><li>SUPPORTS：如果当前存在事务，就加入该事务；<strong>如果当前不存在事务，就以非事务执行</strong>。</li><li>MANDATORY：如果当前存在事务，就加入该事务；<strong>如果当前不存在事务，就抛出异常</strong>。</li><li>REQUIRES_NEW：无论当前存不存在事务，都<strong>创建一个新事务</strong>。</li><li>NOT_SUPPORTED：以非事务执行，<strong>如果当前存在事务，就把当前事务挂起</strong>。</li><li>NEVER：以非事务执行，<strong>如果当前存在事务，则抛出异常</strong>。</li><li>NESTED：如果当前存在事务，则在嵌套事务内执行。如果当前没有事务，则执行与 REQUIRED 类似的操作。</li></ul><h3 id="Context初始化流程"><a href="#Context初始化流程" class="headerlink" title="Context初始化流程"></a>Context初始化流程</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">refresh</span><span class="params">()</span> <span class="keyword">throws</span> BeansException, IllegalStateException </span>&#123;</span><br><span class="line">    <span class="keyword">synchronized</span> (<span class="keyword">this</span>.startupShutdownMonitor) &#123;</span><br><span class="line">        <span class="comment">// 1. 刷新前的预处理，包括设置开始时间、设置激活状态、初始化 Context 环境中的占位符等。</span></span><br><span class="line">        prepareRefresh();</span><br><span class="line">        <span class="comment">// 2. 获取 beanFactory，即前面创建的【DefaultListableBeanFactory】</span></span><br><span class="line">        ConfigurableListableBeanFactory beanFactory = obtainFreshBeanFactory();</span><br><span class="line">        <span class="comment">// 3. 预处理 beanFactory，向容器中添加一些组件</span></span><br><span class="line">        prepareBeanFactory(beanFactory);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            postProcessBeanFactory(beanFactory);</span><br><span class="line">            <span class="comment">// 初始化Bean</span></span><br><span class="line">            invokeBeanFactoryPostProcessors(beanFactory);</span><br><span class="line">            <span class="comment">// 后置处理</span></span><br><span class="line">            registerBeanPostProcessors(beanFactory);</span><br><span class="line">            <span class="comment">// 7. 初始化 MessageSource 组件（做国际化功能；消息绑定，消息解析）</span></span><br><span class="line">            initMessageSource();</span><br><span class="line">            <span class="comment">// 8. 初始化事件派发器，在注册监听器时会用到</span></span><br><span class="line">            initApplicationEventMulticaster();</span><br><span class="line">            <span class="comment">// 9. 留给子容器（子类），子类重写这个方法，在容器刷新的时候可以自定义逻辑，web 场景下会使用</span></span><br><span class="line">            onRefresh();</span><br><span class="line">            <span class="comment">// 10. 注册监听器，派发之前步骤产生的一些事件（可能没有）</span></span><br><span class="line">            registerListeners();</span><br><span class="line">            <span class="comment">// 11. 初始化所有的非单实例 bean</span></span><br><span class="line">            finishBeanFactoryInitialization(beanFactory);</span><br><span class="line">            <span class="comment">// 12. 发布容器刷新完成事件</span></span><br><span class="line">            finishRefresh();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="Spring-Boot"><a href="#Spring-Boot" class="headerlink" title="Spring Boot"></a>Spring Boot</h2><p>目标是简化 Spring 应用和服务的创建、开发与部署。</p><ul><li>简化了配置文件。</li><li>使用嵌入式 Web 服务器。</li><li>含有诸多开箱即用的微服务功能，</li><li>可以和 Spring Cloud 联合部署。</li></ul><p>Spring Boot 的核心思想是约定大于配置，应用只需要很少的配置即可，简化了应用开发模式。</p><h3 id="自动装配"><a href="#自动装配" class="headerlink" title="自动装配"></a>自动装配</h3><p>Spring Boot 通过<code>@EnableAutoConfiguration</code>开启自动装配，通过 SpringFactoriesLoader 最终加载<code>META-INF/spring.factories</code>中的自动配置类实现自动装配，自动配置类其实就是通过<code>@Conditional</code>按需加载的配置类，想要其生效必须引入<code>spring-boot-starter-xxx</code>包实现起步依赖。</p><p>参考文章：<a href="https://www.cnblogs.com/javaguide/p/springboot-auto-config.html" target="_blank" rel="noopener"><a href="https://www.cnblogs.com/javaguide/p/springboot-auto-config.html" target="_blank" rel="noopener">淘宝一面：“说一下 Spring Boot 自动装配原理呗？”</a></a></p><h3 id="启动流程"><a href="#启动流程" class="headerlink" title="启动流程"></a>启动流程</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ConfigurableApplicationContext <span class="title">run</span><span class="params">(String... args)</span> </span>&#123;</span><br><span class="line">    StopWatch stopWatch = <span class="keyword">new</span> StopWatch();</span><br><span class="line">    stopWatch.start();</span><br><span class="line">    ConfigurableApplicationContext context = <span class="keyword">null</span>;</span><br><span class="line">    Collection&lt;SpringBootExceptionReporter&gt; exceptionReporters = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    configureHeadlessProperty();</span><br><span class="line">    SpringApplicationRunListeners listeners = getRunListeners(args);</span><br><span class="line">    listeners.starting();</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        ApplicationArguments applicationArguments = <span class="keyword">new</span> DefaultApplicationArguments(</span><br><span class="line">                args);</span><br><span class="line">        ConfigurableEnvironment environment = prepareEnvironment(listeners,</span><br><span class="line">                applicationArguments);</span><br><span class="line">        configureIgnoreBeanInfo(environment);</span><br><span class="line">        Banner printedBanner = printBanner(environment);</span><br><span class="line">        context = createApplicationContext();</span><br><span class="line">        exceptionReporters = getSpringFactoriesInstances(</span><br><span class="line">                SpringBootExceptionReporter.class,</span><br><span class="line">                <span class="keyword">new</span> Class[] &#123; ConfigurableApplicationContext.class &#125;, context);</span><br><span class="line">        prepareContext(context, environment, listeners, applicationArguments,</span><br><span class="line">                printedBanner);</span><br><span class="line">        refreshContext(context);</span><br><span class="line">        afterRefresh(context, applicationArguments);</span><br><span class="line">        stopWatch.stop();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> context;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ol><li>配置Environment。</li><li>准备 Context 上下文，包括执行 ApplicationContext 的后置处理、初始化 Initializer、通知Listener 处理 ContextPrepared 和 ContextLoaded 事件。</li><li>执行 refreshContext。</li></ol><h2 id="Spring-Cloud"><a href="#Spring-Cloud" class="headerlink" title="Spring Cloud"></a>Spring Cloud</h2><p>Spring Cloud 是一套完整的微服务解决方案，是一系列不同功能的微服务框架的集合。基于 Spring Boot，简化了分布式系统的开发。集成了服务发现、配置管理、消息总线、负载均衡、断路器、数据监控等各种服务治理能力。</p><p>sleuth：提供了全链路追踪能力</p><p>Netflix套件：提供了hystrix熔断器，zuul网关等众多的治理组件</p><p>config 组件提供了动态配置能力</p><p>bus组件：支持使用 RabbitMQ、Kafka、ActiveMQ 等消息队列，实现分布式服务之间的事件通信</p><h2 id="Spring-Data"><a href="#Spring-Data" class="headerlink" title="Spring Data"></a>Spring Data</h2><h2 id="Spring-Security"><a href="#Spring-Security" class="headerlink" title="Spring Security"></a>Spring Security</h2>]]></content>
+      
+      
+      <categories>
+          
+          <category> 应用模块 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 框架 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>硬技能图谱</title>
+      <link href="/2021/07/28/20170918/"/>
+      <url>/2021/07/28/20170918/</url>
+      
+        <content type="html"><![CDATA[<p>努力很容易，坚持努力很难，不忘初心，方得始终。<br><a id="more"></a><br><img src="http://s0.lgstatic.com/i/image2/M01/89/5A/CgoB5l12QGeAX1jpAADXc8NHFMU588.png" alt="img"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 综合模块 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>设计模式</title>
+      <link href="/2021/07/28/20180618/"/>
+      <url>/2021/07/28/20180618/</url>
+      
+        <content type="html"><![CDATA[<p>设计模式分为 3 大类型共 23 种：</p><ul><li>创建型：工厂方法模式、抽象工厂模式、单例模式、建造者模式、原型模式。</li><li>结构型：适配器模式、装饰器模式、代理模式、外观模式、桥接模式、组合模式、享元模式。</li><li>行为型：策略模式、模板方法模式、观察者模式、迭代子模式、责任链模式、命令模式、备忘录模式、状态模式、访问者模式、中介者模式、解释器模式。<a id="more"></a></li></ul><h1 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h1><h1 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h1><h1 id="代理模式"><a href="#代理模式" class="headerlink" title="代理模式"></a>代理模式</h1><h1 id="责任链模式"><a href="#责任链模式" class="headerlink" title="责任链模式"></a>责任链模式</h1><h1 id="适配器模式"><a href="#适配器模式" class="headerlink" title="适配器模式"></a>适配器模式</h1><h1 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h1><h1 id="构造者模式"><a href="#构造者模式" class="headerlink" title="构造者模式"></a>构造者模式</h1>]]></content>
+      
+      
+      <categories>
+          
+          <category> 基础模块 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+  
+  
+</search>
