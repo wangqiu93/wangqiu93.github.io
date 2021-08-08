@@ -15,20 +15,20 @@
 
 
 
-<meta name="description" content="计算机网络HTTPTCP三次握手建连 四次挥手断连 UDPQUICRPCMQTTGB32960(新能源通信协议)在线文档 操作系统topnetstat经验生产配置：4C8G">
+<meta name="description" content="架构图 业务 销售车辆50W，同时在线数高峰：6W。 车辆正常情况下每10s发送一条报文到监控平台。 数据情况： 车辆原始报文大小1K。 车辆解析后车况大小6K。 平均一台车每天会产生10MB的数据。 系统每天会产生5T的数据。 同时系统有7.2亿行的数据需要写入到数据库。   系统并发量 持续并发量：6000。 长连接：6W。 每秒6M的原始数据需要被解析。 每秒35M的解析数据需要被存储。">
+<meta name="keywords" content="项目">
 <meta property="og:type" content="article">
-<meta property="og:title" content="操作系统与计算机网络">
-<meta property="og:url" content="http://yoursite.com/2021/07/29/20171212/index.html">
+<meta property="og:title" content="车辆监控平台">
+<meta property="og:url" content="http://yoursite.com/2021/08/06/20210803/index.html">
 <meta property="og:site_name" content="WangQiu&#39;s Blog">
-<meta property="og:description" content="计算机网络HTTPTCP三次握手建连 四次挥手断连 UDPQUICRPCMQTTGB32960(新能源通信协议)在线文档 操作系统topnetstat经验生产配置：4C8G">
+<meta property="og:description" content="架构图 业务 销售车辆50W，同时在线数高峰：6W。 车辆正常情况下每10s发送一条报文到监控平台。 数据情况： 车辆原始报文大小1K。 车辆解析后车况大小6K。 平均一台车每天会产生10MB的数据。 系统每天会产生5T的数据。 同时系统有7.2亿行的数据需要写入到数据库。   系统并发量 持续并发量：6000。 长连接：6W。 每秒6M的原始数据需要被解析。 每秒35M的解析数据需要被存储。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://s0.lgstatic.com/i/image2/M01/8A/6E/CgotOV13hviAU5H3AAAyMppFmf8039.png">
-<meta property="og:image" content="http://s0.lgstatic.com/i/image2/M01/8A/4E/CgoB5l13hviAZRJ1AABEfmQ55Jw991.png">
-<meta property="og:updated_time" content="2021-07-29T12:12:55.019Z">
+<meta property="og:image" content="http://yoursite.com/img/posts/车辆监控平台架构.png">
+<meta property="og:updated_time" content="2021-08-08T08:13:37.884Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="操作系统与计算机网络">
-<meta name="twitter:description" content="计算机网络HTTPTCP三次握手建连 四次挥手断连 UDPQUICRPCMQTTGB32960(新能源通信协议)在线文档 操作系统topnetstat经验生产配置：4C8G">
-<meta name="twitter:image" content="http://s0.lgstatic.com/i/image2/M01/8A/6E/CgotOV13hviAU5H3AAAyMppFmf8039.png">
+<meta name="twitter:title" content="车辆监控平台">
+<meta name="twitter:description" content="架构图 业务 销售车辆50W，同时在线数高峰：6W。 车辆正常情况下每10s发送一条报文到监控平台。 数据情况： 车辆原始报文大小1K。 车辆解析后车况大小6K。 平均一台车每天会产生10MB的数据。 系统每天会产生5T的数据。 同时系统有7.2亿行的数据需要写入到数据库。   系统并发量 持续并发量：6000。 长连接：6W。 每秒6M的原始数据需要被解析。 每秒35M的解析数据需要被存储。">
+<meta name="twitter:image" content="http://yoursite.com/img/posts/车辆监控平台架构.png">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -60,7 +60,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>操作系统与计算机网络 | WangQiu&#39;s Blog</title>
+<title>车辆监控平台 | WangQiu&#39;s Blog</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -196,7 +196,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/中间件/">中间件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/框架/">框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/消息队列/">消息队列</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/缓存/">缓存</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/中间件/">中间件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/框架/">框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/消息队列/">消息队列</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/缓存/">缓存</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/项目/">项目</a></li></ul>
                     </div>
                 </section>
                 
@@ -275,11 +275,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-20171212" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-20210803" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2021/07/29/20171212/" class="article-date">
-      <time datetime="2021-07-29T12:12:55.018Z" itemprop="datePublished">2021-07-29</time>
+      <a href="/2021/08/06/20210803/" class="article-date">
+      <time datetime="2021-08-06T14:17:17.806Z" itemprop="datePublished">2021-08-06</time>
 </a>
 
 
@@ -294,7 +294,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      操作系统与计算机网络
+      车辆监控平台
     </h1>
   
 
@@ -303,11 +303,15 @@
       <div class="article-info article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/基础模块/">基础模块</a>
+    <a class="article-category-link" href="/categories/综合模块/">综合模块</a>
     </div>
 
 
         
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/项目/">项目</a></li></ul>
+    </div>
+
         <div class="clearfix"></div>
       </div>
       
@@ -315,11 +319,26 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <a id="more"></a>
-<h2 id="计算机网络"><a href="#计算机网络" class="headerlink" title="计算机网络"></a>计算机网络</h2><h3 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h3><h3 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h3><p>三次握手建连<br><img src="http://s0.lgstatic.com/i/image2/M01/8A/6E/CgotOV13hviAU5H3AAAyMppFmf8039.png" alt="img"></p>
-<p>四次挥手断连<br><img src="http://s0.lgstatic.com/i/image2/M01/8A/4E/CgoB5l13hviAZRJ1AABEfmQ55Jw991.png" alt="img"></p>
-<h3 id="UDP"><a href="#UDP" class="headerlink" title="UDP"></a>UDP</h3><h3 id="QUIC"><a href="#QUIC" class="headerlink" title="QUIC"></a>QUIC</h3><h3 id="RPC"><a href="#RPC" class="headerlink" title="RPC"></a>RPC</h3><h3 id="MQTT"><a href="#MQTT" class="headerlink" title="MQTT"></a>MQTT</h3><h3 id="GB32960-新能源通信协议"><a href="#GB32960-新能源通信协议" class="headerlink" title="GB32960(新能源通信协议)"></a>GB32960(新能源通信协议)</h3><p><a href="http://c.gb688.cn/bzgk/gb/showGb?type=online&amp;hcno=674DE45C0AD3DE2CD75B9C4CD8ED57C1" target="_blank" rel="noopener">在线文档</a></p>
-<h2 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h2><h3 id="top"><a href="#top" class="headerlink" title="top"></a>top</h3><h3 id="netstat"><a href="#netstat" class="headerlink" title="netstat"></a>netstat</h3><h2 id="经验"><a href="#经验" class="headerlink" title="经验"></a>经验</h2><p>生产配置：4C8G</p>
+        <h2 id="架构图"><a href="#架构图" class="headerlink" title="架构图"></a>架构图</h2><p><img src="/img/posts/车辆监控平台架构.png" alt="车辆监控架构图"></p>
+<h2 id="业务"><a href="#业务" class="headerlink" title="业务"></a>业务</h2><ol>
+<li>销售车辆50W，同时在线数高峰：6W。</li>
+<li>车辆正常情况下每10s发送一条报文到监控平台。</li>
+<li>数据情况：<ol>
+<li>车辆原始报文大小1K。</li>
+<li>车辆解析后车况大小6K。</li>
+<li>平均一台车每天会产生10MB的数据。</li>
+<li>系统每天会产生5T的数据。</li>
+<li>同时系统有7.2亿行的数据需要写入到数据库。</li>
+</ol>
+</li>
+<li>系统并发量<ol>
+<li>持续并发量：6000。</li>
+<li>长连接：6W。</li>
+<li>每秒6M的原始数据需要被解析。</li>
+<li>每秒35M的解析数据需要被存储。</li>
+</ol>
+</li>
+</ol>
 
       
     </div>
@@ -328,13 +347,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2021/07/29/20171212/">操作系统与计算机网络</a></p>
+        <p><span>本文标题:</span><a href="/2021/08/06/20210803/">车辆监控平台</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">王球</a></p>
-        <p><span>发布时间:</span>2021-07-29, 20:12:55</p>
-        <p><span>最后更新:</span>2021-07-29, 20:12:55</p>
+        <p><span>发布时间:</span>2021-08-06, 22:17:17</p>
+        <p><span>最后更新:</span>2021-08-08, 16:13:37</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2021/07/29/20171212/" title="操作系统与计算机网络">http://yoursite.com/2021/07/29/20171212/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2021/07/29/20171212/　　作者: 王球" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2021/08/06/20210803/" title="车辆监控平台">http://yoursite.com/2021/08/06/20210803/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2021/08/06/20210803/　　作者: 王球" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -347,15 +366,15 @@
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2021/07/29/20180725/">
-                    常用工具集
+                <a href="/2021/08/07/20210807/">
+                    IO
                 </a>
             </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2021/07/28/20210728/">
-                    数据格式
+                <a href="/2021/08/06/20180727/">
+                    Spring
                 </a>
             </div>
         
@@ -367,7 +386,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#计算机网络"><span class="toc-number">1.</span> <span class="toc-text">计算机网络</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#HTTP"><span class="toc-number">1.1.</span> <span class="toc-text">HTTP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP"><span class="toc-number">1.2.</span> <span class="toc-text">TCP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#UDP"><span class="toc-number">1.3.</span> <span class="toc-text">UDP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#QUIC"><span class="toc-number">1.4.</span> <span class="toc-text">QUIC</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RPC"><span class="toc-number">1.5.</span> <span class="toc-text">RPC</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MQTT"><span class="toc-number">1.6.</span> <span class="toc-text">MQTT</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GB32960-新能源通信协议"><span class="toc-number">1.7.</span> <span class="toc-text">GB32960(新能源通信协议)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#操作系统"><span class="toc-number">2.</span> <span class="toc-text">操作系统</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#top"><span class="toc-number">2.1.</span> <span class="toc-text">top</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#netstat"><span class="toc-number">2.2.</span> <span class="toc-text">netstat</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#经验"><span class="toc-number">3.</span> <span class="toc-text">经验</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#架构图"><span class="toc-number">1.</span> <span class="toc-text">架构图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#业务"><span class="toc-number">2.</span> <span class="toc-text">业务</span></a></li></ol>
         
     </div>
     <style>
@@ -403,7 +422,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"操作系统与计算机网络　| WangQiu's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"车辆监控平台　| WangQiu's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -423,7 +442,7 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2021/07/29/20180725/" title="上一篇: 常用工具集">
+            <a href="/2021/08/07/20210807/" title="上一篇: IO">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -431,13 +450,13 @@
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2021/07/28/20210728/" title="下一篇: 数据格式">
+            <a href="/2021/08/06/20180727/" title="下一篇: Spring">
                 <i class="fa fa-angle-right"></i>
             </a>
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20210730/">Netty</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20180916/">缓存</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20181111/">Redis</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20181113/">MySQL</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20180617/">Java</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20180630/">并发与多线程</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20180725/">常用工具集</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20171212/">操作系统与计算机网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20210728/">数据格式</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20190107/">Mongo</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20181114/">HBase</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20181115/">Cassandra</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20190112/">架构</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20180815/">RPC</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20181010/">消息队列</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20181023/">数据库</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20181112/">Kafka</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20180619/">JVM</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20180727/">Spring</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20180802/">MyBatis</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20180720/">数据结构与算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20170918/">硬技能图谱</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20180618/">设计模式</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2021/08/07/20210807/">IO</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/06/20210803/">车辆监控平台</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/06/20180727/">Spring</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/06/20180617/">Java</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/06/20171212/">操作系统与计算机网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20210730/">Netty</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20180916/">缓存</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20181111/">Redis</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20181113/">MySQL</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20180630/">并发与多线程</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20180725/">常用工具集</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20210728/">数据格式</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20181114/">HBase</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20181115/">Cassandra</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20190107/">Mongo</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20190112/">分布式&微服务</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20180815/">RPC</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20181010/">消息队列</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20181023/">存储系统</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20181112/">Kafka</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20180619/">JVM</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20180720/">数据结构与算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20180802/">MyBatis</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20170918/">硬技能图谱</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20180618/">设计模式</a></li></ul>
 
 
 

@@ -197,7 +197,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/中间件/">中间件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/框架/">框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/消息队列/">消息队列</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/缓存/">缓存</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/中间件/">中间件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/框架/">框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/消息队列/">消息队列</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/缓存/">缓存</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/项目/">项目</a></li></ul>
                     </div>
                 </section>
                 
@@ -277,6 +277,418 @@
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-20210807" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/08/07/20210807/" class="article-date">
+      <time datetime="2021-08-06T22:42:57.346Z" itemprop="datePublished">2021-08-07</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/07/20210807/">IO</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="IO模型"><a href="#IO模型" class="headerlink" title="IO模型"></a>IO模型</h2><h3 id="同步阻塞IO"><a href="#同步阻塞IO" class="headerlink" title="同步阻塞IO"></a>同步阻塞IO</h3><h3 id="异步阻塞IO"><a href="#异步阻塞IO" class="headerlink" title="异步阻塞IO"></a>异步阻塞IO</h3><h3 id="同步非阻塞IO"><a href="#同步非阻塞IO" class="headerlink" title="同步非阻塞IO"></a>同步非阻塞IO</h3><h3 id="异步非阻塞IO"><a href="#异步非阻塞IO" class="headerlink" title="异步非阻塞IO"></a>异步非阻塞IO</h3>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/基础模块/">基础模块</a>
+    </div>
+
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-20210803" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/08/06/20210803/" class="article-date">
+      <time datetime="2021-08-06T14:17:17.806Z" itemprop="datePublished">2021-08-06</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/06/20210803/">车辆监控平台</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="架构图"><a href="#架构图" class="headerlink" title="架构图"></a>架构图</h2><p><img src="/img/posts/车辆监控平台架构.png" alt="车辆监控架构图"></p>
+<h2 id="业务"><a href="#业务" class="headerlink" title="业务"></a>业务</h2><ol>
+<li>销售车辆50W，同时在线数高峰：6W。</li>
+<li>车辆正常情况下每10s发送一条报文到监控平台。</li>
+<li>数据情况：<ol>
+<li>车辆原始报文大小1K。</li>
+<li>车辆解析后车况大小6K。</li>
+<li>平均一台车每天会产生10MB的数据。</li>
+<li>系统每天会产生5T的数据。</li>
+<li>同时系统有7.2亿行的数据需要写入到数据库。</li>
+</ol>
+</li>
+<li>系统并发量<ol>
+<li>持续并发量：6000。</li>
+<li>长连接：6W。</li>
+<li>每秒6M的原始数据需要被解析。</li>
+<li>每秒35M的解析数据需要被存储。</li>
+</ol>
+</li>
+</ol>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/综合模块/">综合模块</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/项目/">项目</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-20180727" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/08/06/20180727/" class="article-date">
+      <time datetime="2021-08-06T14:17:17.805Z" itemprop="datePublished">2021-08-06</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/06/20180727/">Spring</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="Spring-Framework"><a href="#Spring-Framework" class="headerlink" title="Spring Framework"></a>Spring Framework</h2><h3 id="Bean生命周期"><a href="#Bean生命周期" class="headerlink" title="Bean生命周期"></a>Bean生命周期</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// AbstractAutowireCapableBeanFactory</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> Object <span class="title">doCreateBean</span><span class="params">(<span class="keyword">final</span> String beanName, <span class="keyword">final</span> RootBeanDefinition mbd, <span class="keyword">final</span> @Nullable Object[] args)</span></span></span><br><span class="line"><span class="function">    <span class="keyword">throws</span> BeanCreationException </span>&#123;</span><br><span class="line">  <span class="comment">// 1. 实例化</span></span><br><span class="line">  BeanWrapper instanceWrapper = <span class="keyword">null</span>;</span><br><span class="line">  <span class="keyword">if</span> (instanceWrapper == <span class="keyword">null</span>) &#123;</span><br><span class="line">      instanceWrapper = createBeanInstance(beanName, mbd, args);</span><br><span class="line">  &#125;</span><br><span class="line">  Object exposedObject = bean;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">      <span class="comment">// 2. 属性赋值</span></span><br><span class="line">      populateBean(beanName, mbd, instanceWrapper);</span><br><span class="line">      <span class="comment">// 3. 初始化</span></span><br><span class="line">      exposedObject = initializeBean(beanName, exposedObject, mbd);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 4. 销毁-注册回调接口</span></span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">      registerDisposableBeanIfNecessary(beanName, bean, mbd);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> exposedObject;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>创建 Bean 的时候默认是按照自然排序来进行创建的，其过程主要分为4 个阶段</p>
+<ol>
+<li>实例化（Instantiation），调用构造方法创建一个对象。</li>
+<li>属性注入（Populate），通过反射为这个对象填充属性。</li>
+<li>初始化（Initialization），进行初始化，并实现 Spring AOP 代理。<ol>
+<li>检查 Aware 的相关接口（BeanNameAware、BeanFactoryAware、ApplicationContextAware）并设置相关依赖。</li>
+<li>BeanPostProcessor 前置处理。</li>
+<li>若实现了 InitializingBean 接口，执行 afterPropertiesSet 方法；</li>
+<li>执行自定义的 init 方法；</li>
+<li>BeanPostProcessor 后置处理。</li>
+<li>注册 Destruction 相关回调接口。</li>
+</ol>
+</li>
+<li>销毁（Destruction），若实现 DisposableBean 接口，执行 destroy 方法，然后执行自定义的 destroy 方法。</li>
+</ol>
+<h3 id="循环依赖"><a href="#循环依赖" class="headerlink" title="循环依赖"></a>循环依赖</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 初始化后的 Bean</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> Map&lt;String, Object&gt; singletonObjects = <span class="keyword">new</span> ConcurrentHashMap&lt;String, Object&gt;(<span class="number">256</span>);</span><br><span class="line"><span class="comment">// 完成实例化后的，但是还未进行属性注入及初始化的对象</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> Map&lt;String, Object&gt; earlySingletonObjects = <span class="keyword">new</span> HashMap&lt;String, Object&gt;(<span class="number">16</span>);</span><br><span class="line"><span class="comment">// 提前暴露的一个单例工厂，二级缓存中存储的就是从这个工厂中获取到的对象</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> Map&lt;String, ObjectFactory&lt;?&gt;&gt; singletonFactories = <span class="keyword">new</span> HashMap&lt;String, ObjectFactory&lt;?&gt;&gt;(<span class="number">16</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// DefaultSingletonBeanRegistry.getSingleton</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> Object <span class="title">getSingleton</span><span class="params">(String beanName, <span class="keyword">boolean</span> allowEarlyReference)</span> </span>&#123;</span><br><span class="line">  <span class="comment">// 首先从一级缓存 singletonObjects 中获取。</span></span><br><span class="line">  Object singletonObject = <span class="keyword">this</span>.singletonObjects.get(beanName);</span><br><span class="line">  <span class="keyword">if</span> (singletonObject == <span class="keyword">null</span> &amp;&amp; isSingletonCurrentlyInCreation(beanName)) &#123;</span><br><span class="line">    <span class="comment">// 走到这说明出现循环依赖了</span></span><br><span class="line">    <span class="keyword">synchronized</span> (<span class="keyword">this</span>.singletonObjects) &#123;</span><br><span class="line">      <span class="comment">// 如果获取不到，并且对象正在创建中，就从二级缓存 earlySingletonObjects 中获取。</span></span><br><span class="line">      singletonObject = <span class="keyword">this</span>.earlySingletonObjects.get(beanName);</span><br><span class="line">      <span class="keyword">if</span> (singletonObject == <span class="keyword">null</span> &amp;&amp; allowEarlyReference) &#123;</span><br><span class="line">        <span class="comment">// 如果还是获取不到且允许通过 singletonFactories 获取，就从三级缓存 singletonFactory 获取</span></span><br><span class="line">        ObjectFactory&lt;?&gt; singletonFactory = <span class="keyword">this</span>.singletonFactories.get(beanName);</span><br><span class="line">        <span class="keyword">if</span> (singletonFactory != <span class="keyword">null</span>) &#123;</span><br><span class="line">          singletonObject = singletonFactory.getObject();</span><br><span class="line">          <span class="keyword">this</span>.earlySingletonObjects.put(beanName, singletonObject);</span><br><span class="line">          <span class="keyword">this</span>.singletonFactories.remove(beanName);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> singletonObject;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>循环依赖解决的核心是通过 <strong>提前曝光</strong> 机制，使用 三级缓存 。</p>
+<p>二级缓存其实就可以解决循环依赖，但是为了完成 <strong>Spring AOP 中的后置处理</strong> Spring使用了三级缓存。</p>
+<p>参考文章：<a href="https://blog.csdn.net/BigBug_500/article/details/109050337" target="_blank" rel="noopener">Spring 循环依赖的“常见”面试问题</a></p>
+<h3 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h3><p>使用注解：@Transactional</p>
+<ol>
+<li>注解只有作用到 public 方法上事务才生效，不推荐在接口上使用；</li>
+<li>避免同一个类中调用注解的方法，这样会导致事务失效；</li>
+</ol>
+<h4 id="传播类型"><a href="#传播类型" class="headerlink" title="传播类型"></a>传播类型</h4><ul>
+<li>REQUIRED：如果当前存在事务，就加入该事务；<strong>如果当前不存在事务，就创建一个新事务</strong>。默认类型。</li>
+<li>SUPPORTS：如果当前存在事务，就加入该事务；<strong>如果当前不存在事务，就以非事务执行</strong>。</li>
+<li>MANDATORY：如果当前存在事务，就加入该事务；<strong>如果当前不存在事务，就抛出异常</strong>。</li>
+<li>REQUIRES_NEW：无论当前存不存在事务，都<strong>创建一个新事务</strong>。</li>
+<li>NOT_SUPPORTED：以非事务执行，<strong>如果当前存在事务，就把当前事务挂起</strong>。</li>
+<li>NEVER：以非事务执行，<strong>如果当前存在事务，则抛出异常</strong>。</li>
+<li>NESTED：如果当前存在事务，则在嵌套事务内执行。如果当前没有事务，则执行与 REQUIRED 类似的操作。</li>
+</ul>
+<h3 id="Context初始化流程"><a href="#Context初始化流程" class="headerlink" title="Context初始化流程"></a>Context初始化流程</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">refresh</span><span class="params">()</span> <span class="keyword">throws</span> BeansException, IllegalStateException </span>&#123;</span><br><span class="line">    <span class="keyword">synchronized</span> (<span class="keyword">this</span>.startupShutdownMonitor) &#123;</span><br><span class="line">        <span class="comment">// 1. 刷新前的预处理，包括设置开始时间、设置激活状态、初始化 Context 环境中的占位符等。</span></span><br><span class="line">        prepareRefresh();</span><br><span class="line">        <span class="comment">// 2. 获取 beanFactory，即前面创建的【DefaultListableBeanFactory】</span></span><br><span class="line">        ConfigurableListableBeanFactory beanFactory = obtainFreshBeanFactory();</span><br><span class="line">        <span class="comment">// 3. 预处理 beanFactory，向容器中添加一些组件</span></span><br><span class="line">        prepareBeanFactory(beanFactory);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            postProcessBeanFactory(beanFactory);</span><br><span class="line">            <span class="comment">// 初始化Bean</span></span><br><span class="line">            invokeBeanFactoryPostProcessors(beanFactory);</span><br><span class="line">            <span class="comment">// 后置处理</span></span><br><span class="line">            registerBeanPostProcessors(beanFactory);</span><br><span class="line">            <span class="comment">// 7. 初始化 MessageSource 组件（做国际化功能；消息绑定，消息解析）</span></span><br><span class="line">            initMessageSource();</span><br><span class="line">            <span class="comment">// 8. 初始化事件派发器，在注册监听器时会用到</span></span><br><span class="line">            initApplicationEventMulticaster();</span><br><span class="line">            <span class="comment">// 9. 留给子容器（子类），子类重写这个方法，在容器刷新的时候可以自定义逻辑，web 场景下会使用</span></span><br><span class="line">            onRefresh();</span><br><span class="line">            <span class="comment">// 10. 注册监听器，派发之前步骤产生的一些事件（可能没有）</span></span><br><span class="line">            registerListeners();</span><br><span class="line">            <span class="comment">// 11. 初始化所有的非单实例 bean</span></span><br><span class="line">            finishBeanFactoryInitialization(beanFactory);</span><br><span class="line">            <span class="comment">// 12. 发布容器刷新完成事件</span></span><br><span class="line">            finishRefresh();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Spring-Boot"><a href="#Spring-Boot" class="headerlink" title="Spring Boot"></a>Spring Boot</h2><p>目标是简化 Spring 应用和服务的创建、开发与部署。</p>
+<ul>
+<li>简化了配置文件。</li>
+<li>使用嵌入式 Web 服务器。</li>
+<li>含有诸多开箱即用的微服务功能，</li>
+<li>可以和 Spring Cloud 联合部署。</li>
+</ul>
+<p>Spring Boot 的核心思想是约定大于配置，应用只需要很少的配置即可，简化了应用开发模式。</p>
+<h3 id="自动装配"><a href="#自动装配" class="headerlink" title="自动装配"></a>自动装配</h3><p>Spring Boot 通过<code>@EnableAutoConfiguration</code>开启自动装配，通过 SpringFactoriesLoader 最终加载<code>META-INF/spring.factories</code>中的自动配置类实现自动装配，自动配置类其实就是通过<code>@Conditional</code>按需加载的配置类，想要其生效必须引入<code>spring-boot-starter-xxx</code>包实现起步依赖。</p>
+<p>参考文章：<a href="https://www.cnblogs.com/javaguide/p/springboot-auto-config.html" target="_blank" rel="noopener"><a href="https://www.cnblogs.com/javaguide/p/springboot-auto-config.html" target="_blank" rel="noopener">淘宝一面：“说一下 Spring Boot 自动装配原理呗？”</a></a></p>
+<h3 id="启动流程"><a href="#启动流程" class="headerlink" title="启动流程"></a>启动流程</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ConfigurableApplicationContext <span class="title">run</span><span class="params">(String... args)</span> </span>&#123;</span><br><span class="line">    StopWatch stopWatch = <span class="keyword">new</span> StopWatch();</span><br><span class="line">    stopWatch.start();</span><br><span class="line">    ConfigurableApplicationContext context = <span class="keyword">null</span>;</span><br><span class="line">    Collection&lt;SpringBootExceptionReporter&gt; exceptionReporters = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    configureHeadlessProperty();</span><br><span class="line">    SpringApplicationRunListeners listeners = getRunListeners(args);</span><br><span class="line">    listeners.starting();</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        ApplicationArguments applicationArguments = <span class="keyword">new</span> DefaultApplicationArguments(</span><br><span class="line">                args);</span><br><span class="line">        ConfigurableEnvironment environment = prepareEnvironment(listeners,</span><br><span class="line">                applicationArguments);</span><br><span class="line">        configureIgnoreBeanInfo(environment);</span><br><span class="line">        Banner printedBanner = printBanner(environment);</span><br><span class="line">        context = createApplicationContext();</span><br><span class="line">        exceptionReporters = getSpringFactoriesInstances(</span><br><span class="line">                SpringBootExceptionReporter.class,</span><br><span class="line">                <span class="keyword">new</span> Class[] &#123; ConfigurableApplicationContext.class &#125;, context);</span><br><span class="line">        prepareContext(context, environment, listeners, applicationArguments,</span><br><span class="line">                printedBanner);</span><br><span class="line">        refreshContext(context);</span><br><span class="line">        afterRefresh(context, applicationArguments);</span><br><span class="line">        stopWatch.stop();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> context;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>配置Environment。</li>
+<li>准备 Context 上下文，包括执行 ApplicationContext 的后置处理、初始化 Initializer、通知Listener 处理 ContextPrepared 和 ContextLoaded 事件。</li>
+<li>执行 refreshContext。</li>
+</ol>
+<h2 id="Spring-Cloud"><a href="#Spring-Cloud" class="headerlink" title="Spring Cloud"></a>Spring Cloud</h2><p>Spring Cloud 是一套完整的微服务解决方案，是一系列不同功能的微服务框架的集合。基于 Spring Boot，简化了分布式系统的开发。集成了服务发现、配置管理、消息总线、负载均衡、断路器、数据监控等各种服务治理能力。</p>
+<p>sleuth：提供了全链路追踪能力</p>
+<p>Netflix套件：提供了hystrix熔断器，zuul网关等众多的治理组件</p>
+<p>config 组件提供了动态配置能力</p>
+<p>bus组件：支持使用 RabbitMQ、Kafka、ActiveMQ 等消息队列，实现分布式服务之间的事件通信</p>
+<h2 id="Spring-Data"><a href="#Spring-Data" class="headerlink" title="Spring Data"></a>Spring Data</h2><h2 id="Spring-Security"><a href="#Spring-Security" class="headerlink" title="Spring Security"></a>Spring Security</h2>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/应用模块/">应用模块</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/框架/">框架</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-20180617" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/08/06/20180617/" class="article-date">
+      <time datetime="2021-08-06T14:17:17.802Z" itemprop="datePublished">2021-08-06</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/06/20180617/">Java</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="常用集合"><a href="#常用集合" class="headerlink" title="常用集合"></a>常用集合</h2><h3 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h3><p>底层实现：数组加链表，数组中的每一项是一个链表，链表中的节点存储的是键值对。通过计算存入对象的 HashCode，来计算对象在数组中要存入的位置。用链表来解决散列冲突，</p>
+<h4 id="数组下标计算过程"><a href="#数组下标计算过程" class="headerlink" title="数组下标计算过程"></a>数组下标计算过程</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hash = (h = key.hashCode()) ^ (h &gt;&gt;&gt; <span class="number">16</span>)</span><br><span class="line"><span class="comment">// n为数组长度，下面代码等价于 n % hash</span></span><br><span class="line">(n - <span class="number">1</span>) &amp; hash</span><br></pre></td></tr></table></figure>
+<p>1111 1101 1101 1111 0101 1101 0010 1111 ：key.hashCode()<br>0000 0000 0000 0000 1111 1101 1101 1111 ：h &gt;&gt;&gt; 16<br>—————————————————————————————————————————————————————————<br>1111 1101 1101 1111 1010 0000 1111 0000 ：h ^ ( h &gt;&gt;&gt; 16 )<br>0000 0000 0000 0000 0000 0000 0000 1111 ：16 - 1<br>—————————————————————————————————————————————————————————<br>0000 0000 0000 0000 0000 0000 0000 0000</p>
+<p>总结：异或运算能更好的保留各部分的特征，如果采用&amp;运算计算出来的值会向0靠拢，采用|运算计算出来的值会向1靠拢</p>
+<h4 id="扩容机制"><a href="#扩容机制" class="headerlink" title="扩容机制"></a>扩容机制</h4><p>容量：默认为 1 &lt;&lt;&lt; 4<br>加载因子：默认0.75<br>当元素数量超过阔值（容量 <em> 加载因子）时触发扩容，扩容后的容量是原容量的<em>*2倍</em></em>。</p>
+<h4 id="链表插入机制"><a href="#链表插入机制" class="headerlink" title="链表插入机制"></a>链表插入机制</h4><p>1.7：头插法<br>1.8：尾插法</p>
+<h4 id="链表转换为红黑树"><a href="#链表转换为红黑树" class="headerlink" title="链表转换为红黑树"></a>链表转换为红黑树</h4><p>1.8版本后为减少搜索时间，当链表长度大于阔值（默认8）且数组长度大于等于64时，链表会转换为<strong>红黑树</strong>。</p>
+<p>单个 TreeNode 需要占用的空间大约是普通 Node 的两倍，所以只有当包含足够多的 Nodes 时才会转成 TreeNodes。<br>而当桶中节点数由于移除或者 resize 变少后，又会变回普通的链表的形式，以便节省空间。</p>
+<p>参考文章<a href="https://blog.csdn.net/woshimaxiao1/article/details/83661464" target="_blank" rel="noopener">Java集合之一—HashMap</a></p>
+<h3 id="ConcurrentHashMap"><a href="#ConcurrentHashMap" class="headerlink" title="ConcurrentHashMap"></a>ConcurrentHashMap</h3><p>1.7：使用 Segment （继承ReentrantLock，结构为数组加链表且均采用 volatile 修饰，保证获取时的可见性）进行分段加锁，降低并发锁定，支持 Segment 数组数量的线程并发。<br>1.8：抛弃了分段锁，使用 CAS + synchronized 来提高性能，并且同 hashMap 一样增加了红黑树。<br>参考文章：<a href="https://blog.csdn.net/weixin_44460333/article/details/86770169" target="_blank" rel="noopener">HashMap？ConcurrentHashMap？相信看完这篇没人能难住你！</a></p>
+<h2 id="JUC"><a href="#JUC" class="headerlink" title="JUC"></a>JUC</h2><h3 id="原子类"><a href="#原子类" class="headerlink" title="原子类"></a>原子类</h3><p>例如：AtomicBoolean、AtomicLong、AtomicInteger、LongAdder、LongAccumulator等。<br>AtomicLong：通过 unsafe 类实现，基于CAS。<br>LongAdder：基于Cell，分段锁思想，空间换时间，更适合高并发场景。<br>LongAccumulator：提供了比LongAdder更强大的功能，能够指定对数据的操作规则，例如可以把对数据的相加操作改成相乘操作。</p>
+<h3 id="锁类"><a href="#锁类" class="headerlink" title="锁类"></a>锁类</h3><p>ReentrantLock<br>ReentrantReadWriteLock<br>StampedLock：JDK 1.8 改进的读写锁，是使用一种 CLH 的乐观锁，能够有效防止写饥饿。所谓写饥饿就是在多线程读写时，读线程访问非常频繁，导致总是有读线程占用资源，写线程很难加上写锁。<br>LockSupport</p>
+<h3 id="异步执行类"><a href="#异步执行类" class="headerlink" title="异步执行类"></a>异步执行类</h3><p>Executors：用于创建线程池<br>ForkJoinPool：1.7提供，采用分治思想，将大任务分解成多个小任务处理，然后在合并处理结果。特点是使用工作窃取算法，可以有效平衡多任务时间长短不一的场景。<br>FutureTask<br>CompletableFuture：可以支持流式调用，可以方便的进行多 future 的组合使用，例如可以同时执行两个异步任务，然后对执行结果进行合并处理。还可以很方便地设置完成时间。</p>
+<h3 id="阻塞队列类"><a href="#阻塞队列类" class="headerlink" title="阻塞队列类"></a>阻塞队列类</h3><p>LinkedBlockingDeque：双端队列，也就是可以分别从队头和队尾操作入队、出队。<br>ArrayBlockingQueue：单端队列，只能从队尾入队，队头出队。 </p>
+<h3 id="多线程协作类"><a href="#多线程协作类" class="headerlink" title="多线程协作类"></a>多线程协作类</h3><p>CountDownLatch：实现计数器功能，可以用来控制等待多个线程执行任务后进行汇总。<br>CyclicBarrier：可以让一组线程等待至某个状态之后，再全部同时执行，一般在测试时使用，可以让多线程更好的并发执行。<br>Semaphore：用来控制对共享资源的访问并发度。允许多个线程共享资源，适用于限制使用共享资源线程数量的场景，例如 100 个车辆要使用 20 个停车位，那么最多允许 20 个车占用停车位。</p>
+<h3 id="集合类"><a href="#集合类" class="headerlink" title="集合类"></a>集合类</h3><p>ConcurrentHashMap：线程安全的HashMap。<br>CopyOnWriteArrayList：通过写入数据时进行 copy 修改，然后更新引用的方式，来消除并行读写中的锁使用，比较适合读多写少，数据量比较小，但是并发非常高的场景。</p>
+<h2 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h2><h2 id="动态代理"><a href="#动态代理" class="headerlink" title="动态代理"></a>动态代理</h2><h3 id="JDK动态代理"><a href="#JDK动态代理" class="headerlink" title="JDK动态代理"></a>JDK动态代理</h3><h3 id="CGLIB动态代理"><a href="#CGLIB动态代理" class="headerlink" title="CGLIB动态代理"></a>CGLIB动态代理</h3><p>JDK 动态代理只能代理实现了接口的类或者直接代理接口；CGLIB 可以代理未实现任何接口的类，但不能代理声明为 final 类型的类和方法。</p>
+<h2 id="基础数据类型"><a href="#基础数据类型" class="headerlink" title="基础数据类型"></a>基础数据类型</h2><h2 id="对象引用"><a href="#对象引用" class="headerlink" title="对象引用"></a>对象引用</h2><h2 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h2><h2 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h2><h2 id="SPI"><a href="#SPI" class="headerlink" title="SPI"></a>SPI</h2><h2 id="版本特性"><a href="#版本特性" class="headerlink" title="版本特性"></a>版本特性</h2>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/基础模块/">基础模块</a>
+    </div>
+
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-20171212" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/08/06/20171212/" class="article-date">
+      <time datetime="2021-08-06T14:17:17.801Z" itemprop="datePublished">2021-08-06</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/06/20171212/">操作系统与计算机网络</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <a id="more"></a>
+<h2 id="计算机网络"><a href="#计算机网络" class="headerlink" title="计算机网络"></a>计算机网络</h2><h3 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h3><h3 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h3><p>三次握手建连<br><img src="http://s0.lgstatic.com/i/image2/M01/8A/6E/CgotOV13hviAU5H3AAAyMppFmf8039.png" alt="img"></p>
+<p>四次挥手断连<br><img src="http://s0.lgstatic.com/i/image2/M01/8A/4E/CgoB5l13hviAZRJ1AABEfmQ55Jw991.png" alt="img"></p>
+<h3 id="UDP"><a href="#UDP" class="headerlink" title="UDP"></a>UDP</h3><h3 id="QUIC"><a href="#QUIC" class="headerlink" title="QUIC"></a>QUIC</h3><h3 id="RPC"><a href="#RPC" class="headerlink" title="RPC"></a>RPC</h3><h3 id="MQTT"><a href="#MQTT" class="headerlink" title="MQTT"></a>MQTT</h3><h3 id="GB32960-新能源通信协议"><a href="#GB32960-新能源通信协议" class="headerlink" title="GB32960(新能源通信协议)"></a>GB32960(新能源通信协议)</h3><p><a href="http://c.gb688.cn/bzgk/gb/showGb?type=online&amp;hcno=674DE45C0AD3DE2CD75B9C4CD8ED57C1" target="_blank" rel="noopener">在线文档</a></p>
+<h2 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h2><h3 id="位运算符"><a href="#位运算符" class="headerlink" title="位运算符"></a>位运算符</h3><ul>
+<li>“&gt;&gt;” ：右移，向右进行移位操作，低位丢弃，高位补 0。例如：m &gt;&gt; n,相当于 m 除以2的 n 次方并取商。</li>
+<li>“&gt;&gt;&gt;” : 无符号右移</li>
+<li>“&lt;&lt;” ：左移，向左进行移位操作，高位丢弃，低位补 0。例如：m &lt;&lt; n,相当于 m 乘以2的 n 次方。</li>
+<li>“&lt;&lt;&lt;” : 无符号左移</li>
+<li>“&amp;” ：与，两个位都为1时，结果才为1。特殊场景：当 x = 2^n 时，y % x = y &amp; ( x - 1 )</li>
+<li>“%” ：求余</li>
+<li>“|” ：或，两个位都为0时，结果才为0。</li>
+<li>“^” ：异或，两个位相同为0，相异为1。</li>
+</ul>
+<h3 id="top"><a href="#top" class="headerlink" title="top"></a>top</h3><h3 id="netstat"><a href="#netstat" class="headerlink" title="netstat"></a>netstat</h3><h2 id="经验"><a href="#经验" class="headerlink" title="经验"></a>经验</h2><p>生产配置：4C8G</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/基础模块/">基础模块</a>
+    </div>
+
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-20210730" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -544,6 +956,10 @@
 <p>B+树叶子节点上的data是行数据。</p>
 <p><strong>非聚簇索引</strong></p>
 <p>B+树的叶子节点上的data不是行数据。而是数据存放的地址或者主键值。</p>
+<p><strong>回表查询</strong></p>
+<p>先通过键值找到主键值，再通过主键值找到行记录，这个过程称为回表查询。</p>
+<p><strong>覆盖索引</strong></p>
+<p>当sql语句的所求查询字段（select列）和查询条件字段（where子句）全都包含在一个索引中（联合索引），可以直接使用索引查询而不需要回表。</p>
 <h3 id="MyISAM"><a href="#MyISAM" class="headerlink" title="MyISAM"></a>MyISAM</h3><p>5.5版本前默认引擎，支持全文索引，查询效率比较高，但不支持事务、使用<strong>表级锁</strong>。</p>
 <p>主键和辅助键均使用非聚簇索引。</p>
 <h3 id="InnoDB"><a href="#InnoDB" class="headerlink" title="InnoDB"></a>InnoDB</h3><p>5.5版本后默认引擎。支持 ACID 事务、支持外键、支持<strong>行级锁</strong>。</p>
@@ -555,7 +971,8 @@
 <li>共享锁：读锁，其他事务可以读，但不能写。MySQL 可以通过 lock in share mode 语句显示使用共享锁。</li>
 <li>排他锁：写锁，其他事务不能读取，也不能写。对于 UPDATE、DELETE 和 INSERT 语句，InnoDB 会自动给涉及的数据集加排他锁，或者使用 select for update 显示使用排他锁。</li>
 </ul>
-<h2 id="经验"><a href="#经验" class="headerlink" title="经验"></a>经验</h2>
+<h2 id="经验"><a href="#经验" class="headerlink" title="经验"></a>经验</h2><h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="https://www.jianshu.com/nb/50366127" target="_blank" rel="noopener">姜承尧的MySQL实战宝典</a></p>
+
       
     </div>
     
@@ -572,74 +989,6 @@
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
     </div>
 
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-20180617" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2021/07/29/20180617/" class="article-date">
-      <time datetime="2021-07-29T12:12:55.019Z" itemprop="datePublished">2021-07-29</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/29/20180617/">Java</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h1 id="常用集合"><a href="#常用集合" class="headerlink" title="常用集合"></a>常用集合</h1><h2 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h2><p>时间复杂度：最好O（1），最差O（N）<br>实现：数组加链表，数组中的每一项是一个链表，通过<strong>计算</strong>存入对象的 HashCode，来计算对象在数组中要存入的位置，用链表来解决散列冲突，链表中的节点存储的是键值对。<br>优化：JDK1.8之后为减少搜索时间，当链表长度大于阔值（默认8）且数组长度大于64时，链表会转换为<strong>红黑树</strong>。<br>参考文章：<a href="https://blog.csdn.net/woshimaxiao1/article/details/83661464" target="_blank" rel="noopener">Java集合之一—HashMap</a></p>
-<h2 id="ConcurrentHashMap"><a href="#ConcurrentHashMap" class="headerlink" title="ConcurrentHashMap"></a>ConcurrentHashMap</h2><p>1.7：使用 Segment （继承ReentrantLock，结构为数组加链表且均采用 volatile 修饰，保证获取时的可见性）进行分段加锁，降低并发锁定，支持 Segment 数组数量的线程并发。<br>1.8：抛弃了分段锁，使用 CAS + synchronized 来提高性能，并且同 hashMap 一样增加了红黑树。<br>参考文章：<a href="https://blog.csdn.net/weixin_44460333/article/details/86770169" target="_blank" rel="noopener">HashMap？ConcurrentHashMap？相信看完这篇没人能难住你！</a></p>
-<h2 id="JUC"><a href="#JUC" class="headerlink" title="JUC"></a>JUC</h2><h3 id="原子类"><a href="#原子类" class="headerlink" title="原子类"></a>原子类</h3><p>例如：AtomicBoolean、AtomicLong、AtomicInteger、LongAdder、LongAccumulator等。<br>AtomicLong：通过 unsafe 类实现，基于CAS。<br>LongAdder：基于Cell，分段锁思想，空间换时间，更适合高并发场景。<br>LongAccumulator：提供了比LongAdder更强大的功能，能够指定对数据的操作规则，例如可以把对数据的相加操作改成相乘操作。</p>
-<h3 id="锁类"><a href="#锁类" class="headerlink" title="锁类"></a>锁类</h3><p>ReentrantLock<br>ReentrantReadWriteLock<br>StampedLock：JDK 1.8 改进的读写锁，是使用一种 CLH 的乐观锁，能够有效防止写饥饿。所谓写饥饿就是在多线程读写时，读线程访问非常频繁，导致总是有读线程占用资源，写线程很难加上写锁。<br>LockSupport</p>
-<h3 id="异步执行类"><a href="#异步执行类" class="headerlink" title="异步执行类"></a>异步执行类</h3><p>Executors：用于创建线程池<br>ForkJoinPool：1.7提供，采用分治思想，将大任务分解成多个小任务处理，然后在合并处理结果。特点是使用工作窃取算法，可以有效平衡多任务时间长短不一的场景。<br>FutureTask<br>CompletableFuture：可以支持流式调用，可以方便的进行多 future 的组合使用，例如可以同时执行两个异步任务，然后对执行结果进行合并处理。还可以很方便地设置完成时间。</p>
-<h3 id="阻塞队列类"><a href="#阻塞队列类" class="headerlink" title="阻塞队列类"></a>阻塞队列类</h3><p>LinkedBlockingDeque：双端队列，也就是可以分别从队头和队尾操作入队、出队。<br>ArrayBlockingQueue：单端队列，只能从队尾入队，队头出队。 </p>
-<h3 id="多线程协作类"><a href="#多线程协作类" class="headerlink" title="多线程协作类"></a>多线程协作类</h3><p>CountDownLatch：实现计数器功能，可以用来控制等待多个线程执行任务后进行汇总。<br>CyclicBarrier：可以让一组线程等待至某个状态之后，再全部同时执行，一般在测试时使用，可以让多线程更好的并发执行。<br>Semaphore：用来控制对共享资源的访问并发度。允许多个线程共享资源，适用于限制使用共享资源线程数量的场景，例如 100 个车辆要使用 20 个停车位，那么最多允许 20 个车占用停车位。</p>
-<h3 id="集合类"><a href="#集合类" class="headerlink" title="集合类"></a>集合类</h3><p>ConcurrentHashMap：线程安全的HashMap。<br>CopyOnWriteArrayList：通过写入数据时进行 copy 修改，然后更新引用的方式，来消除并行读写中的锁使用，比较适合读多写少，数据量比较小，但是并发非常高的场景。</p>
-<h1 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h1><h1 id="动态代理"><a href="#动态代理" class="headerlink" title="动态代理"></a>动态代理</h1><h2 id="JDK动态代理"><a href="#JDK动态代理" class="headerlink" title="JDK动态代理"></a>JDK动态代理</h2><h2 id="CGLIB动态代理"><a href="#CGLIB动态代理" class="headerlink" title="CGLIB动态代理"></a>CGLIB动态代理</h2><p>JDK 动态代理只能代理实现了接口的类或者直接代理接口；CGLIB 可以代理未实现任何接口的类，但不能代理声明为 final 类型的类和方法。</p>
-<h1 id="基础数据类型"><a href="#基础数据类型" class="headerlink" title="基础数据类型"></a>基础数据类型</h1><h1 id="对象引用"><a href="#对象引用" class="headerlink" title="对象引用"></a>对象引用</h1><h1 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h1><h1 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h1><h1 id="SPI"><a href="#SPI" class="headerlink" title="SPI"></a>SPI</h1><h1 id="版本特性"><a href="#版本特性" class="headerlink" title="版本特性"></a>版本特性</h1>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/基础模块/">基础模块</a>
-    </div>
-
-
-      
       
       <div class="clearfix"></div>
     </div>
@@ -801,283 +1150,6 @@
 
 
       
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-20180725" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2021/07/29/20180725/" class="article-date">
-      <time datetime="2021-07-29T12:12:55.019Z" itemprop="datePublished">2021-07-29</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/29/20180725/">常用工具集</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h2 id="团队协作"><a href="#团队协作" class="headerlink" title="团队协作"></a>团队协作</h2><ul>
-<li>Git<h3 id="MAC-SSH-Key"><a href="#MAC-SSH-Key" class="headerlink" title="MAC SSH Key"></a>MAC SSH Key</h3></li>
-</ul>
-<ol>
-<li>生成：ssh-keygen -t rsa -C “wangqiu8077@163.com”</li>
-<li>复制：pbcopy &lt; ~/.ssh/id_rsa.pub</li>
-<li>验证：ssh -T git@github.com<br>ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDDnEhi5PeHYuK9hENM2Izh5n69vtjkt91JQBVc15WbFAOupJc4hBm8uH9ZOJN+QLzrltJBqIicSQulTM+hb3AcDTDru4TuK4ecGumw0pu23SNNoFw7lpZKzOS5Z0siNb9kN+LFUsUCyZLyvXbB1L376fooiBYgiTHQoXu3FfimTyTDPKIq6woSrgopDRyAMPSQDXFvLLFfLWxu0Y4haJ7oULz88IoBxDGNh5p5Un+oMaKQs1PlYY+Ziz9nq5NrLT0eBwX2PngR0fIRhuZCZa1I5EI5HTOEQu8/FniMvnfuBKWN6V3prDofQoCDjsdOPaUr37xM4zas+S2AV+TSYXh5 wangqiu8077@163.com</li>
-</ol>
-<ul>
-<li>SVN</li>
-</ul>
-<h2 id="质量保证"><a href="#质量保证" class="headerlink" title="质量保证"></a>质量保证</h2><h2 id="压测"><a href="#压测" class="headerlink" title="压测"></a>压测</h2><ul>
-<li>JMeter</li>
-</ul>
-<h2 id="容器与代理"><a href="#容器与代理" class="headerlink" title="容器与代理"></a>容器与代理</h2><h2 id="文档管理"><a href="#文档管理" class="headerlink" title="文档管理"></a>文档管理</h2><ul>
-<li>confluence</li>
-</ul>
-<h2 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h2>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/应用模块/">应用模块</a>
-    </div>
-
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-20171212" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2021/07/29/20171212/" class="article-date">
-      <time datetime="2021-07-29T12:12:55.018Z" itemprop="datePublished">2021-07-29</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/29/20171212/">操作系统与计算机网络</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <a id="more"></a>
-<h2 id="计算机网络"><a href="#计算机网络" class="headerlink" title="计算机网络"></a>计算机网络</h2><h3 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h3><h3 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h3><p>三次握手建连<br><img src="http://s0.lgstatic.com/i/image2/M01/8A/6E/CgotOV13hviAU5H3AAAyMppFmf8039.png" alt="img"></p>
-<p>四次挥手断连<br><img src="http://s0.lgstatic.com/i/image2/M01/8A/4E/CgoB5l13hviAZRJ1AABEfmQ55Jw991.png" alt="img"></p>
-<h3 id="UDP"><a href="#UDP" class="headerlink" title="UDP"></a>UDP</h3><h3 id="QUIC"><a href="#QUIC" class="headerlink" title="QUIC"></a>QUIC</h3><h3 id="RPC"><a href="#RPC" class="headerlink" title="RPC"></a>RPC</h3><h3 id="MQTT"><a href="#MQTT" class="headerlink" title="MQTT"></a>MQTT</h3><h3 id="GB32960-新能源通信协议"><a href="#GB32960-新能源通信协议" class="headerlink" title="GB32960(新能源通信协议)"></a>GB32960(新能源通信协议)</h3><p><a href="http://c.gb688.cn/bzgk/gb/showGb?type=online&amp;hcno=674DE45C0AD3DE2CD75B9C4CD8ED57C1" target="_blank" rel="noopener">在线文档</a></p>
-<h2 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h2><h3 id="top"><a href="#top" class="headerlink" title="top"></a>top</h3><h3 id="netstat"><a href="#netstat" class="headerlink" title="netstat"></a>netstat</h3><h2 id="经验"><a href="#经验" class="headerlink" title="经验"></a>经验</h2><p>生产配置：4C8G</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/基础模块/">基础模块</a>
-    </div>
-
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-20210728" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2021/07/28/20210728/" class="article-date">
-      <time datetime="2021-07-28T12:57:41.237Z" itemprop="datePublished">2021-07-28</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/28/20210728/">数据格式</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h2 id="ProtoBuf"><a href="#ProtoBuf" class="headerlink" title="ProtoBuf"></a>ProtoBuf</h2><p>Protocol Buffer 简称 protobuf，google开源的一种数据传输格式，类似于json，但比json的体积要小，速度更快，并且跨平台、跨语言。使用时需编写.proto文件，然后使用protocol.exe生成特定语言的文件。序列化和反序列化需使用同一个文件。<br>protobuf按照Tag + 可选（长度） + 值进行存储，不存储真正的属性名，而是在解析时按照Tag去寻找对应的属性名，然后对其进行赋值。<br>Protostuff是为了简化生成中间文件而生的开源项目。<br>都是Java语言时，客户端和服务端类名、属性、类型需保持一致。包名也必须一致？<br>服务端Java、客户端Python时，客户端需定义Message。对于泛型的处理，需要经过调试才能知道各种类型的Tag。<br>同时需注意客户端与服务端的protobuf的版本必须一致，目前主要版本为2.0、3.0。</p>
-<h2 id="JSON"><a href="#JSON" class="headerlink" title="JSON"></a>JSON</h2>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/基础模块/">基础模块</a>
-    </div>
-
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-20190107" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2021/07/28/20190107/" class="article-date">
-      <time datetime="2021-07-28T12:08:06.943Z" itemprop="datePublished">2021-07-28</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/28/20190107/">Mongo</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><ul>
-<li>单键索引</li>
-<li>复合索引</li>
-<li>多键值索引</li>
-<li>地理索引</li>
-<li>全文索引</li>
-<li><p>散列索引</p>
-</li>
-<li><p>稀疏索引</p>
-</li>
-<li>唯一索引</li>
-<li>过期索引</li>
-</ul>
-<h2 id="部署方式"><a href="#部署方式" class="headerlink" title="部署方式"></a>部署方式</h2><p>分片<br>副本集</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/应用模块/">应用模块</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
-    </div>
-
       
       <div class="clearfix"></div>
     </div>

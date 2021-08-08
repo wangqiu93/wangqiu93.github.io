@@ -15,17 +15,17 @@
 
 
 
-<meta name="description" content="CAP理论Consistency: 一致性，所有节点访问同一份最新的数据副本Availability: 可用性，非故障的节点在合理的时间内返回合理的响应（不是错误或者超时的响应）。Partition tolerance: 分区容错性，分布式系统出现网络分区的时候，仍然能够对外提供服务。在一个分布式系统中，这三个特性最多只能同时满足两个，三者不可兼得。 CA放弃分区容错，这也就等同于放弃了分布式系统">
+<meta name="description" content="分布式理论CAPConsistency: 一致性，所有节点访问同一份最新的数据副本Availability: 可用性，非故障的节点在合理的时间内返回合理的响应（不是错误或者超时的响应）。Partition tolerance: 分区容错性，分布式系统出现网络分区的时候，仍然能够对外提供服务。在一个分布式系统中，这三个特性最多只能同时满足两个，三者不可兼得。 CA放弃分区容错，这也就等同于放弃了分布">
 <meta property="og:type" content="article">
-<meta property="og:title" content="架构">
+<meta property="og:title" content="分布式&amp;微服务">
 <meta property="og:url" content="http://yoursite.com/2021/07/28/20190112/index.html">
 <meta property="og:site_name" content="WangQiu&#39;s Blog">
-<meta property="og:description" content="CAP理论Consistency: 一致性，所有节点访问同一份最新的数据副本Availability: 可用性，非故障的节点在合理的时间内返回合理的响应（不是错误或者超时的响应）。Partition tolerance: 分区容错性，分布式系统出现网络分区的时候，仍然能够对外提供服务。在一个分布式系统中，这三个特性最多只能同时满足两个，三者不可兼得。 CA放弃分区容错，这也就等同于放弃了分布式系统">
+<meta property="og:description" content="分布式理论CAPConsistency: 一致性，所有节点访问同一份最新的数据副本Availability: 可用性，非故障的节点在合理的时间内返回合理的响应（不是错误或者超时的响应）。Partition tolerance: 分区容错性，分布式系统出现网络分区的时候，仍然能够对外提供服务。在一个分布式系统中，这三个特性最多只能同时满足两个，三者不可兼得。 CA放弃分区容错，这也就等同于放弃了分布">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-07-29T22:30:58.724Z">
+<meta property="og:updated_time" content="2021-08-08T08:06:45.038Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="架构">
-<meta name="twitter:description" content="CAP理论Consistency: 一致性，所有节点访问同一份最新的数据副本Availability: 可用性，非故障的节点在合理的时间内返回合理的响应（不是错误或者超时的响应）。Partition tolerance: 分区容错性，分布式系统出现网络分区的时候，仍然能够对外提供服务。在一个分布式系统中，这三个特性最多只能同时满足两个，三者不可兼得。 CA放弃分区容错，这也就等同于放弃了分布式系统">
+<meta name="twitter:title" content="分布式&amp;微服务">
+<meta name="twitter:description" content="分布式理论CAPConsistency: 一致性，所有节点访问同一份最新的数据副本Availability: 可用性，非故障的节点在合理的时间内返回合理的响应（不是错误或者超时的响应）。Partition tolerance: 分区容错性，分布式系统出现网络分区的时候，仍然能够对外提供服务。在一个分布式系统中，这三个特性最多只能同时满足两个，三者不可兼得。 CA放弃分区容错，这也就等同于放弃了分布">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -57,7 +57,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>架构 | WangQiu&#39;s Blog</title>
+<title>分布式&amp;微服务 | WangQiu&#39;s Blog</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -193,7 +193,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/中间件/">中间件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/框架/">框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/消息队列/">消息队列</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/缓存/">缓存</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/中间件/">中间件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/框架/">框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/消息队列/">消息队列</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/缓存/">缓存</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/项目/">项目</a></li></ul>
                     </div>
                 </section>
                 
@@ -291,7 +291,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      架构
+      分布式&amp;微服务
     </h1>
   
 
@@ -312,19 +312,43 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="CAP理论"><a href="#CAP理论" class="headerlink" title="CAP理论"></a>CAP理论</h2><p>Consistency: 一致性，所有节点访问同一份最新的数据副本<br>Availability: 可用性，非故障的节点在合理的时间内返回合理的响应（不是错误或者超时的响应）。<br>Partition tolerance: 分区容错性，分布式系统出现网络分区的时候，仍然能够对外提供服务。<br>在一个分布式系统中，这三个特性最多只能同时满足两个，三者不可兼得。</p>
-<h3 id="CA"><a href="#CA" class="headerlink" title="CA"></a>CA</h3><p>放弃分区容错，这也就等同于放弃了分布式系统，所以 CA 只存在于单机系统。</p>
-<h3 id="CP"><a href="#CP" class="headerlink" title="CP"></a>CP</h3><p>选择强一致和分区容错，允许极端情况下出现短时的服务不可用。<br>CP实现的系统：ZooKeeper、Consul、Etcd、HBase、Nacos</p>
-<h3 id="AP"><a href="#AP" class="headerlink" title="AP"></a>AP</h3><p>选择分区容错和高可用，允许数据出现短时间不一致。在服务注册的场景，短期的不一致一般不会对服务交互产生影响，因此采用 AP 原则的注册中心才是微服务比较适合的选择。<br>AP实现的系统：Eureka、Nacos、Cassandra</p>
+        <h2 id="分布式理论"><a href="#分布式理论" class="headerlink" title="分布式理论"></a>分布式理论</h2><h3 id="CAP"><a href="#CAP" class="headerlink" title="CAP"></a>CAP</h3><p>Consistency: 一致性，所有节点访问同一份最新的数据副本<br>Availability: 可用性，非故障的节点在合理的时间内返回合理的响应（不是错误或者超时的响应）。<br>Partition tolerance: 分区容错性，分布式系统出现网络分区的时候，仍然能够对外提供服务。<br>在一个分布式系统中，这三个特性最多只能同时满足两个，三者不可兼得。</p>
+<h4 id="CA"><a href="#CA" class="headerlink" title="CA"></a>CA</h4><p>放弃分区容错，这也就等同于放弃了分布式系统，所以 CA 只存在于单机系统。</p>
+<h4 id="CP"><a href="#CP" class="headerlink" title="CP"></a>CP</h4><p>选择强一致和分区容错，允许极端情况下出现短时的服务不可用。<br>CP实现的系统：ZooKeeper、Consul、Etcd、HBase、Nacos</p>
+<h4 id="AP"><a href="#AP" class="headerlink" title="AP"></a>AP</h4><p>选择分区容错和高可用，允许数据出现短时间不一致。在服务注册的场景，短期的不一致一般不会对服务交互产生影响，因此采用 AP 原则的注册中心才是微服务比较适合的选择。<br>AP实现的系统：Eureka、Nacos、Cassandra</p>
 <h3 id="BASE"><a href="#BASE" class="headerlink" title="BASE"></a>BASE</h3><p>Basically Available：基本可用<br>Soft-state：软状态<br>Eventual Consistency：最终一致性<br>它是对 CAP 中一致性和可用性权衡的结果。BASE 的核心思想是即使无法做到强一致性，也可以根据系统特点，采用适当的方式达到最终一致性。</p>
-<h2 id="微服务框架"><a href="#微服务框架" class="headerlink" title="微服务框架"></a>微服务框架</h2><ul>
-<li>服务注册：Zookeeper、Consul、Eureka、Nacos</li>
-<li>负载均衡：ribbon</li>
-<li>熔断降级：hystrix</li>
-<li>网关：Zuul</li>
-<li>配置管理：config</li>
+<h2 id="分布式系统一致性算法"><a href="#分布式系统一致性算法" class="headerlink" title="分布式系统一致性算法"></a>分布式系统一致性算法</h2><h3 id="Paxos"><a href="#Paxos" class="headerlink" title="Paxos"></a>Paxos</h3><h3 id="Raft"><a href="#Raft" class="headerlink" title="Raft"></a>Raft</h3><h3 id="ZAB"><a href="#ZAB" class="headerlink" title="ZAB"></a>ZAB</h3><h2 id="分布式ID"><a href="#分布式ID" class="headerlink" title="分布式ID"></a>分布式ID</h2><ul>
+<li>数据库自增ID</li>
+<li>数据库集群自增ID</li>
+<li>数据库号段模式自增ID</li>
+<li>Redis原子性自增ID</li>
+<li>UUID</li>
+<li>雪花算法</li>
+<li>百度</li>
+<li>美团</li>
+<li>滴滴</li>
 </ul>
-<h2 id="云原生服务"><a href="#云原生服务" class="headerlink" title="云原生服务"></a>云原生服务</h2><h2 id="Service-Mesh"><a href="#Service-Mesh" class="headerlink" title="Service Mesh"></a>Service Mesh</h2>
+<h2 id="分布式事务"><a href="#分布式事务" class="headerlink" title="分布式事务"></a>分布式事务</h2><p><a href="/2021/07/28/20181023/#分布式事务解决方案">分布式事务</a></p>
+<h2 id="微服务"><a href="#微服务" class="headerlink" title="微服务"></a>微服务</h2><h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><ul>
+<li>Spring Cloud</li>
+<li>Spring Cloud Alibaba</li>
+</ul>
+<h3 id="服务注册"><a href="#服务注册" class="headerlink" title="服务注册"></a>服务注册</h3><ul>
+<li>Nacos</li>
+<li>Zookeeper</li>
+<li>Consul</li>
+<li>Eureka</li>
+</ul>
+<h3 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h3><p>Ribbon</p>
+<h3 id="熔断降级"><a href="#熔断降级" class="headerlink" title="熔断降级"></a>熔断降级</h3><ul>
+<li>Hystrix</li>
+<li>Sentinel</li>
+</ul>
+<h3 id="网关"><a href="#网关" class="headerlink" title="网关"></a>网关</h3><ul>
+<li>Zuul</li>
+<li>Kong</li>
+</ul>
+<h3 id="配置管理"><a href="#配置管理" class="headerlink" title="配置管理"></a>配置管理</h3><h2 id="云原生服务"><a href="#云原生服务" class="headerlink" title="云原生服务"></a>云原生服务</h2><h2 id="Service-Mesh"><a href="#Service-Mesh" class="headerlink" title="Service Mesh"></a>Service Mesh</h2><h3 id="Istio"><a href="#Istio" class="headerlink" title="Istio"></a>Istio</h3><h2 id="容器化"><a href="#容器化" class="headerlink" title="容器化"></a>容器化</h2><h3 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h3><h3 id="Kubernetes"><a href="#Kubernetes" class="headerlink" title="Kubernetes"></a>Kubernetes</h3>
       
     </div>
     
@@ -332,12 +356,12 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2021/07/28/20190112/">架构</a></p>
+        <p><span>本文标题:</span><a href="/2021/07/28/20190112/">分布式&amp;微服务</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">王球</a></p>
         <p><span>发布时间:</span>2021-07-28, 20:08:06</p>
-        <p><span>最后更新:</span>2021-07-30, 06:30:58</p>
+        <p><span>最后更新:</span>2021-08-08, 16:06:45</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2021/07/28/20190112/" title="架构">http://yoursite.com/2021/07/28/20190112/</a>
+            <span>原始链接:</span><a class="post-url" href="/2021/07/28/20190112/" title="分布式&amp;微服务">http://yoursite.com/2021/07/28/20190112/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2021/07/28/20190112/　　作者: 王球" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -351,8 +375,8 @@
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2021/07/28/20181115/">
-                    Cassandra
+                <a href="/2021/07/28/20190107/">
+                    Mongo
                 </a>
             </div>
         
@@ -371,7 +395,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#CAP理论"><span class="toc-number">1.</span> <span class="toc-text">CAP理论</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CA"><span class="toc-number">1.1.</span> <span class="toc-text">CA</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CP"><span class="toc-number">1.2.</span> <span class="toc-text">CP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AP"><span class="toc-number">1.3.</span> <span class="toc-text">AP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BASE"><span class="toc-number">1.4.</span> <span class="toc-text">BASE</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#微服务框架"><span class="toc-number">2.</span> <span class="toc-text">微服务框架</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#云原生服务"><span class="toc-number">3.</span> <span class="toc-text">云原生服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Service-Mesh"><span class="toc-number">4.</span> <span class="toc-text">Service Mesh</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#分布式理论"><span class="toc-number">1.</span> <span class="toc-text">分布式理论</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CAP"><span class="toc-number">1.1.</span> <span class="toc-text">CAP</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#CA"><span class="toc-number">1.1.1.</span> <span class="toc-text">CA</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CP"><span class="toc-number">1.1.2.</span> <span class="toc-text">CP</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#AP"><span class="toc-number">1.1.3.</span> <span class="toc-text">AP</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BASE"><span class="toc-number">1.2.</span> <span class="toc-text">BASE</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分布式系统一致性算法"><span class="toc-number">2.</span> <span class="toc-text">分布式系统一致性算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Paxos"><span class="toc-number">2.1.</span> <span class="toc-text">Paxos</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Raft"><span class="toc-number">2.2.</span> <span class="toc-text">Raft</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ZAB"><span class="toc-number">2.3.</span> <span class="toc-text">ZAB</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分布式ID"><span class="toc-number">3.</span> <span class="toc-text">分布式ID</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分布式事务"><span class="toc-number">4.</span> <span class="toc-text">分布式事务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#微服务"><span class="toc-number">5.</span> <span class="toc-text">微服务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#解决方案"><span class="toc-number">5.1.</span> <span class="toc-text">解决方案</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#服务注册"><span class="toc-number">5.2.</span> <span class="toc-text">服务注册</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#负载均衡"><span class="toc-number">5.3.</span> <span class="toc-text">负载均衡</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#熔断降级"><span class="toc-number">5.4.</span> <span class="toc-text">熔断降级</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#网关"><span class="toc-number">5.5.</span> <span class="toc-text">网关</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置管理"><span class="toc-number">5.6.</span> <span class="toc-text">配置管理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#云原生服务"><span class="toc-number">6.</span> <span class="toc-text">云原生服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Service-Mesh"><span class="toc-number">7.</span> <span class="toc-text">Service Mesh</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Istio"><span class="toc-number">7.1.</span> <span class="toc-text">Istio</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#容器化"><span class="toc-number">8.</span> <span class="toc-text">容器化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Docker"><span class="toc-number">8.1.</span> <span class="toc-text">Docker</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Kubernetes"><span class="toc-number">8.2.</span> <span class="toc-text">Kubernetes</span></a></li></ol></li></ol>
         
     </div>
     <style>
@@ -407,7 +431,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"架构　| WangQiu's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"分布式&微服务　| WangQiu's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -427,7 +451,7 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2021/07/28/20181115/" title="上一篇: Cassandra">
+            <a href="/2021/07/28/20190107/" title="上一篇: Mongo">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -441,7 +465,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20210730/">Netty</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20180916/">缓存</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20181111/">Redis</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20181113/">MySQL</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20180617/">Java</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20180630/">并发与多线程</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20180725/">常用工具集</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20171212/">操作系统与计算机网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20210728/">数据格式</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20190107/">Mongo</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20181114/">HBase</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20181115/">Cassandra</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20190112/">架构</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20180815/">RPC</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20181010/">消息队列</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20181023/">数据库</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20181112/">Kafka</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20180619/">JVM</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20180727/">Spring</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20180802/">MyBatis</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20180720/">数据结构与算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20170918/">硬技能图谱</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20180618/">设计模式</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2021/08/07/20210807/">IO</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/06/20210803/">车辆监控平台</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/06/20180727/">Spring</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/06/20180617/">Java</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/06/20171212/">操作系统与计算机网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20210730/">Netty</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20180916/">缓存</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20181111/">Redis</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20181113/">MySQL</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20180630/">并发与多线程</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20180725/">常用工具集</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20210728/">数据格式</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20181114/">HBase</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20181115/">Cassandra</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20190107/">Mongo</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20190112/">分布式&微服务</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20180815/">RPC</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20181010/">消息队列</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20181023/">存储系统</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20181112/">Kafka</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20180619/">JVM</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20180720/">数据结构与算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20180802/">MyBatis</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20170918/">硬技能图谱</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20180618/">设计模式</a></li></ul>
 
 
 

@@ -15,18 +15,18 @@
 
 
 
-<meta name="description" content="生产消息生产者根据规则选择一个Partition写入  轮询策略（默认规则） 指定Partition 指定key来根据Hash值选择Partition  消息发送方式  同步：默认方式 异步：允许批量 oneway：不需要返回结果  消费消息 Consumer按照Group来消费消息，topic中的每一条消息可以被多个Consumer Group消费； 每个Partition在一个Group中只能">
-<meta name="keywords" content="消息队列,中间件">
+<meta name="description" content="高性能原因网络层的Reactor设计模式顺序写页缓存零拷贝生产消息生产者根据规则选择一个Partition写入  轮询策略（默认规则） 指定Partition 指定key来根据Hash值选择Partition  消息发送方式  同步：默认方式 异步：允许批量 oneway：不需要返回结果  消费消息 Consumer按照Group来消费消息，topic中的每一条消息可以被多个Consumer Gr">
+<meta name="keywords" content="中间件,消息队列">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Kafka">
 <meta property="og:url" content="http://yoursite.com/2021/07/28/20181112/index.html">
 <meta property="og:site_name" content="WangQiu&#39;s Blog">
-<meta property="og:description" content="生产消息生产者根据规则选择一个Partition写入  轮询策略（默认规则） 指定Partition 指定key来根据Hash值选择Partition  消息发送方式  同步：默认方式 异步：允许批量 oneway：不需要返回结果  消费消息 Consumer按照Group来消费消息，topic中的每一条消息可以被多个Consumer Group消费； 每个Partition在一个Group中只能">
+<meta property="og:description" content="高性能原因网络层的Reactor设计模式顺序写页缓存零拷贝生产消息生产者根据规则选择一个Partition写入  轮询策略（默认规则） 指定Partition 指定key来根据Hash值选择Partition  消息发送方式  同步：默认方式 异步：允许批量 oneway：不需要返回结果  消费消息 Consumer按照Group来消费消息，topic中的每一条消息可以被多个Consumer Gr">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-07-29T13:07:16.284Z">
+<meta property="og:updated_time" content="2021-08-08T03:48:38.926Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kafka">
-<meta name="twitter:description" content="生产消息生产者根据规则选择一个Partition写入  轮询策略（默认规则） 指定Partition 指定key来根据Hash值选择Partition  消息发送方式  同步：默认方式 异步：允许批量 oneway：不需要返回结果  消费消息 Consumer按照Group来消费消息，topic中的每一条消息可以被多个Consumer Group消费； 每个Partition在一个Group中只能">
+<meta name="twitter:description" content="高性能原因网络层的Reactor设计模式顺序写页缓存零拷贝生产消息生产者根据规则选择一个Partition写入  轮询策略（默认规则） 指定Partition 指定key来根据Hash值选择Partition  消息发送方式  同步：默认方式 异步：允许批量 oneway：不需要返回结果  消费消息 Consumer按照Group来消费消息，topic中的每一条消息可以被多个Consumer Gr">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -194,7 +194,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/中间件/">中间件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/框架/">框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/消息队列/">消息队列</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/缓存/">缓存</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/中间件/">中间件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/框架/">框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/消息队列/">消息队列</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/缓存/">缓存</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/项目/">项目</a></li></ul>
                     </div>
                 </section>
                 
@@ -317,7 +317,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="生产消息"><a href="#生产消息" class="headerlink" title="生产消息"></a>生产消息</h2><p>生产者根据规则选择一个Partition写入</p>
+        <h2 id="高性能原因"><a href="#高性能原因" class="headerlink" title="高性能原因"></a>高性能原因</h2><h3 id="网络层的Reactor设计模式"><a href="#网络层的Reactor设计模式" class="headerlink" title="网络层的Reactor设计模式"></a>网络层的Reactor设计模式</h3><h3 id="顺序写"><a href="#顺序写" class="headerlink" title="顺序写"></a>顺序写</h3><h3 id="页缓存"><a href="#页缓存" class="headerlink" title="页缓存"></a>页缓存</h3><h3 id="零拷贝"><a href="#零拷贝" class="headerlink" title="零拷贝"></a>零拷贝</h3><h2 id="生产消息"><a href="#生产消息" class="headerlink" title="生产消息"></a>生产消息</h2><p>生产者根据规则选择一个Partition写入</p>
 <ul>
 <li>轮询策略（默认规则）</li>
 <li>指定Partition</li>
@@ -360,7 +360,7 @@
         <p><span>本文标题:</span><a href="/2021/07/28/20181112/">Kafka</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">王球</a></p>
         <p><span>发布时间:</span>2021-07-28, 20:08:06</p>
-        <p><span>最后更新:</span>2021-07-29, 21:07:16</p>
+        <p><span>最后更新:</span>2021-08-08, 11:48:38</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2021/07/28/20181112/" title="Kafka">http://yoursite.com/2021/07/28/20181112/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2021/07/28/20181112/　　作者: 王球" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -377,7 +377,7 @@
         
             <div id="article-nav-newer" class="article-nav-title">
                 <a href="/2021/07/28/20181023/">
-                    数据库
+                    存储系统
                 </a>
             </div>
         
@@ -396,7 +396,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#生产消息"><span class="toc-number">1.</span> <span class="toc-text">生产消息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#消费消息"><span class="toc-number">2.</span> <span class="toc-text">消费消息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#经验"><span class="toc-number">3.</span> <span class="toc-text">经验</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#集成Spring-Kafka"><span class="toc-number">3.1.</span> <span class="toc-text">集成Spring Kafka</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#生产者"><span class="toc-number">3.2.</span> <span class="toc-text">生产者</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#消费者"><span class="toc-number">3.3.</span> <span class="toc-text">消费者</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#可视化"><span class="toc-number">3.4.</span> <span class="toc-text">可视化</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文章"><span class="toc-number">4.</span> <span class="toc-text">参考文章</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#高性能原因"><span class="toc-number">1.</span> <span class="toc-text">高性能原因</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#网络层的Reactor设计模式"><span class="toc-number">1.1.</span> <span class="toc-text">网络层的Reactor设计模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#顺序写"><span class="toc-number">1.2.</span> <span class="toc-text">顺序写</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#页缓存"><span class="toc-number">1.3.</span> <span class="toc-text">页缓存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#零拷贝"><span class="toc-number">1.4.</span> <span class="toc-text">零拷贝</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#生产消息"><span class="toc-number">2.</span> <span class="toc-text">生产消息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#消费消息"><span class="toc-number">3.</span> <span class="toc-text">消费消息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#经验"><span class="toc-number">4.</span> <span class="toc-text">经验</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#集成Spring-Kafka"><span class="toc-number">4.1.</span> <span class="toc-text">集成Spring Kafka</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#生产者"><span class="toc-number">4.2.</span> <span class="toc-text">生产者</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#消费者"><span class="toc-number">4.3.</span> <span class="toc-text">消费者</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#可视化"><span class="toc-number">4.4.</span> <span class="toc-text">可视化</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文章"><span class="toc-number">5.</span> <span class="toc-text">参考文章</span></a></li></ol>
         
     </div>
     <style>
@@ -452,7 +452,7 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2021/07/28/20181023/" title="上一篇: 数据库">
+            <a href="/2021/07/28/20181023/" title="上一篇: 存储系统">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -466,7 +466,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20210730/">Netty</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20180916/">缓存</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20181111/">Redis</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20181113/">MySQL</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20180617/">Java</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20180630/">并发与多线程</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20180725/">常用工具集</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20171212/">操作系统与计算机网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20210728/">数据格式</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20190107/">Mongo</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20181114/">HBase</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20181115/">Cassandra</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20190112/">架构</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20180815/">RPC</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20181010/">消息队列</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20181023/">数据库</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20181112/">Kafka</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20180619/">JVM</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20180727/">Spring</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20180802/">MyBatis</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20180720/">数据结构与算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20170918/">硬技能图谱</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20180618/">设计模式</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2021/08/07/20210807/">IO</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/06/20210803/">车辆监控平台</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/06/20180727/">Spring</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/06/20180617/">Java</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/06/20171212/">操作系统与计算机网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20210730/">Netty</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20180916/">缓存</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20181111/">Redis</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20181113/">MySQL</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20180630/">并发与多线程</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20180725/">常用工具集</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20210728/">数据格式</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20181114/">HBase</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20181115/">Cassandra</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20190107/">Mongo</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20190112/">分布式&微服务</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20180815/">RPC</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20181010/">消息队列</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20181023/">存储系统</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20181112/">Kafka</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20180619/">JVM</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20180720/">数据结构与算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20180802/">MyBatis</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20170918/">硬技能图谱</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20180618/">设计模式</a></li></ul>
 
 
 
