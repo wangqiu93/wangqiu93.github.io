@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="王球">
+
+
+    
+    
+
+
+<meta name="description" content="总结,随笔">
+<meta property="og:type" content="website">
+<meta property="og:title" content="WangQiu&#39;s Blog">
+<meta property="og:url" content="http://yoursite.com/page/4/index.html">
+<meta property="og:site_name" content="WangQiu&#39;s Blog">
+<meta property="og:description" content="总结,随笔">
+<meta property="og:locale" content="zh-Hans">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="WangQiu&#39;s Blog">
+<meta name="twitter:description" content="总结,随笔">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="WangQiu&#39;s Blog" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <style> .article { opacity: 0;} </style>
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>WangQiu&#39;s Blog</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: true,
+        isPost: false,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">王球</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">Success Belongs to the Persevering</p>
+        
+
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="false" />
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:wangqiu8077@163.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="#" title="GitHub"></a>
+                            
+                                <a class="fa 知乎" href="https://www.zhihu.com/people/3fwangqiu" title="知乎"></a>
+                            
+                                <a class="fa CSDN" href="https://blog.csdn.net/qq_22220361?type=sub&subType=fans&spm=1010.2135.3001.5347" title="CSDN"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/中间件/">中间件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/任务调度平台/">任务调度平台</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搜索引擎/">搜索引擎</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据分析/">数据分析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/框架/">框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/注册中心/">注册中心</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/消息队列/">消息队列</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/缓存/">缓存</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/配置中心/">配置中心</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/项目/">项目</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/领域驱动/">领域驱动</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">王球</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">王球</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">Success Belongs to the Persevering</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:wangqiu8077@163.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="#" title="GitHub"></a>
+                            
+                                <a class="fa 知乎" target="_blank" href="https://www.zhihu.com/people/3fwangqiu" title="知乎"></a>
+                            
+                                <a class="fa CSDN" target="_blank" href="https://blog.csdn.net/qq_22220361?type=sub&subType=fans&spm=1010.2135.3001.5347" title="CSDN"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap">
+  
+    <article id="post-20190107" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/07/28/20190107/" class="article-date">
+      <time datetime="2021-07-28T12:08:06.943Z" itemprop="datePublished">2021-07-28</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/28/20190107/">Mongo</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><ul>
+<li>单键索引</li>
+<li>复合索引</li>
+<li>多键值索引</li>
+<li>地理索引</li>
+<li>全文索引</li>
+<li><p>散列索引</p>
+</li>
+<li><p>稀疏索引</p>
+</li>
+<li>唯一索引</li>
+<li>过期索引</li>
+</ul>
+<h2 id="部署方式"><a href="#部署方式" class="headerlink" title="部署方式"></a>部署方式</h2><p>分片<br>副本集</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/应用模块/">应用模块</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-20190112" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/07/28/20190112/" class="article-date">
+      <time datetime="2021-07-28T12:08:06.943Z" itemprop="datePublished">2021-07-28</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/28/20190112/">分布式&amp;微服务</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="分布式理论"><a href="#分布式理论" class="headerlink" title="分布式理论"></a>分布式理论</h2><h3 id="CAP"><a href="#CAP" class="headerlink" title="CAP"></a>CAP</h3><p>Consistency: 一致性，所有节点访问同一份最新的数据副本<br>Availability: 可用性，非故障的节点在合理的时间内返回合理的响应（不是错误或者超时的响应）。<br>Partition tolerance: 分区容错性，分布式系统出现网络分区的时候，仍然能够对外提供服务。<br>在一个分布式系统中，这三个特性最多只能同时满足两个，三者不可兼得。</p>
+<h4 id="CA"><a href="#CA" class="headerlink" title="CA"></a>CA</h4><p>放弃分区容错，这也就等同于放弃了分布式系统，所以 CA 只存在于单机系统。</p>
+<h4 id="CP"><a href="#CP" class="headerlink" title="CP"></a>CP</h4><p>选择强一致和分区容错，允许极端情况下出现短时的服务不可用。<br>CP实现的系统：ZooKeeper、Consul、Etcd、HBase、Nacos</p>
+<h4 id="AP"><a href="#AP" class="headerlink" title="AP"></a>AP</h4><p>选择分区容错和高可用，允许数据出现短时间不一致。在服务注册的场景，短期的不一致一般不会对服务交互产生影响，因此采用 AP 原则的注册中心才是微服务比较适合的选择。<br>AP实现的系统：Eureka、Nacos、Cassandra</p>
+<h3 id="BASE"><a href="#BASE" class="headerlink" title="BASE"></a>BASE</h3><p>Basically Available：基本可用<br>Soft-state：软状态<br>Eventual Consistency：最终一致性<br>它是对 CAP 中一致性和可用性权衡的结果。BASE 的核心思想是即使无法做到强一致性，也可以根据系统特点，采用适当的方式达到最终一致性。</p>
+<h2 id="分布式系统一致性算法"><a href="#分布式系统一致性算法" class="headerlink" title="分布式系统一致性算法"></a>分布式系统一致性算法</h2><h3 id="Paxos"><a href="#Paxos" class="headerlink" title="Paxos"></a>Paxos</h3><h3 id="Raft"><a href="#Raft" class="headerlink" title="Raft"></a>Raft</h3><h3 id="ZAB"><a href="#ZAB" class="headerlink" title="ZAB"></a>ZAB</h3><h2 id="分布式ID"><a href="#分布式ID" class="headerlink" title="分布式ID"></a>分布式ID</h2><ul>
+<li>数据库自增ID</li>
+<li>数据库集群自增ID</li>
+<li>数据库号段模式自增ID</li>
+<li>Redis原子性自增ID</li>
+<li>UUID</li>
+<li>雪花算法</li>
+<li>百度</li>
+<li>美团</li>
+<li>滴滴</li>
+</ul>
+<h2 id="分布式事务"><a href="#分布式事务" class="headerlink" title="分布式事务"></a>分布式事务</h2><p><a href="/2021/07/28/20181023/#分布式事务解决方案">分布式事务</a></p>
+<h2 id="微服务"><a href="#微服务" class="headerlink" title="微服务"></a>微服务</h2><h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><ul>
+<li>Spring Cloud</li>
+<li>Spring Cloud Alibaba</li>
+</ul>
+<h3 id="服务注册"><a href="#服务注册" class="headerlink" title="服务注册"></a>服务注册</h3><ul>
+<li>Nacos</li>
+<li>Zookeeper</li>
+<li>Consul</li>
+<li>Eureka</li>
+</ul>
+<h3 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h3><p>Ribbon</p>
+<h3 id="熔断降级"><a href="#熔断降级" class="headerlink" title="熔断降级"></a>熔断降级</h3><ul>
+<li>Hystrix</li>
+<li>Sentinel</li>
+</ul>
+<h3 id="网关"><a href="#网关" class="headerlink" title="网关"></a>网关</h3><ul>
+<li>Zuul</li>
+<li>Kong</li>
+</ul>
+<h3 id="配置管理"><a href="#配置管理" class="headerlink" title="配置管理"></a>配置管理</h3><h2 id="云原生服务"><a href="#云原生服务" class="headerlink" title="云原生服务"></a>云原生服务</h2><h2 id="Service-Mesh"><a href="#Service-Mesh" class="headerlink" title="Service Mesh"></a>Service Mesh</h2><h3 id="Istio"><a href="#Istio" class="headerlink" title="Istio"></a>Istio</h3><h2 id="容器化"><a href="#容器化" class="headerlink" title="容器化"></a>容器化</h2><h3 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h3><p><a href="https://help.aliyun.com/document_detail/187598.html" target="_blank" rel="noopener">CentOS 8 部署并使用Docker</a></p>
+<p>远程开放端口：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vim /lib/systemd/system/docker.service</span><br><span class="line">ExecStart=/usr/bin/dockerd -H fd:<span class="comment">// --containerd=/run/containerd/containerd.sock -H tcp://0.0.0.0:2375</span></span><br><span class="line">systemctl daemon-reload</span><br><span class="line">systemctl restart docker.service</span><br><span class="line">        systemctl start docker.service</span><br></pre></td></tr></table></figure></p>
+<p>docker run -it 0525b953d9fe /bin/bash</p>
+<p>docker logs -f -t –tail 10 im</p>
+<p>netstat -ntlp</p>
+<p>docker run -d -p 8080:8080 -p 1883:1883 –name=im 202111292000:latest</p>
+<h3 id="Kubernetes"><a href="#Kubernetes" class="headerlink" title="Kubernetes"></a>Kubernetes</h3>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/综合模块/">综合模块</a>
+    </div>
+
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-20180815" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/07/28/20180815/" class="article-date">
+      <time datetime="2021-07-28T12:08:06.942Z" itemprop="datePublished">2021-07-28</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/28/20180815/">RPC</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p>RPC 是远程过程调用的简写，RPC 与 HTTP 一样都可以实现远程服务的调用，但是使用方式上有很大的区别。它能够像使用本地方法一样调用远程的方法。<br>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/应用模块/">应用模块</a>
+    </div>
+
+
+      
+      
+        <p class="article-more-link">
+          <a href="/2021/07/28/20180815/#more">阅读全文 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-20181023" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/07/28/20181023/" class="article-date">
+      <time datetime="2021-07-28T12:08:06.942Z" itemprop="datePublished">2021-07-28</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/28/20181023/">存储系统</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><ul>
+<li>关系型数据库<ul>
+<li>MySQL：ShardingJDBC、Mycat</li>
+<li>Oracle</li>
+<li>PostgreSQL(PGSQL)</li>
+<li>MariaDB</li>
+</ul>
+</li>
+<li>NoSQL<ul>
+<li>MongoDB</li>
+</ul>
+</li>
+<li>NewSQL<ul>
+<li>TiDB</li>
+<li>OceanBase</li>
+</ul>
+</li>
+<li>图数据库<ul>
+<li>Neo4j</li>
+</ul>
+</li>
+<li>轻量级分布式文件系统<ul>
+<li>FastDFS</li>
+</ul>
+</li>
+<li>分布式云存储<ul>
+<li>OSS</li>
+</ul>
+</li>
+<li>大数据存储<ul>
+<li>HBase</li>
+<li>Cassandra</li>
+</ul>
+</li>
+</ul>
+<h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><h3 id="事务特性"><a href="#事务特性" class="headerlink" title="事务特性"></a>事务特性</h3><p>A(Atomicity)C(Consistency)I(Isolation)D(Durability)</p>
+<ul>
+<li>原子性：指事务由原子的操作序列组成，所有操作要么全部成功，要么全部失败回滚。</li>
+<li>一致性：指事务的执行不能破坏数据库数据的完整性和一致性，一个事务在执行之前和执行之后，数据库都必须处以一致性状态。比如在做多表操作时，多个表要么都是事务后新的值，要么都是事务前的旧值。</li>
+<li>隔离性：指多个用户并发访问数据库时，数据库为每个用户执行的事务，不能被其他事务的操作所干扰，多个并发事务之间要相互隔离。</li>
+<li>持久性：指一个事务一旦提交并执行成功，那么对数据库中数据的改变就是永久性的，即便是在数据库系统遇到故障的情况下也不会丢失提交事务的操作。</li>
+</ul>
+<h3 id="并发问题"><a href="#并发问题" class="headerlink" title="并发问题"></a>并发问题</h3><p>脏读：指在一个事务处理过程里读取了另一个未提交的事务中的数据。</p>
+<p>不可重复读：指对于数据库中某个数据，一个事务范围内多次查询返回了不同的数据值，这是由于在多次查询之间，有其他事务修改了数据并进行了提交。</p>
+<p>幻读：指一个事务中执行两次完全相同的查询时，第二次查询所返回的结果集跟第一个查询不相同。与不可重复读的区别在于，不可重复读是对同一条记录，两次读取的值不同。而幻读是记录的增加或删除，导致两次相同条件获取的结果记录数不同。</p>
+<h3 id="隔离级别"><a href="#隔离级别" class="headerlink" title="隔离级别"></a>隔离级别</h3><ul>
+<li>读未提交：最低的隔离级别，可以读取到其他事务未提交的内容。所有并发问题都有可能发生。</li>
+<li>读已提交：就是只能读取到其他事务已经提交的数据。可以解决脏读问题。</li>
+<li>可重复读：MySQL默认隔离级别，可以保证整个事务过程中，对同数据的多次读取结果是相同的。这个级别可以解决脏读和不可重复读的问题。</li>
+<li>串行化：最高的隔离级别，所有事务操作都依次顺序执行。这个级别会导致并发度下降，性能最差。不过这个级别可以解决前面提到的所有并发问题。</li>
+</ul>
+<h3 id="事务分类"><a href="#事务分类" class="headerlink" title="事务分类"></a>事务分类</h3><ul>
+<li>扁平化事务：使用最多，所有的操作都在同一层次，不能提交或者回滚事务的某一部分，要么都成功，要么都回滚。</li>
+<li>带保存点的扁平化事务：允许事务在执行过程中回滚到较早的状态，而不是全部回滚。通过在事务中插入保存点，当操作失败后，可以选择回滚到最近的保存点处。</li>
+<li>链事务：在事务提交时，会将必要的上下文隐式传递给下一个事务，当事务失败时就可以回滚到最近的事务。不过，链事务只能回滚到最近的保存点，而带保存点的扁平化事务是可以回滚到任意的保存点。</li>
+<li>嵌套事务：由顶层事务和子事务构成，类似于树的结构。一般顶层事务负责逻辑管理，子事务负责具体的工作，子事务可以提交，但真正提交要等到父事务提交，如果上层事务回滚，那么所有的子事务都会回滚。</li>
+</ul>
+<h3 id="分布式事务解决方案"><a href="#分布式事务解决方案" class="headerlink" title="分布式事务解决方案"></a>分布式事务解决方案</h3><ul>
+<li>XA协议：是保证强一致性的刚性事务。实现方式有两段式提交和三段式提交。两段式提交需要有一个事务协调者来保证所有的事务参与者都完成了第一阶段的准备工作。如果协调者收到所有参与者都准备好的消息，就会通知所有的事务执行第二阶段提交。一般场景下两段式提交已经能够很好得解决分布式事务了，然而两阶段在即使只有一个进程发生故障时，也会导致整个系统存在较长时间的阻塞。三段式提交通过增加 pre-commit 阶段来减少前面提到的系统阻塞的时间。三段式提交很少在实际中使用，简单了解就可以了。</li>
+<li>TCC：是满足最终一致性的柔性事务方案。TCC 采用补偿机制，核心思想是对每个操作，都要注册对应的确认和补偿操作。它分为三个阶段：Try 阶段主要对业务系统进行检测及资源预留；Confirm 阶段对业务系统做确认提交；Cancel 阶段是在业务执行错误，执行回滚，释放预留的资源。</li>
+<li>消息一致性：是将本地操作和发送消息放在一个事务中，保证本地操作和消息发送要么都成功要么都失败。下游应用订阅消息，收到消息后执行对应操作。</li>
+<li>GTS：阿里云中的全局事务服务 GTS，对应的开源版本是 Fescar。Fescar 基于两段式提交进行改良，剥离了分布式事务方案对数据库在协议支持上的要求。使用 Fescar 的前提是分支事务中涉及的资源，必须是支持 ACID 事务的关系型数据库。分支的提交和回滚机制，都依赖于本地事务来保障。 Fescar 的实现目前还存在一些局限，比如事务隔离级别最高支持到读已提交级别。</li>
+</ul>
+<p>框架：Seata</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/应用模块/">应用模块</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-20180802" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/07/28/20180802/" class="article-date">
+      <time datetime="2021-07-28T12:08:06.941Z" itemprop="datePublished">2021-07-28</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/28/20180802/">MyBatis</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p>MyBatis 的优点：</p>
+<ol>
+<li>MyBatis 是原生SQL，不像 Hibernate 的 HQL 需要额外的学习成本。</li>
+<li>MyBatis 的 SQL 语句与代码进行了解耦合。</li>
+<li>MyBatis 功能简单，学习成本比较低，使用的门槛也非常低，可以快速上手。</li>
+<li>MyBatis SQL调优比较灵活，而 Hibernate，SQL 语句是自动生成的，当有复杂语句需要进行优化时就比较难处理。 </li>
+</ol>
+<p>MyBatis 的缺点：</p>
+<ol>
+<li>相比 Hibernate 这样的全自动 ORM 框架，不能自动生成 SQL 语句，编写 SQL 的工作量比较大，尤其是字段多、关联表多的情况下；</li>
+<li>SQL 语句依赖于具体数据库，导致数据库迁移性差，而 Hibernate 则拥有良好的数据库可移植性。</li>
+</ol>
+<p>官方文档：<a href="https://mybatis.org/mybatis-3/zh/index.html" target="_blank" rel="noopener">MyBatis3</a></p>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/应用模块/">应用模块</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/框架/">框架</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a href="/2021/07/28/20180802/#more">阅读全文 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-20170918" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/07/28/20170918/" class="article-date">
+      <time datetime="2021-07-28T12:08:06.940Z" itemprop="datePublished">2021-07-28</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/28/20170918/">硬技能图谱</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p>努力很容易，坚持努力很难，不忘初心，方得始终。<br>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/综合模块/">综合模块</a>
+    </div>
+
+
+      
+      
+        <p class="article-more-link">
+          <a href="/2021/07/28/20170918/#more">阅读全文 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+  
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
+    </nav>
+  
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2022 王球
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
