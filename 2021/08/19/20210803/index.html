@@ -15,19 +15,19 @@
 
 
 
-<meta name="description" content="车辆监控平台项目介绍">
+<meta name="description" content="实时车况  销售车辆50W，同时在线数高峰：6W。 车辆正常情况下每10s发送一条报文到监控平台。 数据情况： 车辆原始报文大小1K。 车辆解析后车况大小6K。 平均一台车每天会产生10MB的数据。 系统每天会产生5T的数据。 同时系统有7.2亿行的数据需要写入到数据库。   系统并发量 持续并发量：6000。 长连接：6W。 每秒6M的原始数据需要被解析。 每秒35M的解析数据需要被存储。">
 <meta name="keywords" content="项目">
 <meta property="og:type" content="article">
-<meta property="og:title" content="车辆监控平台">
+<meta property="og:title" content="仙豆智能">
 <meta property="og:url" content="http://yoursite.com/2021/08/19/20210803/index.html">
 <meta property="og:site_name" content="WangQiu&#39;s Blog">
-<meta property="og:description" content="车辆监控平台项目介绍">
+<meta property="og:description" content="实时车况  销售车辆50W，同时在线数高峰：6W。 车辆正常情况下每10s发送一条报文到监控平台。 数据情况： 车辆原始报文大小1K。 车辆解析后车况大小6K。 平均一台车每天会产生10MB的数据。 系统每天会产生5T的数据。 同时系统有7.2亿行的数据需要写入到数据库。   系统并发量 持续并发量：6000。 长连接：6W。 每秒6M的原始数据需要被解析。 每秒35M的解析数据需要被存储。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/img/posts/车辆监控平台架构.png">
-<meta property="og:updated_time" content="2021-08-19T00:09:10.313Z">
+<meta property="og:updated_time" content="2022-05-14T12:04:22.470Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="车辆监控平台">
-<meta name="twitter:description" content="车辆监控平台项目介绍">
+<meta name="twitter:title" content="仙豆智能">
+<meta name="twitter:description" content="实时车况  销售车辆50W，同时在线数高峰：6W。 车辆正常情况下每10s发送一条报文到监控平台。 数据情况： 车辆原始报文大小1K。 车辆解析后车况大小6K。 平均一台车每天会产生10MB的数据。 系统每天会产生5T的数据。 同时系统有7.2亿行的数据需要写入到数据库。   系统并发量 持续并发量：6000。 长连接：6W。 每秒6M的原始数据需要被解析。 每秒35M的解析数据需要被存储。">
 <meta name="twitter:image" content="http://yoursite.com/img/posts/车辆监控平台架构.png">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -60,7 +60,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>车辆监控平台 | WangQiu&#39;s Blog</title>
+<title>仙豆智能 | WangQiu&#39;s Blog</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -196,7 +196,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/中间件/">中间件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/任务调度平台/">任务调度平台</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搜索引擎/">搜索引擎</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据分析/">数据分析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/框架/">框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/注册中心/">注册中心</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/消息队列/">消息队列</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/缓存/">缓存</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/配置中心/">配置中心</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/项目/">项目</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/领域驱动/">领域驱动</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/中间件/">中间件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/框架/">框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/流式计算/">流式计算</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/消息队列/">消息队列</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/缓存/">缓存</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/项目/">项目</a></li></ul>
                     </div>
                 </section>
                 
@@ -294,7 +294,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      车辆监控平台
+      仙豆智能
     </h1>
   
 
@@ -319,9 +319,8 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>车辆监控平台项目介绍<br><a id="more"></a></p>
-<h2 id="架构图"><a href="#架构图" class="headerlink" title="架构图"></a>架构图</h2><p><img src="/img/posts/车辆监控平台架构.png" alt="车辆监控架构图"></p>
-<h2 id="业务"><a href="#业务" class="headerlink" title="业务"></a>业务</h2><ol>
+        <h2 id="实时车况"><a href="#实时车况" class="headerlink" title="实时车况"></a>实时车况</h2><p><img src="/img/posts/车辆监控平台架构.png" alt="车辆监控架构图"></p>
+<ol>
 <li>销售车辆50W，同时在线数高峰：6W。</li>
 <li>车辆正常情况下每10s发送一条报文到监控平台。</li>
 <li>数据情况：<ol>
@@ -340,7 +339,7 @@
 </ol>
 </li>
 </ol>
-
+<h2 id="蓝牙钥匙"><a href="#蓝牙钥匙" class="headerlink" title="蓝牙钥匙"></a>蓝牙钥匙</h2><h2 id="车辆权限"><a href="#车辆权限" class="headerlink" title="车辆权限"></a>车辆权限</h2><h2 id="自动泊车"><a href="#自动泊车" class="headerlink" title="自动泊车"></a>自动泊车</h2><h2 id="DVR"><a href="#DVR" class="headerlink" title="DVR"></a>DVR</h2>
       
     </div>
     
@@ -348,12 +347,12 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2021/08/19/20210803/">车辆监控平台</a></p>
+        <p><span>本文标题:</span><a href="/2021/08/19/20210803/">仙豆智能</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">王球</a></p>
         <p><span>发布时间:</span>2021-08-19, 08:09:10</p>
-        <p><span>最后更新:</span>2021-08-19, 08:09:10</p>
+        <p><span>最后更新:</span>2022-05-14, 20:04:22</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2021/08/19/20210803/" title="车辆监控平台">http://yoursite.com/2021/08/19/20210803/</a>
+            <span>原始链接:</span><a class="post-url" href="/2021/08/19/20210803/" title="仙豆智能">http://yoursite.com/2021/08/19/20210803/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2021/08/19/20210803/　　作者: 王球" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -374,8 +373,8 @@
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2021/08/19/20210812/">
-                    RabbitMQ
+                <a href="/2021/08/19/20210728/">
+                    数据格式
                 </a>
             </div>
         
@@ -387,7 +386,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#架构图"><span class="toc-number">1.</span> <span class="toc-text">架构图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#业务"><span class="toc-number">2.</span> <span class="toc-text">业务</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#实时车况"><span class="toc-number">1.</span> <span class="toc-text">实时车况</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#蓝牙钥匙"><span class="toc-number">2.</span> <span class="toc-text">蓝牙钥匙</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#车辆权限"><span class="toc-number">3.</span> <span class="toc-text">车辆权限</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自动泊车"><span class="toc-number">4.</span> <span class="toc-text">自动泊车</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DVR"><span class="toc-number">5.</span> <span class="toc-text">DVR</span></a></li></ol>
         
     </div>
     <style>
@@ -423,7 +422,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"车辆监控平台　| WangQiu's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"仙豆智能　| WangQiu's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -451,13 +450,13 @@
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2021/08/19/20210812/" title="下一篇: RabbitMQ">
+            <a href="/2021/08/19/20210728/" title="下一篇: 数据格式">
                 <i class="fa fa-angle-right"></i>
             </a>
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2021/09/15/20210915/">领域驱动设计</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/09/12/20210912/">数据清洗</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/09/05/20210908/">ES</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/09/05/20210907/">XXL-JOB</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/09/05/20210906/">Eureka</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/09/05/20210905/">Apollo</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/29/20210819/">特定方法论</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/29/20210825/">国际物流</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/29/20210809/">性能优化</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/29/20210818/">Nacos</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/29/20181112/">Kafka</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/29/20181113/">MySQL</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/29/20181010/">消息队列</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/29/20180725/">常用工具集</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/29/20180727/">Spring</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/29/20180617/">Java</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/19/20180630/">并发与多线程</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/19/20210803/">车辆监控平台</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/19/20210812/">RabbitMQ</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/19/20210728/">数据格式</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/19/20181111/">Redis</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/19/20180720/">数据结构与算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/19/20180619/">JVM</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/19/20180618/">设计模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/07/20210807/">IO</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/06/20171212/">操作系统与计算机网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20210730/">Netty</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20180916/">缓存</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20181114/">HBase</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20181115/">Cassandra</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20190107/">Mongo</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20190112/">分布式&微服务</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20180815/">RPC</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20181023/">存储系统</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20180802/">MyBatis</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20170918/">硬技能图谱</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/05/14/20220514/">Flink</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/09/05/20210907/">XXL-JOB</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/29/20210819/">特定方法论</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/29/20210809/">性能优化</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/29/20210818/">Nacos</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/29/20181112/">Kafka</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/29/20181113/">MySQL</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/29/20181010/">消息队列</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/29/20180725/">常用工具集</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/29/20180727/">Spring</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/29/20180617/">Java</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/19/20180630/">并发与多线程</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/19/20210803/">仙豆智能</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/19/20210728/">数据格式</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/19/20181111/">Redis</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/19/20180720/">数据结构与算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/19/20180619/">JVM</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/19/20180618/">设计模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/07/20210807/">IO</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/06/20171212/">操作系统与计算机网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20210730/">Netty</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/29/20180916/">缓存</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20181115/">Cassandra</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20190107/">Mongo</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20181114/">HBase</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20190112/">分布式&微服务</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20180815/">RPC</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20181023/">数据库与事务</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20180802/">MyBatis</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/28/20170918/">硬技能图谱</a></li></ul>
 
 
 
@@ -471,7 +470,7 @@
         <div id="footer-info">
             <div class="footer-left">
                 <i class="fa fa-copyright"></i> 
-                2016-2022 王球
+                2016-2023 王球
             </div>
             <div class="footer-right">
                 <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>

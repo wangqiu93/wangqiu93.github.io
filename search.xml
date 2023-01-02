@@ -4,61 +4,11 @@
   
     
     <entry>
-      <title>领域驱动设计</title>
-      <link href="/2021/09/15/20210915/"/>
-      <url>/2021/09/15/20210915/</url>
+      <title>Flink</title>
+      <link href="/2022/05/14/20220514/"/>
+      <url>/2022/05/14/20220514/</url>
       
-        <content type="html"><![CDATA[]]></content>
-      
-      
-      <categories>
-          
-          <category> 综合模块 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 领域驱动 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>数据清洗</title>
-      <link href="/2021/09/12/20210912/"/>
-      <url>/2021/09/12/20210912/</url>
-      
-        <content type="html"><![CDATA[<p>数据清洗的最终目的是为了提高数据质量，数据质量包含以下几个方面：</p><ol><li>完整性</li><li>可靠性</li><li>稳定性</li><li>可回溯性<a id="more"></a></li></ol><h2 id="缺失值处理"><a href="#缺失值处理" class="headerlink" title="缺失值处理"></a>缺失值处理</h2><ol><li><p>确定缺失值范围</p></li><li><p>去除不需要的字段</p></li><li><p>填充缺失内容</p></li><li><p>重新取数</p></li></ol><h2 id="格式内容清洗"><a href="#格式内容清洗" class="headerlink" title="格式内容清洗"></a>格式内容清洗</h2><h2 id="逻辑错误清洗"><a href="#逻辑错误清洗" class="headerlink" title="逻辑错误清洗"></a>逻辑错误清洗</h2><ol><li><p>去重</p></li><li><p>去除不合理值</p></li><li><p>修正矛盾内容</p></li></ol><h2 id="非需求数据清洗"><a href="#非需求数据清洗" class="headerlink" title="非需求数据清洗"></a>非需求数据清洗</h2><h2 id="关联性验证"><a href="#关联性验证" class="headerlink" title="关联性验证"></a>关联性验证</h2>]]></content>
-      
-      
-      <categories>
-          
-          <category> 综合模块 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 数据分析 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>ES</title>
-      <link href="/2021/09/05/20210908/"/>
-      <url>/2021/09/05/20210908/</url>
-      
-        <content type="html"><![CDATA[]]></content>
+        <content type="html"><![CDATA[<p><a href="https://nightlies.apache.org/flink/flink-docs-release-1.15/zh/" target="_blank" rel="noopener">官方文档</a></p>]]></content>
       
       
       <categories>
@@ -70,7 +20,7 @@
       
         <tags>
             
-            <tag> 搜索引擎 </tag>
+            <tag> 流式计算 </tag>
             
         </tags>
       
@@ -95,57 +45,7 @@
       
         <tags>
             
-            <tag> 任务调度平台 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Eureka</title>
-      <link href="/2021/09/05/20210906/"/>
-      <url>/2021/09/05/20210906/</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-      
-      <categories>
-          
-          <category> 应用模块 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 注册中心 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Apollo</title>
-      <link href="/2021/09/05/20210905/"/>
-      <url>/2021/09/05/20210905/</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-      
-      <categories>
-          
-          <category> 应用模块 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 配置中心 </tag>
+            <tag> 中间件 </tag>
             
         </tags>
       
@@ -167,31 +67,6 @@
           
       </categories>
       
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>国际物流</title>
-      <link href="/2021/08/29/20210825/"/>
-      <url>/2021/08/29/20210825/</url>
-      
-        <content type="html"><![CDATA[<h2 id="相关名词"><a href="#相关名词" class="headerlink" title="相关名词"></a>相关名词</h2><ul><li>TEU（Twenty-feet Equivalent Unit）：是以长度为20英尺的集装箱为国际计量单位，也称国际标准箱单位。通常用来表示船舶装载集装箱的能力，也是集装箱和港口吞吐量的重要统计、换算单位。</li></ul>]]></content>
-      
-      
-      <categories>
-          
-          <category> 综合模块 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 项目 </tag>
-            
-        </tags>
       
     </entry>
     
@@ -233,9 +108,7 @@
       
         <tags>
             
-            <tag> 注册中心 </tag>
-            
-            <tag> 配置中心 </tag>
+            <tag> 中间件 </tag>
             
         </tags>
       
@@ -260,9 +133,9 @@
       
         <tags>
             
-            <tag> 中间件 </tag>
-            
             <tag> 消息队列 </tag>
+            
+            <tag> 中间件 </tag>
             
         </tags>
       
@@ -312,9 +185,9 @@
       
         <tags>
             
-            <tag> 中间件 </tag>
-            
             <tag> 消息队列 </tag>
+            
+            <tag> 中间件 </tag>
             
         </tags>
       
@@ -405,11 +278,11 @@
     
     
     <entry>
-      <title>车辆监控平台</title>
+      <title>仙豆智能</title>
       <link href="/2021/08/19/20210803/"/>
       <url>/2021/08/19/20210803/</url>
       
-        <content type="html"><![CDATA[<p>车辆监控平台项目介绍<br><a id="more"></a></p><h2 id="架构图"><a href="#架构图" class="headerlink" title="架构图"></a>架构图</h2><p><img src="/img/posts/车辆监控平台架构.png" alt="车辆监控架构图"></p><h2 id="业务"><a href="#业务" class="headerlink" title="业务"></a>业务</h2><ol><li>销售车辆50W，同时在线数高峰：6W。</li><li>车辆正常情况下每10s发送一条报文到监控平台。</li><li>数据情况：<ol><li>车辆原始报文大小1K。</li><li>车辆解析后车况大小6K。</li><li>平均一台车每天会产生10MB的数据。</li><li>系统每天会产生5T的数据。</li><li>同时系统有7.2亿行的数据需要写入到数据库。</li></ol></li><li>系统并发量<ol><li>持续并发量：6000。</li><li>长连接：6W。</li><li>每秒6M的原始数据需要被解析。</li><li>每秒35M的解析数据需要被存储。</li></ol></li></ol>]]></content>
+        <content type="html"><![CDATA[<h2 id="实时车况"><a href="#实时车况" class="headerlink" title="实时车况"></a>实时车况</h2><p><img src="/img/posts/车辆监控平台架构.png" alt="车辆监控架构图"></p><ol><li>销售车辆50W，同时在线数高峰：6W。</li><li>车辆正常情况下每10s发送一条报文到监控平台。</li><li>数据情况：<ol><li>车辆原始报文大小1K。</li><li>车辆解析后车况大小6K。</li><li>平均一台车每天会产生10MB的数据。</li><li>系统每天会产生5T的数据。</li><li>同时系统有7.2亿行的数据需要写入到数据库。</li></ol></li><li>系统并发量<ol><li>持续并发量：6000。</li><li>长连接：6W。</li><li>每秒6M的原始数据需要被解析。</li><li>每秒35M的解析数据需要被存储。</li></ol></li></ol><h2 id="蓝牙钥匙"><a href="#蓝牙钥匙" class="headerlink" title="蓝牙钥匙"></a>蓝牙钥匙</h2><h2 id="车辆权限"><a href="#车辆权限" class="headerlink" title="车辆权限"></a>车辆权限</h2><h2 id="自动泊车"><a href="#自动泊车" class="headerlink" title="自动泊车"></a>自动泊车</h2><h2 id="DVR"><a href="#DVR" class="headerlink" title="DVR"></a>DVR</h2>]]></content>
       
       
       <categories>
@@ -422,33 +295,6 @@
         <tags>
             
             <tag> 项目 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>RabbitMQ</title>
-      <link href="/2021/08/19/20210812/"/>
-      <url>/2021/08/19/20210812/</url>
-      
-        <content type="html"><![CDATA[<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="https://help.aliyun.com/document_detail/141604.html" target="_blank" rel="noopener">https://help.aliyun.com/document_detail/141604.html</a></p>]]></content>
-      
-      
-      <categories>
-          
-          <category> 应用模块 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 中间件 </tag>
-            
-            <tag> 消息队列 </tag>
             
         </tags>
       
@@ -492,9 +338,9 @@
       
         <tags>
             
-            <tag> 缓存 </tag>
-            
             <tag> 中间件 </tag>
+            
+            <tag> 缓存 </tag>
             
         </tags>
       
@@ -545,7 +391,7 @@
       <link href="/2021/08/19/20180618/"/>
       <url>/2021/08/19/20180618/</url>
       
-        <content type="html"><![CDATA[<p>设计模式分为 3 大类型共 23 种：</p><ul><li>创建型：工厂方法模式、抽象工厂模式、单例模式、建造者模式、原型模式。</li><li>结构型：适配器模式、装饰器模式、代理模式、外观模式、桥接模式、组合模式、享元模式。</li><li>行为型：策略模式、模板方法模式、观察者模式、迭代子模式、责任链模式、命令模式、备忘录模式、状态模式、访问者模式、中介者模式、解释器模式。<a id="more"></a></li></ul><h2 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h2><h3 id="懒汉式，线程安全"><a href="#懒汉式，线程安全" class="headerlink" title="懒汉式，线程安全"></a>懒汉式，线程安全</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Singleton instance;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span> <span class="params">()</span></span>&#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (instance == <span class="keyword">null</span>) &#123;</span><br><span class="line">            instance = <span class="keyword">new</span> Singleton();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="双重检验锁"><a href="#双重检验锁" class="headerlink" title="双重检验锁"></a>双重检验锁</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">static</span> Singleton instance;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span> <span class="params">()</span></span>&#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getSingleton</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (instance == <span class="keyword">null</span>) &#123;                         </span><br><span class="line">            <span class="keyword">synchronized</span> (Singleton.class) &#123;</span><br><span class="line">                <span class="keyword">if</span> (instance == <span class="keyword">null</span>) &#123;       </span><br><span class="line">                    instance = <span class="keyword">new</span> Singleton();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="饿汉式"><a href="#饿汉式" class="headerlink" title="饿汉式"></a>饿汉式</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span></span>&#123;</span><br><span class="line">    <span class="comment">//类加载时就初始化</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Singleton instance = <span class="keyword">new</span> Singleton();</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="静态内部类"><a href="#静态内部类" class="headerlink" title="静态内部类"></a>静态内部类</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">SingletonHolder</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Singleton INSTANCE = <span class="keyword">new</span> Singleton();  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span> <span class="params">()</span></span>&#123;&#125;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">return</span> SingletonHolder.INSTANCE; </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> EasySingleton&#123;</span><br><span class="line">    INSTANCE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h2><h2 id="代理模式"><a href="#代理模式" class="headerlink" title="代理模式"></a>代理模式</h2><h2 id="责任链模式"><a href="#责任链模式" class="headerlink" title="责任链模式"></a>责任链模式</h2><h2 id="适配器模式"><a href="#适配器模式" class="headerlink" title="适配器模式"></a>适配器模式</h2><h2 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h2><h2 id="构造者模式"><a href="#构造者模式" class="headerlink" title="构造者模式"></a>构造者模式</h2>]]></content>
+        <content type="html"><![CDATA[<p>设计模式分为 3 大类型共 23 种：</p><ul><li><strong>创建型</strong>：工厂方法模式、抽象工厂模式、单例模式、建造者模式、原型模式。</li><li><strong>结构型</strong>：适配器模式、桥接模式、组合模式、装饰模式、门面模式、享元模式和代理模式。</li><li><strong>行为型</strong>：策略模式、模板方法模式、观察者模式、迭代器模式、责任链模式、命令模式、备忘录模式、状态模式、访问者模式、中介者模式、解释器模式。</li></ul><a id="more"></a><h1 id="创建型"><a href="#创建型" class="headerlink" title="创建型"></a>创建型</h1><h2 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h2><h3 id="懒汉式，线程安全"><a href="#懒汉式，线程安全" class="headerlink" title="懒汉式，线程安全"></a>懒汉式，线程安全</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Singleton instance;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span> <span class="params">()</span></span>&#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (instance == <span class="keyword">null</span>) &#123;</span><br><span class="line">            instance = <span class="keyword">new</span> Singleton();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="双重检验锁"><a href="#双重检验锁" class="headerlink" title="双重检验锁"></a>双重检验锁</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">static</span> Singleton instance;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span> <span class="params">()</span></span>&#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getSingleton</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (instance == <span class="keyword">null</span>) &#123;                         </span><br><span class="line">            <span class="keyword">synchronized</span> (Singleton.class) &#123;</span><br><span class="line">                <span class="keyword">if</span> (instance == <span class="keyword">null</span>) &#123;       </span><br><span class="line">                    instance = <span class="keyword">new</span> Singleton();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="饿汉式"><a href="#饿汉式" class="headerlink" title="饿汉式"></a>饿汉式</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span></span>&#123;</span><br><span class="line">    <span class="comment">//类加载时就初始化</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Singleton instance = <span class="keyword">new</span> Singleton();</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="静态内部类"><a href="#静态内部类" class="headerlink" title="静态内部类"></a>静态内部类</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">SingletonHolder</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Singleton INSTANCE = <span class="keyword">new</span> Singleton();  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span> <span class="params">()</span></span>&#123;&#125;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">return</span> SingletonHolder.INSTANCE; </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> EasySingleton&#123;</span><br><span class="line">    INSTANCE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h1 id="结构型"><a href="#结构型" class="headerlink" title="结构型"></a>结构型</h1><h2 id="适配器模式"><a href="#适配器模式" class="headerlink" title="适配器模式"></a>适配器模式</h2><p>使用频率：☆☆☆☆☆</p><p>定义：将类的接口转换为客户期望的另一个接口，适配器可以让不兼容的两个类一起协同工作。</p><p>关键角色：</p><ul><li><strong>目标类，</strong> 适配器类即将要进行适配的抽象类或接口；</li><li><strong>适配器类，</strong> 可以是类或接口，是作为具体适配者类的中间类来使用；</li><li><strong>具体适配者类，</strong> 可以是内部的类或服务，也可以是外部对象或服务。</li></ul><h2 id="桥接模式"><a href="#桥接模式" class="headerlink" title="桥接模式"></a>桥接模式</h2><p>使用频率：☆☆☆☆☆</p><p>定义：将抽象部分与它的实现部分分离，使它们都可以独立地变化。</p><p>关键角色：</p><ul><li><strong>抽象实体</strong>：定义的一种抽象分类。比如，电脑中的 CPU、内存、摄像头、显示屏等。</li><li><strong>具体实体</strong>：继承抽象实体的子类实体。比如，Intel i7 CPU、三星内存、徕卡摄像头、京东方显示屏幕等。</li><li><strong>抽象行为</strong>：定义抽象实体中具备的多种行为。比如，CPU 逻辑运算、内存读写存储、摄像头拍照、屏幕显示图像等。</li><li><strong>具体行为</strong>：实现抽象行为的具体算法。比如，Intel 使用 X64 架构实现 CPU 逻辑运算，Mac M1 芯片使用 ARM 架构实现 CPU 逻辑运算，等等。</li></ul><p><strong>桥接模式的本质是通过对一个对象进行实体与行为的分离，来将需要使用多层继承的场景转换为使用组合或聚合的方式，进而解耦对象间的强耦合关系，达到对象与对象之间的动态绑定的效果，提升代码结构的扩展性</strong>。</p><h2 id="代理模式"><a href="#代理模式" class="headerlink" title="代理模式"></a>代理模式</h2><p>使用频率：☆☆☆☆☆</p><p>定义：让你能够提供对象的替代品或其[占位符。代理控制着对于原对象的访问，并允许将请求提交给对象前后进行一些处理。</p><p>关键角色：</p><ul><li><strong>抽象主题类（RealObject）</strong>：声明公用的方法，定义可供客户端使用的统一功能。</li><li><strong>主题实现类（RealObjectImpl）</strong>：实现了抽象主题类的所有方法。</li><li><strong>代理类（Proxy）</strong>：实现了抽象主题类的方法，并隐藏在代理后面可能其他类的实现。</li></ul><h2 id="装饰模式"><a href="#装饰模式" class="headerlink" title="装饰模式"></a>装饰模式</h2><p>使用频率：☆☆☆☆☆</p><p>定义：允许动态地向一个现有的对象添加新的功能，同时又不改变其结构，相当于对现有的对象进行了一个包装。</p><p>关键角色：</p><ul><li><strong>组件</strong>：作为装饰器类包装的目标类。</li><li><strong>具体组件</strong>：实现组件的基础子类。</li><li><strong>装饰器</strong>：一个抽象类，其中包含对组件的引用，并且还重写了组件接口方法。</li><li><strong>具体装饰器</strong>：继承扩展了装饰器，并重写组件接口方法，同时可以添加附加功能。</li></ul><h2 id="门面模式"><a href="#门面模式" class="headerlink" title="门面模式"></a>门面模式</h2><p>使用频率：☆☆☆☆☆</p><p>定义：为子系统中的一组接口提供统一的接口。它定义了一个更高级别的接口，使子系统更易于使用。</p><p>关键角色：</p><ul><li><strong>门面系统</strong>，负责处理依赖子系统的请求，并将请求代理给适当的子系统进行处理；</li><li><strong>子系统</strong>，代表某个领域内的功能实现，比如，订单、用户、支付等，专门处理由门面系统指派的任务。</li></ul><h2 id="组合模式"><a href="#组合模式" class="headerlink" title="组合模式"></a>组合模式</h2><p>使用频率：☆</p><p>定义：将对象组合成树形结构以表示整个部分的层次结构。组合模式可以让用户统一对待单个对象和对象的组合。</p><p>关键角色：</p><h2 id="享元模式"><a href="#享元模式" class="headerlink" title="享元模式"></a>享元模式</h2><p>使用频率：☆</p><p>定义：摒弃了在每个对象中保存所有数据的方式，通过共享多个对象所共有的相同状态，从而让我们能在有限的内存容量中载入更多对象。</p><p>关键角色：</p><ul><li><strong>享元类（Flyweight）</strong>：定义了享元对象需要实现的公共操作方法。在该方法中会使用一个状态作为输入参数，也叫外部状态，由客户端保存，在运行时改变。</li><li><strong>享元工厂类（Flyweight Factory）</strong>：管理一个享元对象类的缓存池。它会存储享元对象之间需要传递的共有状态，比如，按照大写英文字母来作为状态标识，这种只在享元对象之间传递的方式就叫内部状态。同时，它还提供了一个通用方法 getFlyweight()，主要通过内部状态标识来获取享元对象。</li><li><strong>可共享的具体享元类（ConcreteFlyweight）</strong>：能够复用享元工厂内部状态并实现享元类公共操作的具体实现类。</li><li><strong>非共享的具体享元类（UnsharedConcreteFlyweight）</strong>：不复用享元工厂内部状态，但实现享元类的具体实现类。</li></ul><h1 id="行为型"><a href="#行为型" class="headerlink" title="行为型"></a>行为型</h1><h2 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h2><p>使用频率：☆☆☆☆☆</p><p>定义：定义对象之间的一对多依赖关系，这样当一个对象改变状态时，它的所有依赖项都会自动得到通知和更新。</p><p>解释：相当于<strong>订阅-发布模式；**</strong>基于事件驱动的架构**也是观察者模式的一种最佳实践</p><h2 id="策略模式"><a href="#策略模式" class="headerlink" title="策略模式"></a>策略模式</h2><p>使用频率：☆☆☆☆☆</p><p>定义：定义一系列算法，封装每个算法，并使它们可以互换。策略让算法独立于使用它的客户端而变化。</p><ul><li><strong>上下文信息类</strong>（Context）：用于存放和执行需要使用的具体策略类以及客户端调用的逻辑。</li><li><strong>抽象策略类</strong>（Strategy）：定义策略的共有方法。</li><li><strong>具体策略类</strong>（StrategyA 等）：实现抽象策略类定义的共有方法。</li></ul><h2 id="模板方法模式"><a href="#模板方法模式" class="headerlink" title="模板方法模式"></a>模板方法模式</h2><p>使用频率：☆☆☆☆</p><p>定义：在操作中定义算法的框架，将一些步骤推迟到子类中。模板方法让子类在不改变算法结构的情况下重新定义算法的某些步骤。</p><ul><li><strong>抽象父类</strong>：定义一个算法所包含的所有步骤，并提供一些通用的方法逻辑。</li><li><strong>具体子类</strong>：继承自抽象父类，根据需要重写父类提供的算法步骤中的某些步骤。</li></ul><h2 id="中介者模式"><a href="#中介者模式" class="headerlink" title="中介者模式"></a>中介者模式</h2><p>使用频率：☆☆☆</p><p>定义：中介者对象封装了一组对象之间的交互，这组对象会将它们的交互委托给中介者对象，而不是直接交互。</p><ul><li><strong>抽象中介者</strong>（Mediator）：定义中介者需要执行的方法操作。</li><li><strong>具体中介者</strong>（MediatorImpl）：实现抽象中介者定义的方法操作，同时可以包含更多逻辑。</li><li><strong>抽象组件类</strong>（Component）：定义组件需要执行的方法操作。</li><li><strong>具体组件类</strong>（ComponentA、ComponentB）：继承自抽象组件类，实现具体的组件业务逻辑。</li></ul><h2 id="状态模式"><a href="#状态模式" class="headerlink" title="状态模式"></a>状态模式</h2><p>使用频率：☆☆☆</p><p>定义：允许一个对象在其内部状态改变时改变它的行为，对象看起来似乎修改了自己的类一样。</p><ul><li><strong>上下文信息类</strong>（Context）：实际上就是存储当前状态的类，对外提供更新状态的操作。</li><li><strong>抽象状态类</strong>（State）：可以是一个接口或抽象类，用于定义声明状态更新的操作方法有哪些。</li><li><strong>具体状态类</strong>（StateA 等）：实现抽象状态类定义的方法，根据具体的场景来指定对应状态改变后的代码实现逻辑。</li></ul><h2 id="责任链模式"><a href="#责任链模式" class="headerlink" title="责任链模式"></a>责任链模式</h2><p>使用频率：☆☆☆</p><p>定义：将一个请求封装为一个对象，从而让我们可以参数化具有不同请求、队列或日志请求的其他对象，并支持可撤销的操作。</p><p>解释：命令模式是为了将一组操作封装在对象中而设计的，简单来说，就是为了将函数方法封装为对象以方便传输。</p><h2 id="迭代器模式"><a href="#迭代器模式" class="headerlink" title="迭代器模式"></a>迭代器模式</h2><p>使用频率：☆</p><p>定义：迭代器提供一种对容器对象中的各个元素进行访问的方法，而又不需要暴露该对象的内部细节。</p><h2 id="命令模式"><a href="#命令模式" class="headerlink" title="命令模式"></a>命令模式</h2><p>使用频率：☆</p><p>定义：用于定义语言的语法规则表示，并提供解释器来处理句子中的语法</p><p>解释：相当于函数式编程</p><h2 id="解释器模式"><a href="#解释器模式" class="headerlink" title="解释器模式"></a>解释器模式</h2><p>使用频率：☆</p><p>定义：用于定义语言的语法规则表示，并提供解释器来处理句子中的语法。</p><h2 id="备忘录模式"><a href="#备忘录模式" class="headerlink" title="备忘录模式"></a>备忘录模式</h2><p>使用频率：☆</p><p>定义：捕获并外部化对象的内部状态，以便以后可以恢复，所有这些都不会违反封装。</p><ul><li><strong>原始对象（Originator）</strong>：除了创建自身所需要的属性和业务逻辑外，还通过提供方法 create() 和 restore(memento) 来保存和恢复对象副本。</li><li><strong>备忘录（Memento）</strong>：用于保存原始对象的所有属性状态，以便在未来进行撤销操作。</li></ul><h2 id="访问者模式"><a href="#访问者模式" class="headerlink" title="访问者模式"></a>访问者模式</h2><p>使用频率：☆</p><p>定义：允许在运行时将一个或多个操作应用于一组对象，将操作与对象结构分离。</p><h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><ol><li><a href="https://enterpc.blog.csdn.net/category_11435606.html" target="_blank" rel="noopener">拉钩教育之趣学设计模式</a></li></ol>]]></content>
       
       
       <categories>
@@ -639,34 +485,9 @@
       
         <tags>
             
-            <tag> 缓存 </tag>
-            
             <tag> 中间件 </tag>
             
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>HBase</title>
-      <link href="/2021/07/28/20181114/"/>
-      <url>/2021/07/28/20181114/</url>
-      
-        <content type="html"><![CDATA[<h2 id="索引类型"><a href="#索引类型" class="headerlink" title="索引类型"></a>索引类型</h2><ul><li>本地索引</li><li>全局索引</li><li>覆盖索引</li></ul><h2 id="RowKey设计"><a href="#RowKey设计" class="headerlink" title="RowKey设计"></a>RowKey设计</h2><ul><li>长度原则</li><li>唯一原则</li><li>散列原则</li></ul><h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><ul><li><a href="https://cloud.tencent.com/developer/article/1006043" target="_blank" rel="noopener">HBase技术细节笔记上</a></li><li><a href="https://cloud.tencent.com/developer/article/1006044" target="_blank" rel="noopener">HBase技术细节笔记下</a></li><li><a href="https://zhuanlan.zhihu.com/p/145551967" target="_blank" rel="noopener">我终于看懂了HBase，太不容易了</a></li><li><a href="https://www.slidestalk.com/HBaseGroup/HBase_ebook28532" target="_blank" rel="noopener">2018 HBase技术总结</a></li></ul>]]></content>
-      
-      
-      <categories>
-          
-          <category> 应用模块 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 数据库 </tag>
+            <tag> 缓存 </tag>
             
         </tags>
       
@@ -725,6 +546,31 @@
     
     
     <entry>
+      <title>HBase</title>
+      <link href="/2021/07/28/20181114/"/>
+      <url>/2021/07/28/20181114/</url>
+      
+        <content type="html"><![CDATA[<h2 id="索引类型"><a href="#索引类型" class="headerlink" title="索引类型"></a>索引类型</h2><ul><li>本地索引</li><li>全局索引</li><li>覆盖索引</li></ul><h2 id="RowKey设计"><a href="#RowKey设计" class="headerlink" title="RowKey设计"></a>RowKey设计</h2><ul><li>长度原则</li><li>唯一原则</li><li>散列原则</li></ul><h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><ul><li><a href="https://cloud.tencent.com/developer/article/1006043" target="_blank" rel="noopener">HBase技术细节笔记上</a></li><li><a href="https://cloud.tencent.com/developer/article/1006044" target="_blank" rel="noopener">HBase技术细节笔记下</a></li><li><a href="https://zhuanlan.zhihu.com/p/145551967" target="_blank" rel="noopener">我终于看懂了HBase，太不容易了</a></li><li><a href="https://www.slidestalk.com/HBaseGroup/HBase_ebook28532" target="_blank" rel="noopener">2018 HBase技术总结</a></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 应用模块 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 数据库 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>分布式&amp;微服务</title>
       <link href="/2021/07/28/20190112/"/>
       <url>/2021/07/28/20190112/</url>
@@ -763,11 +609,11 @@
     
     
     <entry>
-      <title>存储系统</title>
+      <title>数据库与事务</title>
       <link href="/2021/07/28/20181023/"/>
       <url>/2021/07/28/20181023/</url>
       
-        <content type="html"><![CDATA[<h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><ul><li>关系型数据库<ul><li>MySQL：ShardingJDBC、Mycat</li><li>Oracle</li><li>PostgreSQL(PGSQL)</li><li>MariaDB</li></ul></li><li>NoSQL<ul><li>MongoDB</li></ul></li><li>NewSQL<ul><li>TiDB</li><li>OceanBase</li></ul></li><li>图数据库<ul><li>Neo4j</li></ul></li><li>轻量级分布式文件系统<ul><li>FastDFS</li></ul></li><li>分布式云存储<ul><li>OSS</li></ul></li><li>大数据存储<ul><li>HBase</li><li>Cassandra</li></ul></li></ul><h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><h3 id="事务特性"><a href="#事务特性" class="headerlink" title="事务特性"></a>事务特性</h3><p>A(Atomicity)C(Consistency)I(Isolation)D(Durability)</p><ul><li>原子性：指事务由原子的操作序列组成，所有操作要么全部成功，要么全部失败回滚。</li><li>一致性：指事务的执行不能破坏数据库数据的完整性和一致性，一个事务在执行之前和执行之后，数据库都必须处以一致性状态。比如在做多表操作时，多个表要么都是事务后新的值，要么都是事务前的旧值。</li><li>隔离性：指多个用户并发访问数据库时，数据库为每个用户执行的事务，不能被其他事务的操作所干扰，多个并发事务之间要相互隔离。</li><li>持久性：指一个事务一旦提交并执行成功，那么对数据库中数据的改变就是永久性的，即便是在数据库系统遇到故障的情况下也不会丢失提交事务的操作。</li></ul><h3 id="并发问题"><a href="#并发问题" class="headerlink" title="并发问题"></a>并发问题</h3><p>脏读：指在一个事务处理过程里读取了另一个未提交的事务中的数据。</p><p>不可重复读：指对于数据库中某个数据，一个事务范围内多次查询返回了不同的数据值，这是由于在多次查询之间，有其他事务修改了数据并进行了提交。</p><p>幻读：指一个事务中执行两次完全相同的查询时，第二次查询所返回的结果集跟第一个查询不相同。与不可重复读的区别在于，不可重复读是对同一条记录，两次读取的值不同。而幻读是记录的增加或删除，导致两次相同条件获取的结果记录数不同。</p><h3 id="隔离级别"><a href="#隔离级别" class="headerlink" title="隔离级别"></a>隔离级别</h3><ul><li>读未提交：最低的隔离级别，可以读取到其他事务未提交的内容。所有并发问题都有可能发生。</li><li>读已提交：就是只能读取到其他事务已经提交的数据。可以解决脏读问题。</li><li>可重复读：MySQL默认隔离级别，可以保证整个事务过程中，对同数据的多次读取结果是相同的。这个级别可以解决脏读和不可重复读的问题。</li><li>串行化：最高的隔离级别，所有事务操作都依次顺序执行。这个级别会导致并发度下降，性能最差。不过这个级别可以解决前面提到的所有并发问题。</li></ul><h3 id="事务分类"><a href="#事务分类" class="headerlink" title="事务分类"></a>事务分类</h3><ul><li>扁平化事务：使用最多，所有的操作都在同一层次，不能提交或者回滚事务的某一部分，要么都成功，要么都回滚。</li><li>带保存点的扁平化事务：允许事务在执行过程中回滚到较早的状态，而不是全部回滚。通过在事务中插入保存点，当操作失败后，可以选择回滚到最近的保存点处。</li><li>链事务：在事务提交时，会将必要的上下文隐式传递给下一个事务，当事务失败时就可以回滚到最近的事务。不过，链事务只能回滚到最近的保存点，而带保存点的扁平化事务是可以回滚到任意的保存点。</li><li>嵌套事务：由顶层事务和子事务构成，类似于树的结构。一般顶层事务负责逻辑管理，子事务负责具体的工作，子事务可以提交，但真正提交要等到父事务提交，如果上层事务回滚，那么所有的子事务都会回滚。</li></ul><h3 id="分布式事务解决方案"><a href="#分布式事务解决方案" class="headerlink" title="分布式事务解决方案"></a>分布式事务解决方案</h3><ul><li>XA协议：是保证强一致性的刚性事务。实现方式有两段式提交和三段式提交。两段式提交需要有一个事务协调者来保证所有的事务参与者都完成了第一阶段的准备工作。如果协调者收到所有参与者都准备好的消息，就会通知所有的事务执行第二阶段提交。一般场景下两段式提交已经能够很好得解决分布式事务了，然而两阶段在即使只有一个进程发生故障时，也会导致整个系统存在较长时间的阻塞。三段式提交通过增加 pre-commit 阶段来减少前面提到的系统阻塞的时间。三段式提交很少在实际中使用，简单了解就可以了。</li><li>TCC：是满足最终一致性的柔性事务方案。TCC 采用补偿机制，核心思想是对每个操作，都要注册对应的确认和补偿操作。它分为三个阶段：Try 阶段主要对业务系统进行检测及资源预留；Confirm 阶段对业务系统做确认提交；Cancel 阶段是在业务执行错误，执行回滚，释放预留的资源。</li><li>消息一致性：是将本地操作和发送消息放在一个事务中，保证本地操作和消息发送要么都成功要么都失败。下游应用订阅消息，收到消息后执行对应操作。</li><li>GTS：阿里云中的全局事务服务 GTS，对应的开源版本是 Fescar。Fescar 基于两段式提交进行改良，剥离了分布式事务方案对数据库在协议支持上的要求。使用 Fescar 的前提是分支事务中涉及的资源，必须是支持 ACID 事务的关系型数据库。分支的提交和回滚机制，都依赖于本地事务来保障。 Fescar 的实现目前还存在一些局限，比如事务隔离级别最高支持到读已提交级别。</li></ul><p>框架：Seata</p>]]></content>
+        <content type="html"><![CDATA[<h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><ul><li>关系型数据库<ul><li>MySQL</li></ul></li><li>NoSQL<ul><li>MongoDB</li></ul></li><li>宽列数据库<ul><li>HBase</li><li>Cassandra</li></ul></li><li>时序数据库<ul><li>InfluxDB</li><li>TDEngine</li></ul></li></ul><h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><h3 id="事务特性"><a href="#事务特性" class="headerlink" title="事务特性"></a>事务特性</h3><p>A(Atomicity)C(Consistency)I(Isolation)D(Durability)</p><ul><li>原子性：指事务由原子的操作序列组成，所有操作要么全部成功，要么全部失败回滚。</li><li>一致性：指事务的执行不能破坏数据库数据的完整性和一致性，一个事务在执行之前和执行之后，数据库都必须处以一致性状态。比如在做多表操作时，多个表要么都是事务后新的值，要么都是事务前的旧值。</li><li>隔离性：指多个用户并发访问数据库时，数据库为每个用户执行的事务，不能被其他事务的操作所干扰，多个并发事务之间要相互隔离。</li><li>持久性：指一个事务一旦提交并执行成功，那么对数据库中数据的改变就是永久性的，即便是在数据库系统遇到故障的情况下也不会丢失提交事务的操作。</li></ul><h3 id="并发问题"><a href="#并发问题" class="headerlink" title="并发问题"></a>并发问题</h3><p>脏读：指在一个事务处理过程里读取了另一个未提交的事务中的数据。</p><p>不可重复读：指对于数据库中某个数据，一个事务范围内多次查询返回了不同的数据值，这是由于在多次查询之间，有其他事务修改了数据并进行了提交。</p><p>幻读：指一个事务中执行两次完全相同的查询时，第二次查询所返回的结果集跟第一个查询不相同。与不可重复读的区别在于，不可重复读是对同一条记录，两次读取的值不同。而幻读是记录的增加或删除，导致两次相同条件获取的结果记录数不同。</p><h3 id="隔离级别"><a href="#隔离级别" class="headerlink" title="隔离级别"></a>隔离级别</h3><ul><li>读未提交：最低的隔离级别，可以读取到其他事务未提交的内容。所有并发问题都有可能发生。</li><li>读已提交：就是只能读取到其他事务已经提交的数据。可以解决脏读问题。</li><li>可重复读：MySQL默认隔离级别，可以保证整个事务过程中，对同数据的多次读取结果是相同的。这个级别可以解决脏读和不可重复读的问题。</li><li>串行化：最高的隔离级别，所有事务操作都依次顺序执行。这个级别会导致并发度下降，性能最差。不过这个级别可以解决前面提到的所有并发问题。</li></ul><h3 id="事务分类"><a href="#事务分类" class="headerlink" title="事务分类"></a>事务分类</h3><ul><li>扁平化事务：使用最多，所有的操作都在同一层次，不能提交或者回滚事务的某一部分，要么都成功，要么都回滚。</li><li>带保存点的扁平化事务：允许事务在执行过程中回滚到较早的状态，而不是全部回滚。通过在事务中插入保存点，当操作失败后，可以选择回滚到最近的保存点处。</li><li>链事务：在事务提交时，会将必要的上下文隐式传递给下一个事务，当事务失败时就可以回滚到最近的事务。不过，链事务只能回滚到最近的保存点，而带保存点的扁平化事务是可以回滚到任意的保存点。</li><li>嵌套事务：由顶层事务和子事务构成，类似于树的结构。一般顶层事务负责逻辑管理，子事务负责具体的工作，子事务可以提交，但真正提交要等到父事务提交，如果上层事务回滚，那么所有的子事务都会回滚。</li></ul><h3 id="分布式事务解决方案"><a href="#分布式事务解决方案" class="headerlink" title="分布式事务解决方案"></a>分布式事务解决方案</h3><ul><li>XA协议：是保证强一致性的刚性事务。实现方式有两段式提交和三段式提交。两段式提交需要有一个事务协调者来保证所有的事务参与者都完成了第一阶段的准备工作。如果协调者收到所有参与者都准备好的消息，就会通知所有的事务执行第二阶段提交。一般场景下两段式提交已经能够很好得解决分布式事务了，然而两阶段在即使只有一个进程发生故障时，也会导致整个系统存在较长时间的阻塞。三段式提交通过增加 pre-commit 阶段来减少前面提到的系统阻塞的时间。三段式提交很少在实际中使用，简单了解就可以了。</li><li>TCC：是满足最终一致性的柔性事务方案。TCC 采用补偿机制，核心思想是对每个操作，都要注册对应的确认和补偿操作。它分为三个阶段：Try 阶段主要对业务系统进行检测及资源预留；Confirm 阶段对业务系统做确认提交；Cancel 阶段是在业务执行错误，执行回滚，释放预留的资源。</li><li>消息一致性：是将本地操作和发送消息放在一个事务中，保证本地操作和消息发送要么都成功要么都失败。下游应用订阅消息，收到消息后执行对应操作。</li><li>GTS：阿里云中的全局事务服务 GTS，对应的开源版本是 Fescar。Fescar 基于两段式提交进行改良，剥离了分布式事务方案对数据库在协议支持上的要求。使用 Fescar 的前提是分支事务中涉及的资源，必须是支持 ACID 事务的关系型数据库。分支的提交和回滚机制，都依赖于本地事务来保障。 Fescar 的实现目前还存在一些局限，比如事务隔离级别最高支持到读已提交级别。</li></ul><p>框架：Seata</p>]]></content>
       
       
       <categories>
@@ -817,7 +663,7 @@
       <link href="/2021/07/28/20170918/"/>
       <url>/2021/07/28/20170918/</url>
       
-        <content type="html"><![CDATA[<p>努力很容易，坚持努力很难，不忘初心，方得始终。<br><a id="more"></a><br><img src="http://s0.lgstatic.com/i/image2/M01/89/5A/CgoB5l12QGeAX1jpAADXc8NHFMU588.png" alt="img"></p>]]></content>
+        <content type="html"><![CDATA[<p>程序员的核心竞争力</p><ul><li><strong>学习能力</strong>，尤其是自学能力，你啥时看到那些有名的程序高手在论坛上问“学习XX该看什么书，如何快速学习XXX，学习XXX有什么代码推荐”之类的问题，他们想学什么很快就能自己找到相关资料。这个行业发展太快，技术淘汰的速度也很快，3年不学新东西就可能落伍了。</li><li><strong>动手能力</strong>，都是看书看资料，当别人还在纠结看什么书，还在纠结书里的字句是什么意思的时候，有些人的几百上千行代码都已经能运行了。</li><li><strong>耐心和毅力</strong>，做程序员兴趣固然重要，写自己喜欢的代码那是相当愉快的事情，但是程序开发中无论如何还有大量乏味无趣的事情，要能坚持，咬牙把这些做完。</li><li><strong>表达能力</strong>，能在大庭广众下，把自己的想法逻辑清晰流畅地讲出来，让人听懂。</li></ul><a id="more"></a><p><img src="http://s0.lgstatic.com/i/image2/M01/89/5A/CgoB5l12QGeAX1jpAADXc8NHFMU588.png" alt="img"></p><p><img src="http://s0.lgstatic.com/i/image2/M01/89/7A/CgotOV12QGeAMyl9AAChmvajJmw343.png" alt="img"></p>]]></content>
       
       
       <categories>
